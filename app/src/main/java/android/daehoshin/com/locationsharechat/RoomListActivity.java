@@ -9,6 +9,7 @@ import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,7 +37,6 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
         setContentView(R.layout.activity_room_list);
         progress = findViewById(R.id.progress);
         progress.setVisibility(View.VISIBLE);
-
         checkPermission();
     }
 
@@ -110,5 +110,12 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+
+    //======== 임시용 버튼(삭제 할 것) 생성=================================
+    public void goTemp(View view){
+        Intent intent = new Intent(RoomListActivity.this,SigninActivity.class); // 뒤에 바꿀 것
+        startActivity(intent);
     }
 }
