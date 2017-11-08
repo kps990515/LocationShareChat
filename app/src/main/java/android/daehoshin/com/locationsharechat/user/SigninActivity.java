@@ -2,7 +2,7 @@ package android.daehoshin.com.locationsharechat.user;
 
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
-import android.daehoshin.com.locationsharechat.domain.UserInfo;
+import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -1,6 +1,6 @@
 package android.daehoshin.com.locationsharechat.common;
 
-import android.daehoshin.com.locationsharechat.domain.UserInfo;
+import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -74,7 +74,8 @@ public class AuthManager {
                 if(task.isSuccessful()){
                     setCurrentUser();
 
-                    UserInfo ui = new UserInfo(currentUser.getUid());
+                    UserInfo ui = new UserInfo();
+                    ui.setUid(currentUser.getUid());
                     ui.setName(nickname);
                     ui.save();
                 }
