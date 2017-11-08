@@ -23,9 +23,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     public static final int PERMISSION_REQ = 901;
     public static final String[] Permission = new String[] {
               Manifest.permission.ACCESS_FINE_LOCATION
-            , Manifest.permission.ACCESS_COARSE_LOCATION
-            , android.Manifest.permission.CAMERA
-            , android.Manifest.permission.WRITE_EXTERNAL_STORAGE };
+            , Manifest.permission.ACCESS_COARSE_LOCATION };
 
     private GoogleMap mMap;
     private PermissionUtil pUtil;
@@ -106,6 +104,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
