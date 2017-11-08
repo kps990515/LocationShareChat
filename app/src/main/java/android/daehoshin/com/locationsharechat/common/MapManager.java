@@ -6,5 +6,8 @@ package android.daehoshin.com.locationsharechat.common;
 
 public class MapManager {
 
+    public void showRoomPopup(){
+
+    }
 
 }

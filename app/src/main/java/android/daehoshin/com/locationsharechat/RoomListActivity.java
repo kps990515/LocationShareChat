@@ -3,7 +3,9 @@ package android.daehoshin.com.locationsharechat;
 import android.Manifest;
 import android.content.Intent;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
+import android.daehoshin.com.locationsharechat.custom.CustomMarker;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
+import android.daehoshin.com.locationsharechat.room.RoomActivity;
 import android.daehoshin.com.locationsharechat.user.SigninActivity;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -104,8 +107,6 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
@@ -115,7 +116,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
 
     //======== 임시용 버튼(삭제 할 것) 생성=================================
     public void goTemp(View view){
-        Intent intent = new Intent(RoomListActivity.this,SigninActivity.class); // 뒤에 바꿀 것
+        Intent intent = new Intent(RoomListActivity.this,RoomActivity.class); // 뒤에 바꿀 것
         startActivity(intent);
     }
 }
