@@ -24,19 +24,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class CustomMarker extends FrameLayout {
     // 마커에 let, lan 저장
+    private String room_id;
     double let;
     double lan;
-    View marker;
-    TextView roomTitle;
-    TextView roomTime;
+    private View marker;
+    private TextView roomTitle;
+    private TextView roomTime;
 
-    public CustomMarker(@NonNull Context context, double let, double lan, String title, String time){
+    public CustomMarker(@NonNull Context context, double let, double lan){
         super(context);
         initView();
         this.let = let;
         this.lan = lan;
-        roomTitle.setText(title);
-        roomTime.setText(time);
     }
 
     // 커스텀한 marker 뷰 init
@@ -46,6 +45,9 @@ public class CustomMarker extends FrameLayout {
         roomTime = marker.findViewById(R.id.roomTime);
     }
     // title과 time, let, lan 등을 세팅
+    public void setRoomId(String room_id){
+        this.room_id = room_id;
+    }
     public void setRoomTitle(String title){
         roomTitle.setText(title);
     }
@@ -57,6 +59,21 @@ public class CustomMarker extends FrameLayout {
     }
     public void setLan(double lan){
         this.lan = lan;
+    }
+    public String getRoomId(){
+        return room_id;
+    }
+    public String getRoomTitle(){
+        return roomTitle.getText().toString();
+    }
+    public String getRoomTime(){
+        return roomTime.getText().toString();
+    }
+    public double getLet(){
+        return let;
+    }
+    public double getLan(){
+        return lan;
     }
 
     // 마커를 추가
@@ -71,7 +88,7 @@ public class CustomMarker extends FrameLayout {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(position);
         // 아이콘을 변경
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(FormatUtil.createDrawbleFromView(getContext(),marker)));
+//        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(FormatUtil.createDrawbleFromView(getContext(),marker)));
         return googleMap.addMarker(markerOptions);
     }
 }
