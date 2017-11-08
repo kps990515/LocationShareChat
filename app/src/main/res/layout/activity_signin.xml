@@ -28,8 +28,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/ivProfile"
         app:layout_constraintEnd_toEndOf="@+id/ivProfile"
         app:layout_constraintStart_toStartOf="@+id/ivProfile"
-        app:layout_constraintTop_toTopOf="@+id/ivProfile"
-        app:srcCompat="@drawable/add_profile" />
+        app:layout_constraintTop_toTopOf="@+id/ivProfile" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

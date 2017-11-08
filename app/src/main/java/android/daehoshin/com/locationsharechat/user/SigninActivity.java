@@ -233,5 +233,7 @@ public class SigninActivity extends AppCompatActivity {
                 }
                 break;
         }
+
+        popupChoice.setVisibility(View.GONE);
     }
 }
