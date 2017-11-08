@@ -1,0 +1,4 @@
+<resources>
+    <string name="nickname">Input your nickname</string>
+    <string name="nickname_check">Nickname is empty!</string>
+</resources>

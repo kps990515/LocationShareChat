@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "533107464950",
+    "firebase_url": "https://locationsharechat.firebaseio.com",
+    "project_id": "locationsharechat",
+    "storage_bucket": "locationsharechat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533107464950:android:2177ccc01baaefc8",
+        "android_client_info": {
+          "package_name": "android.daehoshin.com.locationsharechat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533107464950-9mr9411pb2cpuuldc5brkn7g6tuc3dj1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "android.daehoshin.com.locationsharechat",
+            "certificate_hash": "c3bde2f8f6c5d30bb4312b7cb60bc013e6d01490"
+          }
+        },
+        {
+          "client_id": "533107464950-e4k0o49e4dssrmqldg8l9krfqptmeabn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEincduwIdi3TGNGmKFMcjxq2u0YloWsE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533107464950-e4k0o49e4dssrmqldg8l9krfqptmeabn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
