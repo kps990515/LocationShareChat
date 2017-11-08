@@ -45,6 +45,7 @@ public class AuthManager {
      * @param callback 현재 UserInfo 반환(로그인 안된경우 null)
      */
     public void getCurrentUser(final IAuthCallback callback){
+        auth.signOut();
         if(currentUser == null) {
             callback.getCurrentUser(null);
             return;
