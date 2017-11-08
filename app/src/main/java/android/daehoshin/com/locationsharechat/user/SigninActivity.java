@@ -2,6 +2,7 @@ package android.daehoshin.com.locationsharechat.user;
 
 import android.Manifest;
 import android.content.Intent;
+import android.daehoshin.com.locationsharechat.BuildConfig;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
@@ -13,7 +14,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.BuildConfig;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
