@@ -40,3 +40,5 @@ Thumbs.db
 .idea/tasks.xml
 .idea/datasources.xml
 .idea/dataSources.ids
+.idea/libraries/android_android_26.xml
+.idea/libraries/com_google_android_gms_play_services_location_11_0_4.xml
