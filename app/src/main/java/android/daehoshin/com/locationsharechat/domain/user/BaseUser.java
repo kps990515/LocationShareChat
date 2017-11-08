@@ -1,6 +1,4 @@
-package android.daehoshin.com.locationsharechat.domain;
-
-import android.daehoshin.com.locationsharechat.common.DatabaseManager;
+package android.daehoshin.com.locationsharechat.domain.user;
 
 import com.google.firebase.database.Exclude;
 
@@ -8,27 +6,22 @@ import com.google.firebase.database.Exclude;
  * Created by daeho on 2017. 11. 8..
  * 사용자 Class
  */
-public class UserInfo {
-    private String uid;
-    private String name;
-    private String let = "";
-    private String lan = "";
-    private String profile_filename = "";
+abstract class BaseUser {
+    protected String uid;
+    protected String name;
+    protected String let;
+    protected String lan;
+    protected String profile_filename;
 
-    public UserInfo(){
+    public BaseUser(){
 
-    }
-    public UserInfo(String uid){
-        this.uid = uid;
     }
 
     /**
      * firebase database에 저장
      */
     @Exclude
-    public void save(){
-        DatabaseManager.getUserRef(uid).setValue(this);
-    }
+    abstract void save();
 
     public String getUid() {
         return uid;
