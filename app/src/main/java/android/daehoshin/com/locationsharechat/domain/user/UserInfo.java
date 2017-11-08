@@ -27,6 +27,7 @@ public class UserInfo extends BaseUser {
         DatabaseManager.getUserRef(uid).setValue(this);
     }
 
+    @Exclude
     public String[] getRoomIds(){
         return room.split(",");
     }
