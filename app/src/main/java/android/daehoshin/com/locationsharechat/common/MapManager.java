@@ -2,6 +2,8 @@ package android.daehoshin.com.locationsharechat.common;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.daehoshin.com.locationsharechat.Const.Consts;
+import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,7 +33,7 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
     private Location lastLocation = null;
     // 디폴트로 좌표 값을 지정
     private double lastLat = 37.56;
-    private double lastLan = 126.97;
+    private double lastLng = 126.97;
 
     public MapManager(FragmentActivity fragmentActivity){
         setMapGoogleApiClient(fragmentActivity);
@@ -92,8 +94,8 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
      */
     private void setLocationRequest(){
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setInterval(Consts.location_interval_time_current);
+        mLocationRequest.setFastestInterval(Consts.location_interval_time_current);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
@@ -117,7 +119,7 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
     public Location getMyRecentLocation(){
         lastLocation = LocationServices.FusedLocationApi.getLastLocation(mapGoogleApiClient);
         lastLat = lastLocation.getLatitude();
-        lastLan = lastLocation.getLongitude();
+        lastLng = lastLocation.getLongitude();
         return lastLocation;
     }
     /**
@@ -138,15 +140,16 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
     @Override
     public void onLocationChanged(Location location) {
         lastLat = location.getLatitude();
-        lastLan = location.getLongitude();
+        lastLng = location.getLongitude();
         lastLocation = location;
+
     }
 
     public double getLastLat(){
         return lastLat;
     }
-    public double getLastLan(){
-        return lastLan;
+    public double getLastLng(){
+        return lastLng;
     }
 
     // 일단 위랑 중복.... 나중에 빼도 될듯===================//

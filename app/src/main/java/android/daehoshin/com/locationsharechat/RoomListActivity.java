@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
+import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.room.RoomActivity;
 import android.daehoshin.com.locationsharechat.user.SigninActivity;
@@ -11,6 +12,7 @@ import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,7 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import static android.daehoshin.com.locationsharechat.Const.Consts.LOGIN_REQ;
 import static android.daehoshin.com.locationsharechat.Const.Consts.PERMISSION_REQ;
 
-public class RoomListActivity extends FragmentActivity implements OnMapReadyCallback {
+public class RoomListActivity extends FragmentActivity implements OnMapReadyCallback, CustomMapPopup.DelteThis {
 
     public static final String[] Permission = new String[] {
               Manifest.permission.ACCESS_FINE_LOCATION
@@ -34,12 +36,18 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
 
     private ProgressBar progress;
 
+    private FrameLayout popUpStage;
+    CustomMapPopup customMapPopup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
         progress = findViewById(R.id.progress);
         progress.setVisibility(View.VISIBLE);
+
+        setPopUpStage();
+
         checkPermission();
     }
 
@@ -111,23 +119,46 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
         mapManager.longClick(mMap, new MapManager.IMakeRoom() {
             @Override
             public void makePopup(LatLng latLng) {
-
+                popUpStage.setVisibility(View.VISIBLE);
+                customMapPopup = new CustomMapPopup(RoomListActivity.this,latLng.latitude,latLng.longitude);
+                customMapPopup.setX(100);
+                customMapPopup.setY(100);
+                popUpStage.addView(customMapPopup);
             }
         });
+
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
+    @Override
+    public void deletePopUp() {
+        popUpStage.removeView(customMapPopup);
+        popUpStage.setVisibility(View.GONE);
+    }
+
+    private void setPopUpStage(){
+        popUpStage = findViewById(R.id.popUpStage);
+        popUpStage.setVisibility(View.GONE);
+        popUpStage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUpStage.setVisibility(View.GONE);
+            }
+        });
+    }
 
     //======== 임시용 버튼(삭제 할 것) 생성=================================
     public void goTemp(View view){
-        Intent intent = new Intent(RoomListActivity.this,RoomActivity.class); // 뒤에 바꿀 것
+        Intent intent = new Intent(RoomListActivity.this, RoomActivity.class); // 뒤에 바꿀 것
         startActivity(intent);
     }
     public void signout(View view){
         AuthManager.getInstance().signout();
         finish();
     }
+
+
 }

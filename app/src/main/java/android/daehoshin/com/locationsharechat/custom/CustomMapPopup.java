@@ -2,7 +2,10 @@ package android.daehoshin.com.locationsharechat.custom;
 
 import android.content.Context;
 import android.daehoshin.com.locationsharechat.R;
+import android.daehoshin.com.locationsharechat.domain.room.Room;
+import android.daehoshin.com.locationsharechat.util.FormatUtil;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,17 +28,36 @@ public class CustomMapPopup extends FrameLayout {
     private Spinner spinnerMin;
     private Spinner spinnerEnd;
     private Button btnMakeRoom;
+    private DelteThis delteThis;
 
     private String hour;
     private String minute;
-    private String end_time;
+    private String endString;
 
-    public CustomMapPopup(@NonNull Context context) {
+    // Room에 저장할 값
+    private String title;
+    private long time;
+    private long end_time;
+    private String lat;
+    private String lng;
+    private String loc_name;
+    private String msg_count;
+
+    public CustomMapPopup(@NonNull Context context, Double lat, Double lng) {
         super(context);
+        delteThis = (DelteThis) context;
         initView();
+        this.lat = lat+"";
+        this.lng = lng+"";
+
+        init();
+    }
+
+    private void init(){
         setSpinnerHour();
         setSpinnerMin();
         setSpinnerEnd();
+        setBtnMakeRoom();
     }
 
     private void initView() {
@@ -45,8 +67,13 @@ public class CustomMapPopup extends FrameLayout {
         spinnerMin = view.findViewById(R.id.spinnerMin);
         spinnerEnd = view.findViewById(R.id.spinnerEnd);
         btnMakeRoom = view.findViewById(R.id.btnMakeRoom);
+
+        addView(view);
     }
 
+    /**
+     * 스피너 세팅
+     */
     private void setSpinnerHour(){
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),R.array.hour,android.R.layout.simple_list_item_1);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -63,7 +90,6 @@ public class CustomMapPopup extends FrameLayout {
             }
         });
     }
-
     private void setSpinnerMin(){
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),R.array.min,android.R.layout.simple_list_item_1);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -80,7 +106,6 @@ public class CustomMapPopup extends FrameLayout {
             }
         });
     }
-
     private void setSpinnerEnd(){
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),R.array.endTime,android.R.layout.simple_list_item_1);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -88,7 +113,8 @@ public class CustomMapPopup extends FrameLayout {
         spinnerEnd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                end_time = (String) adapter.getItem(position);
+                endString = (String) adapter.getItem(position);
+                endString = endString.substring(0,1);
             }
 
             @Override
@@ -98,12 +124,59 @@ public class CustomMapPopup extends FrameLayout {
         });
     }
 
+    /**
+     * 버튼 클릭시 Room을 생성
+     */
     private void setBtnMakeRoom(){
         btnMakeRoom.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Room을 생성 시킴
+                title =editTitle.getText().toString();
+                if("".equals(title) || title == null){
+                    Toast.makeText(getContext(), "방 제목을 입력해주세요", Toast.LENGTH_SHORT).show();
+                } else {
+                    setTime(hour,minute,endString);
+                    Log.e("확인",title + " // " + time + " // " + end_time + " // " + lat + " // " + lng);
+//                    makeThisRoom();
+                    delteThis.deletePopUp();
+                }
             }
         });
     }
+
+    /**
+     * Time을 포멧에 맞춰 세팅
+     * @param hour
+     * @param minute
+     * @param endString
+     */
+    private void setTime(String hour, String minute, String endString){
+        String timeTemp = FormatUtil.settingDateFormat(hour,minute,"0");
+        String timeTemp_end = FormatUtil.settingDateFormat(hour,minute,endString);
+        time = FormatUtil.changeTimeFormatStringToLong(timeTemp);
+        end_time = FormatUtil.changeTimeFormatStringToLong(timeTemp_end);
+    }
+
+    /**
+     * Room을 생성
+     */
+    private void makeThisRoom(){
+        Room room = new Room();
+        room.setTitle(editTitle.getText().toString());
+        room.setTime(time);
+        room.setEnd_time(end_time);
+        room.setLat(lat);
+        room.setLng(lng);
+        room.setLoc_name("");
+        room.setMsg_count("");
+        room.save();
+    }
+
+    /**
+     * 버튼 클릭시 popup을 삭제하기 위한 인터페이스
+     */
+    public interface DelteThis{
+        public void deletePopUp();
+    }
+
 }

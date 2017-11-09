@@ -19,4 +19,8 @@ public class Consts {
     public static final int LOGIN_REQ = 900;
     public static final int PERMISSION_REQ = 901;
 
+    // 업데이트 시간
+    public static final int location_interval_time_current = 6000;
+    public static final int location_interval_meter_current = 10;
+
 }

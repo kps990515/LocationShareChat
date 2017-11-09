@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -53,15 +54,19 @@ public class FormatUtil {
     }
 
     /**
-     * 시간과 분을 받아서 yyyy/MM/dd/HH/mm/ss 형식으로 변환
+     * 시간과 분, end-time을 받아서 yyyy/MM/dd/HH/mm/ss 형식으로 변환
      * @param hour
      * @param minute
+     * @param plusHour
      * @return
      */
-    public static String settingDateFormat(String hour, String minute){
+    public static String settingDateFormat(String hour, String minute, String plusHour){
         String result = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        long today = System.currentTimeMillis();
+
+        Calendar today = Calendar.getInstance();
+        int plusHourInt = Integer.parseInt(plusHour);
+        today.add(Calendar.HOUR_OF_DAY,plusHourInt);
         result = sdf.format(today);
         result = result + "/" + hour + "/" + minute + "/00";
         return result;
