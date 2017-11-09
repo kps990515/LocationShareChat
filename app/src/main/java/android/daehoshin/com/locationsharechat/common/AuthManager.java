@@ -1,6 +1,7 @@
 package android.daehoshin.com.locationsharechat.common;
 
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -67,7 +68,7 @@ public class AuthManager {
      * 익명 로그인 처리
      * @param callback 성공여부 반환
      */
-    public void signInAnonymously(final String nickname, final IAuthCallback callback){
+    public void signInAnonymously(final String nickname, final Uri profileUri, final IAuthCallback callback){
         auth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -78,11 +79,16 @@ public class AuthManager {
                     ui.setUid(currentUser.getUid());
                     ui.setName(nickname);
                     ui.save();
+
+                    StorageManager.uploadProfile(ui.getUid(), profileUri, new StorageManager.IUploadCallback() {
+                        @Override
+                        public void uploaded(boolean isSuccess, Uri uri) {
+
+                        }
+                    });
                 }
 
                 callback.signinAnonymously(task.isSuccessful());
-
-
             }
         });
     }
