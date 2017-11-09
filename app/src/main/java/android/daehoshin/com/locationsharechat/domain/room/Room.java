@@ -38,6 +38,7 @@ public class Room {
         DatabaseManager.getRoomRef(id).setValue(this);
     }
 
+    @Exclude
     public void getMember(final IRoomMemberCallback callback){
         DatabaseManager.getMemberRef(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -56,6 +57,7 @@ public class Room {
         });
     }
 
+    @Exclude
     public void getMsg(final IRoomMsgCallback callback){
         DatabaseManager.getMsgRef(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -74,6 +76,7 @@ public class Room {
         });
     }
 
+    @Exclude
     public MarkerOptions getMarker(){
         return MarkerUtil.createMarkerOptions(this);
     }
