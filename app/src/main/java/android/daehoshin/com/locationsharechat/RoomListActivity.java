@@ -131,7 +131,6 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
                 customMapPopup.setX(100);
                 customMapPopup.setY(100);
                 popUpStage.addView(customMapPopup);
-                // dialog 혹은 Toast 띄우고, 마커 찍기
             }
         });
 
@@ -185,9 +184,11 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     }
 
     @Override
-    public void deletePopUp() {
+    public void deletePopUp(Room room) {
         popUpStage.removeView(customMapPopup);
         popUpStage.setVisibility(View.GONE);
+        // dialog 혹은 Toast 띄우고, 마커 찍기
+        addRoom(room);
     }
 
     private void setPopUpStage(){

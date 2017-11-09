@@ -4,6 +4,7 @@ import android.content.Context;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
+import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.util.FormatUtil;
 import android.support.annotation.NonNull;
@@ -37,6 +38,7 @@ public class CustomMapPopup extends FrameLayout {
     private String endString;
 
     // Room에 저장할 값
+    private Room room;
     private String title;
     private long time;
     private long end_time;
@@ -134,15 +136,12 @@ public class CustomMapPopup extends FrameLayout {
             @Override
             public void onClick(View v) {
                 title =editTitle.getText().toString();
-                loc_name = "";
-                msg_count="";
                 if("".equals(title) || title == null){
                     Toast.makeText(getContext(), "방 제목을 입력해주세요", Toast.LENGTH_SHORT).show();
                 } else {
                     setTime(hour,minute,endString);
-                    Log.e("확인",title + " // " + time + " // " + end_time + " // " + lat + " // " + lng);
                     makeThisRoom();
-                    delteThis.deletePopUp();
+                    delteThis.deletePopUp(room);
                 }
             }
         });
@@ -165,22 +164,40 @@ public class CustomMapPopup extends FrameLayout {
      * Room을 생성
      */
     private void makeThisRoom(){
-        Room room = new Room();
+        // 룸을 생성
+        room = new Room();
         room.setTitle(editTitle.getText().toString());
         room.setTime(time);
         room.setEnd_time(end_time);
         room.setLat(lat);
         room.setLng(lng);
-        room.setLoc_name(loc_name);
-        room.setMsg_count(msg_count);
         room.save();
+
+        // 자신 밑에 room_id를 추가
+        AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
+            @Override
+            public void signinAnonymously(boolean isSuccessful) {
+
+            }
+
+            @Override
+            public void getCurrentUser(UserInfo userInfo) {
+                userInfo.addRoom(room.id);
+                userInfo.save();
+
+                // 맴버에 자신을 추가
+                Member member = new Member(userInfo, room.id);
+                member.save();
+            }
+        });
+
     }
 
     /**
-     * 버튼 클릭시 popup을 삭제하기 위한 인터페이스
+     * 버튼 클릭시 popup을 삭제하고 마커를 추가
      */
     public interface DelteThis{
-        public void deletePopUp();
+        public void deletePopUp(Room room);
     }
 
 }
