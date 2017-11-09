@@ -28,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.daehoshin.com.locationsharechat.Const.Consts.ROOM_ID;
+
 public class RoomActivity extends AppCompatActivity {
 
     RecyclerView chatList;
@@ -46,8 +48,7 @@ public class RoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_room);
         database = FirebaseDatabase.getInstance();
 
-        //roomid = getIntent().getStringExtra("-KyUZzRy1Rgj3fkBYjFb");
-        roomid = "-KyUZzRy1Rgj3fkBYjFb";
+        roomid = getIntent().getStringExtra(ROOM_ID);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
