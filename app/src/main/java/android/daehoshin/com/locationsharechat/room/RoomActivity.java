@@ -28,8 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.daehoshin.com.locationsharechat.Const.Consts.ROOM_ID;
-
 public class RoomActivity extends AppCompatActivity {
 
     RecyclerView chatList;
@@ -40,6 +38,7 @@ public class RoomActivity extends AppCompatActivity {
 
     private UserInfo currentUser;
     private Room currentRoom;
+    private String roomid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,8 @@ public class RoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_room);
         database = FirebaseDatabase.getInstance();
 
-        final String roomid = getIntent().getStringExtra(ROOM_ID);
+        //roomid = getIntent().getStringExtra("-KyUZzRy1Rgj3fkBYjFb");
+        roomid = "-KyUZzRy1Rgj3fkBYjFb";
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,7 +61,7 @@ public class RoomActivity extends AppCompatActivity {
             @Override
             public void getCurrentUser(UserInfo userInfo) {
                 currentUser = userInfo;
-                currentUser.getRoom("-KyUZzRy1Rgj3fkBYjFb", new UserInfo.IUserInfoCallback() {
+                currentUser.getRoom(roomid, new UserInfo.IUserInfoCallback() {
                     @Override
                     public void getRoom(Room room) {
                         currentRoom = room;
@@ -103,7 +103,7 @@ public class RoomActivity extends AppCompatActivity {
         String text = edit_msg.getText().toString();
         if(text != null && !"".equals(text)) {
             final Msg msg = new Msg();
-            msg.setId(ROOM_ID);
+            msg.setId(roomid);
             msgRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
