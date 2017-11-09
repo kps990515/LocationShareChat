@@ -18,14 +18,14 @@ import java.util.List;
  */
 
 public class Room {
-    private String id;
-    private String title;
-    private long time;
-    private long end_time;
-    private String lat;
-    private String lng;
-    private String loc_name;
-    private String msg_count;
+    public String id;
+    public String title;
+    public long time;
+    public long end_time;
+    public String lat;
+    public String lng;
+    public String loc_name;
+    public String msg_count;
 
     public Room(){
 

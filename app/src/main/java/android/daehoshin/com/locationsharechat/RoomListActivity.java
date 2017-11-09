@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
 import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
+import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.room.RoomActivity;
 import android.daehoshin.com.locationsharechat.user.SigninActivity;
@@ -19,6 +20,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.daehoshin.com.locationsharechat.Const.Consts.LOGIN_REQ;
 import static android.daehoshin.com.locationsharechat.Const.Consts.PERMISSION_REQ;
@@ -36,6 +40,9 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
 
     private FrameLayout popUpStage;
     CustomMapPopup customMapPopup;
+
+    private UserInfo currentUser;
+    private List<Room> rooms = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,10 +132,41 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
             }
         });
 
+        loadData();
+
         // Add a marker in Sydney and move the camera
 //        LatLng sydney = new LatLng(-34, 151);
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    private void loadData(){
+        AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
+            @Override
+            public void signinAnonymously(boolean isSuccessful) {
+
+            }
+
+            @Override
+            public void getCurrentUser(UserInfo userInfo) {
+                currentUser = userInfo;
+
+                for(String roomid : currentUser.getRoomIds()){
+                    currentUser.getRoom(roomid, new UserInfo.IUserInfoCallback() {
+                        @Override
+                        public void getRoom(Room room) {
+                            addRoom(room);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private void addRoom(Room room){
+        rooms.add(room);
+
+        mMap.addMarker(room.getMarker());
     }
 
     @Override
