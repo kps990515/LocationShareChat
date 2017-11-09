@@ -105,9 +105,12 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
     @SuppressLint("MissingPermission")
     public void startUpdateMyLocation(){
         LocationServices.FusedLocationApi.requestLocationUpdates(mapGoogleApiClient,mLocationRequest,this);
+
+        Log.e("startUpdateMyLocation","======================");
     }
     public void stopUpdateMyLocation(){
         LocationServices.FusedLocationApi.removeLocationUpdates(mapGoogleApiClient,this);
+        Log.e("stopUpdateMyLocation","======================");
     }
 
     /**
@@ -125,10 +128,15 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
      * 지도에서 내 최근 위치로 이동하는 메소드 (커스텀하게 되면 사용)
      */
     public void moveToMyLocation(GoogleMap mMap){
-        LatLng latLng = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
         if(lastLocation != null){
+            startUpdateMyLocation();
+            LatLng latLng = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+        } else {
+            LatLng latLng = new LatLng(lastLat, lastLng);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
         }
+        Log.e("moveToMyLocation","======================"+lastLat + "//" +lastLng);
     }
 
     /**
@@ -141,7 +149,7 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
         lastLat = location.getLatitude();
         lastLng = location.getLongitude();
         lastLocation = location;
-
+        Log.e("onlocationchagned","======================"+lastLat + "//" +lastLng);
     }
 
     public double getLastLat(){

@@ -40,6 +40,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
 
     private FrameLayout popUpStage;
     CustomMapPopup customMapPopup;
+    MapManager mapManager;
 
     private UserInfo currentUser;
 
@@ -51,6 +52,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
         progress.setVisibility(View.VISIBLE);
 
         setPopUpStage();
+        mapManager = new MapManager(this);
 
         checkPermission();
     }
@@ -119,7 +121,6 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        MapManager mapManager = new MapManager(this);
         mapManager.longClick(mMap, new MapManager.IMakeRoom() {
             @Override
             public void makePopup(LatLng latLng) {
@@ -130,6 +131,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
                 popUpStage.addView(customMapPopup);
             }
         });
+        mapManager.moveToMyLocation(mMap);
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
