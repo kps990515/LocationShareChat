@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -60,7 +61,7 @@ public class RoomActivity extends AppCompatActivity {
             @Override
             public void getCurrentUser(UserInfo userInfo) {
                 currentUser = userInfo;
-                currentUser.getRoom(roomid, new UserInfo.IUserInfoCallback() {
+                currentUser.getRoom("-KyUZzRy1Rgj3fkBYjFb", new UserInfo.IUserInfoCallback() {
                     @Override
                     public void getRoom(Room room) {
                         currentRoom = room;
@@ -122,7 +123,7 @@ public class RoomActivity extends AppCompatActivity {
             msg.setTime(System.currentTimeMillis());
             msg.setType("text");
             msg.setMessage(text);
-            msgRef.child(room_id).child(msg.getIdx()+"").setValue(msg);
+            msgRef.child(msg.getIdx()+"").setValue(msg);
             edit_msg.setText("");
         }
     }
@@ -144,8 +145,8 @@ public class RoomActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<Msg> data = new ArrayList<>();
                 for(DataSnapshot item : dataSnapshot.getChildren()){
+                    Log.d("msg",item.getKey());
                     Msg msg = item.getValue(Msg.class);
-
                     data.add(msg);
                 }
                 adapter.dataRefresh(data);
