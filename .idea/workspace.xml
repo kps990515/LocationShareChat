@@ -19,13 +19,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DatabaseManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DatabaseManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/Member.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/Member.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/marker_room_info.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/marker_room_info.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,12 +43,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RoomListActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RoomListActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="158" column="83" lean-forward="false" selection-start-line="158" selection-start-column="83" selection-end-line="158" selection-end-column="83" />
-              <folding />
+            <state relative-caret-position="174">
+              <caret line="133" column="11" lean-forward="true" selection-start-line="133" selection-start-column="11" selection-end-line="133" selection-end-column="11" />
+              <folding>
+                <element signature="method#getInfoWindow#0;class#4613:5351" expanded="true" />
+                <element signature="e#5397#5862#0" expanded="true" />
+                <element signature="e#5861#5862#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -129,7 +127,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DatabaseManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DatabaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="256">
@@ -1981,11 +1979,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/ChatAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/custom/CustomMapPopup.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/marker_room_info.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/Member.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DatabaseManager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java" />
       </list>
     </option>
   </component>
@@ -2424,7 +2422,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510230403441" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510230716995" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2472,7 +2470,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510230403441" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510230716995" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2655,7 +2653,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510230403443" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510230716997" />
       </method>
     </configuration>
     <list size="1">
@@ -2820,7 +2818,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510218509304</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="member 저장위치 수정">
+      <created>1510230429747</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1510230429747</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2927,7 +2932,8 @@
     <MESSAGE value="member save public으로 수정" />
     <MESSAGE value="member 생성자 추가" />
     <MESSAGE value="marker info 추가중" />
-    <option name="LAST_COMMIT_MESSAGE" value="marker info 추가중" />
+    <MESSAGE value="member 저장위치 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="member 저장위치 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2939,7 +2945,7 @@
           <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="27" />
+      <option name="time" value="28" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -3266,14 +3272,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="158" column="83" lean-forward="false" selection-start-line="158" selection-start-column="83" selection-end-line="158" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/marker_room_info.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
@@ -3365,6 +3363,18 @@
             <element signature="method#getRoomRef#1;class#DatabaseManager#0" expanded="true" />
             <element signature="method#getMsgRef#0;class#DatabaseManager#0" expanded="true" />
             <element signature="method#DatabaseManager#0;class#DatabaseManager#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="133" column="11" lean-forward="true" selection-start-line="133" selection-start-column="11" selection-end-line="133" selection-end-column="11" />
+          <folding>
+            <element signature="method#getInfoWindow#0;class#4613:5351" expanded="true" />
+            <element signature="e#5397#5862#0" expanded="true" />
+            <element signature="e#5861#5862#0" expanded="true" />
           </folding>
         </state>
       </provider>

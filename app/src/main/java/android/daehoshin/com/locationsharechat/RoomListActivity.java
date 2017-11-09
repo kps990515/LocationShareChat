@@ -134,21 +134,6 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
         });
         mapManager.moveToMyLocation(mMap);
 
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                if(marker.getTag() != null){
-                    if(marker.getTag() instanceof Room) {
-                        Room room = (Room)marker.getTag();
-                        Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
-                        intent.putExtra(ROOM_ID, room.id);
-                        startActivity(intent);
-                    }
-                }
-                return false;
-            }
-        });
-
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
@@ -165,6 +150,18 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
             @Override
             public View getInfoContents(Marker marker) {
                 return null;
+            }
+        });
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                if(marker.getTag() instanceof Room) {
+                    Room room = (Room) marker.getTag();
+                    Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
+                    intent.putExtra(ROOM_ID, room.id);
+                    startActivity(intent);
+                }
             }
         });
 
