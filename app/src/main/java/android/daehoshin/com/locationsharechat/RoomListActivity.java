@@ -12,6 +12,7 @@ import android.daehoshin.com.locationsharechat.user.SigninActivity;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -21,9 +22,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.PERMISSION_REQ;
@@ -44,7 +42,6 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     CustomMapPopup customMapPopup;
 
     private UserInfo currentUser;
-    private List<Room> rooms = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +143,25 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
             }
         });
 
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                if(marker.getTag() instanceof Room){
+                    View view = LayoutInflater.from(RoomListActivity.this).inflate(R.layout.marker_room_info, null, false);
+                    return view;
+                }
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                return null;
+            }
+        });
+
+
         loadData();
+
 
         // Add a marker in Sydney and move the camera
 //        LatLng sydney = new LatLng(-34, 151);
@@ -178,9 +193,9 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     }
 
     private void addRoom(Room room){
-        rooms.add(room);
-
-        mMap.addMarker(room.getMarker()).setTag(room.id);
+        Marker marker = mMap.addMarker(room.getMarker());
+        marker.setTag(room);
+        marker.showInfoWindow();
     }
 
     @Override
