@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 
 public class MarkerUtil {
-    private static MarkerOptions createMarkerOptions(int resourceId, String let, String lan){
+    public static MarkerOptions createMarkerOptions(int resourceId, String let, String lan){
         LatLng position = new LatLng(Double.parseDouble(let), Double.parseDouble(lan));
 
         // 마커 옵션 설정

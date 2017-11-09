@@ -20,12 +20,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.daehoshin.com.locationsharechat.Const.Consts.LOGIN_REQ;
 import static android.daehoshin.com.locationsharechat.Const.Consts.PERMISSION_REQ;
+import static android.daehoshin.com.locationsharechat.Const.Consts.ROOM_ID;
 
 public class RoomListActivity extends FragmentActivity implements OnMapReadyCallback, CustomMapPopup.DelteThis {
 
@@ -133,6 +135,18 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
             }
         });
 
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if(marker.getTag() != null){
+                    Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
+                    intent.putExtra(ROOM_ID, marker.getTag().toString());
+                    startActivity(intent);
+                }
+                return false;
+            }
+        });
+
         loadData();
 
         // Add a marker in Sydney and move the camera
@@ -167,7 +181,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     private void addRoom(Room room){
         rooms.add(room);
 
-        mMap.addMarker(room.getMarker());
+        mMap.addMarker(room.getMarker()).setTag(room.id);
     }
 
     @Override
