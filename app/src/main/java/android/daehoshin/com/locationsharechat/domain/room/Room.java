@@ -1,8 +1,13 @@
 package android.daehoshin.com.locationsharechat.domain.room;
 
+import android.content.Context;
+import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.util.MarkerUtil;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -81,6 +86,15 @@ public class Room {
     @Exclude
     public MarkerOptions getMarker(){
         return MarkerUtil.createMarkerOptions(this);
+    }
+
+    @Exclude
+    public View getInfoView(Context context){
+        View view = LayoutInflater.from(context).inflate(R.layout.marker_room_info, null, false);
+        ((TextView)view.findViewById(R.id.tvTitle)).setText(title);
+        ((TextView)view.findViewById(R.id.tvTime)).setText(time+"");
+
+        return view;
     }
 
     public String getId() {

@@ -12,11 +12,9 @@ import android.daehoshin.com.locationsharechat.user.SigninActivity;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -139,10 +137,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
             public View getInfoWindow(Marker marker) {
                 if(marker.getTag() instanceof Room){
                     Room room = (Room)marker.getTag();
-                    View view = LayoutInflater.from(RoomListActivity.this).inflate(R.layout.marker_room_info, null, false);
-                    ((TextView)view.findViewById(R.id.tvTitle)).setText(room.title);
-                    ((TextView)view.findViewById(R.id.tvTime)).setText(room.time+"");
-                    return view;
+                    return room.getInfoView(RoomListActivity.this);
                 }
                 return null;
             }
