@@ -2,7 +2,9 @@ package android.daehoshin.com.locationsharechat.domain.room;
 
 import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
+import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Exclude;
@@ -20,8 +22,8 @@ public class Room {
     private String title;
     private long time;
     private long end_time;
-    private String let;
-    private String lan;
+    private String lat;
+    private String lng;
     private String loc_name;
     private String msg_count;
 
@@ -72,6 +74,10 @@ public class Room {
         });
     }
 
+    public MarkerOptions getMarker(){
+        return MarkerUtil.createMarkerOptions(this);
+    }
+
     public String getId() {
         return id;
     }
@@ -96,17 +102,17 @@ public class Room {
     public void setEnd_time(long end_time) {
         this.end_time = end_time;
     }
-    public String getLet() {
-        return let;
+    public String getLat() {
+        return lat;
     }
-    public void setLet(String let) {
-        this.let = let;
+    public void setLat(String lat) {
+        this.lat = lat;
     }
-    public String getLan() {
-        return lan;
+    public String getLng() {
+        return lng;
     }
-    public void setLan(String lan) {
-        this.lan = lan;
+    public void setLng(String lng) {
+        this.lng = lng;
     }
     public String getLoc_name() {
         return loc_name;

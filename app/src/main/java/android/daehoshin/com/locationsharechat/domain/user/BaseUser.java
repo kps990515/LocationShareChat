@@ -1,9 +1,13 @@
 package android.daehoshin.com.locationsharechat.domain.user;
 
+import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.net.Uri;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by daeho on 2017. 11. 8..
@@ -12,11 +16,11 @@ import com.google.firebase.database.Exclude;
 abstract class BaseUser {
     protected String uid;
     protected String name;
-    protected String let;
-    protected String lan;
+    protected String lat;
+    protected String lng;
 
     public BaseUser(){
-
+        realtimeRefresh();
     }
 
     /**
@@ -24,6 +28,9 @@ abstract class BaseUser {
      */
     @Exclude
     abstract void save();
+
+    @Exclude
+    abstract void realtimeRefresh();
 
     @Exclude
     public void uploadProfile(Uri profileUri){
@@ -56,20 +63,21 @@ abstract class BaseUser {
         this.name = name;
     }
 
-    public String getLet() {
-        return let;
+    public String getLat() {
+        return lat;
     }
 
-    public void setLet(String let) {
-        this.let = let;
+    public void setLat(String lat) {
+        this.lat = lat;
     }
 
-    public String getLan() {
-        return lan;
+    public String getLng() {
+        return lng;
     }
 
-    public void setLan(String lan) {
-        this.lan = lan;
+    public void setLng(String lng) {
+        this.lng = lng;
     }
+
 
 }
