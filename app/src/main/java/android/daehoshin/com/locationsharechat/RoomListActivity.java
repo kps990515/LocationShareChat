@@ -3,9 +3,7 @@ package android.daehoshin.com.locationsharechat;
 import android.Manifest;
 import android.content.Intent;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
-import android.daehoshin.com.locationsharechat.common.CustomLocationManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
-import android.daehoshin.com.locationsharechat.custom.CustomMarker;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.room.RoomActivity;
 import android.daehoshin.com.locationsharechat.user.SigninActivity;
@@ -13,21 +11,20 @@ import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import static android.daehoshin.com.locationsharechat.Const.Consts.LOGIN_REQ;
+import static android.daehoshin.com.locationsharechat.Const.Consts.PERMISSION_REQ;
+
 public class RoomListActivity extends FragmentActivity implements OnMapReadyCallback {
-    public static final int LOGIN_REQ = 900;
-    public static final int PERMISSION_REQ = 901;
+
     public static final String[] Permission = new String[] {
               Manifest.permission.ACCESS_FINE_LOCATION
             , Manifest.permission.ACCESS_COARSE_LOCATION };

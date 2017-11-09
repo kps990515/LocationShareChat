@@ -3,15 +3,16 @@ package android.daehoshin.com.locationsharechat.common;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static android.daehoshin.com.locationsharechat.Const.Consts.TB_MEMBER;
+import static android.daehoshin.com.locationsharechat.Const.Consts.TB_MSG;
+import static android.daehoshin.com.locationsharechat.Const.Consts.TB_ROOM;
+import static android.daehoshin.com.locationsharechat.Const.Consts.TB_USER;
+
 /**
  * Created by daeho on 2017. 11. 7..
  */
 
 public class DatabaseManager {
-    public static final String TB_USER = "user";
-    public static final String TB_MEMBER = "member";
-    public static final String TB_ROOM = "room";
-    public static final String TB_MSG = "msg";
 
     private static DatabaseManager databaseManager;
     public static DatabaseManager getInstance(){

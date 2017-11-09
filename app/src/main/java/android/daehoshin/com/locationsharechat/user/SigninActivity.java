@@ -29,10 +29,11 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 
+import static android.daehoshin.com.locationsharechat.Const.Consts.CAMERA_PERMISSION_REQ;
+import static android.daehoshin.com.locationsharechat.Const.Consts.CAMERA_REQ;
+import static android.daehoshin.com.locationsharechat.Const.Consts.GALLERY_REQ;
+
 public class SigninActivity extends AppCompatActivity {
-    public static final int CAMERA_PERMISSION_REQ = 902;
-    public static final int CAMERA_REQ = 800;
-    public static final int GALLERY_REQ = 801;
 
     private ImageView ivProfile;
     private ImageButton btnAddProfile;
