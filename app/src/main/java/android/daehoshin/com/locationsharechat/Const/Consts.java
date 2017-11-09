@@ -5,7 +5,7 @@ package android.daehoshin.com.locationsharechat.Const;
  */
 
 public class Consts {
-    public static final String room_id = "room_id";
+    public static final String ROOM_ID = "room_id";
 
     public static final String TB_USER = "user";
     public static final String TB_MEMBER = "member";
@@ -20,7 +20,7 @@ public class Consts {
     public static final int PERMISSION_REQ = 901;
 
     // 업데이트 시간
-    public static final int location_interval_time_current = 6000;
-    public static final int location_interval_meter_current = 10;
+    public static final int LOCATION_INTERVAL_TIME = 6000;
+    public static final int LOCATION_INTERVAL_METER = 10;
 
 }

@@ -64,11 +64,18 @@ public class FormatUtil {
         String result = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
-        Calendar today = Calendar.getInstance();
-        int plusHourInt = Integer.parseInt(plusHour);
-        today.add(Calendar.HOUR_OF_DAY,plusHourInt);
-        result = sdf.format(today);
-        result = result + "/" + hour + "/" + minute + "/00";
+        Calendar day = Calendar.getInstance();
+        int checkHour = Integer.parseInt(plusHour) + Integer.parseInt(hour);
+        if(checkHour>23){
+            checkHour -=24;
+            day.add(Calendar.DATE,1);
+        }
+        Log.e("day",sdf.format(day.getTime()));
+
+        result = sdf.format(day.getTime());
+        result = result + "/" + checkHour + "/" + minute + "/00";
+
+        Log.e("result",result);
         return result;
     }
 }

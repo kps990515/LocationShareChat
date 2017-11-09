@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.daehoshin.com.locationsharechat.Const.Consts.room_id;
+import static android.daehoshin.com.locationsharechat.Const.Consts.ROOM_ID;
 
 public class RoomActivity extends AppCompatActivity {
 
@@ -47,7 +47,7 @@ public class RoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_room);
         database = FirebaseDatabase.getInstance();
 
-        final String roomid = getIntent().getStringExtra(room_id);
+        final String roomid = getIntent().getStringExtra(ROOM_ID);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -103,7 +103,7 @@ public class RoomActivity extends AppCompatActivity {
         String text = edit_msg.getText().toString();
         if(text != null && !"".equals(text)) {
             final Msg msg = new Msg();
-            msg.setId(room_id);
+            msg.setId(ROOM_ID);
             msgRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

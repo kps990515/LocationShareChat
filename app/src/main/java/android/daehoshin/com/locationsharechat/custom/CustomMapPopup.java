@@ -2,7 +2,9 @@ package android.daehoshin.com.locationsharechat.custom;
 
 import android.content.Context;
 import android.daehoshin.com.locationsharechat.R;
+import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
+import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.util.FormatUtil;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -132,12 +134,14 @@ public class CustomMapPopup extends FrameLayout {
             @Override
             public void onClick(View v) {
                 title =editTitle.getText().toString();
+                loc_name = "";
+                msg_count="";
                 if("".equals(title) || title == null){
                     Toast.makeText(getContext(), "방 제목을 입력해주세요", Toast.LENGTH_SHORT).show();
                 } else {
                     setTime(hour,minute,endString);
                     Log.e("확인",title + " // " + time + " // " + end_time + " // " + lat + " // " + lng);
-//                    makeThisRoom();
+                    makeThisRoom();
                     delteThis.deletePopUp();
                 }
             }
@@ -167,8 +171,8 @@ public class CustomMapPopup extends FrameLayout {
         room.setEnd_time(end_time);
         room.setLat(lat);
         room.setLng(lng);
-        room.setLoc_name("");
-        room.setMsg_count("");
+        room.setLoc_name(loc_name);
+        room.setMsg_count(msg_count);
         room.save();
     }
 

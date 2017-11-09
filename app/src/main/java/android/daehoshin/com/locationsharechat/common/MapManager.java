@@ -93,8 +93,8 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
      */
     private void setLocationRequest(){
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(Consts.location_interval_time_current);
-        mLocationRequest.setFastestInterval(Consts.location_interval_time_current);
+        mLocationRequest.setInterval(Consts.LOCATION_INTERVAL_TIME);
+        mLocationRequest.setFastestInterval(Consts.LOCATION_INTERVAL_TIME);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
