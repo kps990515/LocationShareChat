@@ -32,8 +32,10 @@ public class Member extends BaseUser {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Member m = dataSnapshot.getValue(Member.class);
-                lat = m.getLat();
-                lng = m.getLng();
+                if(m != null) {
+                    lat = m.getLat();
+                    lng = m.getLng();
+                }
             }
 
             @Override

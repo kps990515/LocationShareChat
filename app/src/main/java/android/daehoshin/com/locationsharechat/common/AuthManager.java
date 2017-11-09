@@ -80,12 +80,14 @@ public class AuthManager {
                     ui.setName(nickname);
                     ui.save();
 
-                    StorageManager.uploadProfile(ui.getUid(), profileUri, new StorageManager.IUploadCallback() {
-                        @Override
-                        public void uploaded(boolean isSuccess, Uri uri) {
+                    if(profileUri != null) {
+                        StorageManager.uploadProfile(ui.getUid(), profileUri, new StorageManager.IUploadCallback() {
+                            @Override
+                            public void uploaded(boolean isSuccess, Uri uri) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
 
                 callback.signinAnonymously(task.isSuccessful());

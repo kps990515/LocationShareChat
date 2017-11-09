@@ -35,8 +35,10 @@ public class UserInfo extends BaseUser {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserInfo m = dataSnapshot.getValue(UserInfo.class);
-                lat = m.getLat();
-                lng = m.getLng();
+                if(m != null) {
+                    lat = m.getLat();
+                    lng = m.getLng();
+                }
             }
 
             @Override
