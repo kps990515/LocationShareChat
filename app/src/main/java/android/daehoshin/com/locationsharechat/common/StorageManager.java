@@ -42,17 +42,17 @@ public class StorageManager {
                 });
     }
 
-    public static void downloadProfile(String uid, final IDownloadCallback callback){
+    public static void downloadProfile(final String uid, final IDownloadCallback callback){
         StorageReference riversRef = getInstance().stRef.child(DIR_PROFILE + "/" + uid + ".jpg");
         riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                callback.downloaded(uri);
+                callback.downloaded(uid, uri);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                callback.downloaded(null);
+                callback.downloaded(uid, null);
             }
         });
     }
@@ -68,6 +68,6 @@ public class StorageManager {
         void uploaded(boolean isSuccess, Uri uri);
     }
     public interface IDownloadCallback{
-        void downloaded(Uri uri);
+        void downloaded(String id, Uri uri);
     }
 }

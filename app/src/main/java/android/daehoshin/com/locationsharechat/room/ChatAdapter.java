@@ -36,6 +36,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
         notifyDataSetChanged();
     }
 
+    public void addProfile(String uid, Uri uri){
+        profiles.put(uid, uri);
+    }
+
     @Override
     public ChatAdapter.Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_chat,parent,false);

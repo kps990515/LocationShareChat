@@ -3,9 +3,12 @@ package android.daehoshin.com.locationsharechat.room;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.DatabaseManager;
+import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.daehoshin.com.locationsharechat.domain.room.Msg;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
+import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,15 +64,26 @@ public class RoomActivity extends AppCompatActivity {
                     @Override
                     public void getRoom(Room room) {
                         currentRoom = room;
-//                        currentRoom.getMember(new Room.IRoomMemberCallback() {
-//                            @Override
-//                            public void getMember(List<Member> members) {
-//                                members.get(0).getProfile();
-//                            }
-//                        });
                         msgRef = DatabaseManager.getMsgRef(roomid);
-
                         initView();
+
+                        currentRoom.getMember(new Room.IRoomMemberCallback() {
+                            @Override
+                            public void getMember(List<Member> members) {
+                                for(Member member : members){
+                                    member.getProfile(new StorageManager.IDownloadCallback() {
+                                        @Override
+                                        public void downloaded(String id, Uri uri) {
+                                            adapter.addProfile(id, uri);
+                                        }
+                                    });
+                                }
+
+                            }
+                        });
+
+
+
                     }
                 });
             }
