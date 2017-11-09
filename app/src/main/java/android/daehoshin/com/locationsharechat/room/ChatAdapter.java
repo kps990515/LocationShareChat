@@ -2,6 +2,7 @@ package android.daehoshin.com.locationsharechat.room;
 
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.domain.room.Msg;
+import android.net.Uri;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by user on 2017-11-09.
@@ -19,8 +23,9 @@ import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
 
-    private List<Msg> data;
+    private List<Msg> data = new ArrayList<>();
     private String currentUserUid;
+    private Map<String, Uri> profiles = new HashMap<>();
 
     public ChatAdapter(String currentUserUid){
         this.currentUserUid = currentUserUid;

@@ -61,6 +61,12 @@ public class RoomActivity extends AppCompatActivity {
                     @Override
                     public void getRoom(Room room) {
                         currentRoom = room;
+//                        currentRoom.getMember(new Room.IRoomMemberCallback() {
+//                            @Override
+//                            public void getMember(List<Member> members) {
+//                                members.get(0).getProfile();
+//                            }
+//                        });
                         msgRef = DatabaseManager.getMsgRef(roomid);
 
                         initView();
