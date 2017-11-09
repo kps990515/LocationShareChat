@@ -15,7 +15,7 @@ import com.google.firebase.database.ValueEventListener;
  * 사용자 Class
  */
 public class UserInfo extends BaseUser {
-    private String room;
+    public String room;
 
     public UserInfo(){
 

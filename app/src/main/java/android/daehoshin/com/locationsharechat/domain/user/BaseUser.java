@@ -1,23 +1,19 @@
 package android.daehoshin.com.locationsharechat.domain.user;
 
-import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.net.Uri;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Exclude;
-import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by daeho on 2017. 11. 8..
  * 사용자 Class
  */
 abstract class BaseUser {
-    protected String uid;
-    protected String name;
-    protected String lat;
-    protected String lng;
+    public String uid;
+    public String name;
+    public String lat;
+    public String lng;
 
     public BaseUser(){
         realtimeRefresh();

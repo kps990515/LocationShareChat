@@ -9,13 +9,13 @@ import com.google.firebase.database.Exclude;
  */
 
 public class Msg {
-    private String id;
-    private long idx;
-    private String uid;
-    private String name;
-    private long time;
-    private String type;
-    private String message;
+    public String id;
+    public long idx;
+    public String uid;
+    public String name;
+    public long time;
+    public String type;
+    public String message;
 
     public Msg(){
 

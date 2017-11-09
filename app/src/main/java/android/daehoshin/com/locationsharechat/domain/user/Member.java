@@ -14,8 +14,8 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class Member extends BaseUser {
-    private String id;
-    private String msg_read;
+    public String id;
+    public String msg_read;
 
     public Member(){
 
