@@ -31,6 +31,8 @@ public class Room {
 
     @Exclude
     public void save(){
+        if("".equals(id) || id == null) id = DatabaseManager.getRoomRef().push().getKey();
+
         DatabaseManager.getRoomRef(id).setValue(this);
     }
 
