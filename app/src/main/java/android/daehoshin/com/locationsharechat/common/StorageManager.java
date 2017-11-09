@@ -25,7 +25,7 @@ public class StorageManager {
     }
 
     public static void uploadProfile(String uid, Uri uploadFile, final IUploadCallback callback){
-        StorageReference riversRef = sm.stRef.child(DIR_PROFILE + "/" + uid + ".jpg");
+        StorageReference riversRef = getInstance().stRef.child(DIR_PROFILE + "/" + uid + ".jpg");
 
         riversRef.putFile(uploadFile)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -43,7 +43,7 @@ public class StorageManager {
     }
 
     public static void downloadProfile(String uid, final IDownloadCallback callback){
-        StorageReference riversRef = sm.stRef.child(DIR_PROFILE + "/" + uid + ".jpg");
+        StorageReference riversRef = getInstance().stRef.child(DIR_PROFILE + "/" + uid + ".jpg");
         riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

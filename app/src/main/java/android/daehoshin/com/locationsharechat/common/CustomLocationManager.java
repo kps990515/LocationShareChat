@@ -2,12 +2,12 @@ package android.daehoshin.com.locationsharechat.common;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -62,6 +62,20 @@ public class CustomLocationManager implements LocationListener {
         lastLat = location.getLatitude();
         lastLan = location.getLongitude();
         lastLocation = location;
+
+        AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
+            @Override
+            public void signinAnonymously(boolean isSuccessful) {
+
+            }
+
+            @Override
+            public void getCurrentUser(UserInfo userInfo) {
+                userInfo.setLat(lastLat + "");
+                userInfo.setLng(lastLan + "");
+                userInfo.save();
+            }
+        });
     }
 
     @Override
