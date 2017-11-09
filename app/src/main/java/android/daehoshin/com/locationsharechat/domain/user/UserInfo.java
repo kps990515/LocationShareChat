@@ -55,6 +55,8 @@ public class UserInfo extends BaseUser {
 
     @Exclude
     public String[] getRoomIds(){
+        if("".equals(room) || room == null) return new String[]{};
+
         return room.split(",");
     }
 
