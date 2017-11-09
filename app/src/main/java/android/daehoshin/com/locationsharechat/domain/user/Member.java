@@ -22,7 +22,7 @@ public class Member extends BaseUser {
     }
 
     @Override
-    void save() {
+    public void save() {
         DatabaseManager.getMemberRef(id).setValue(this);
     }
 
