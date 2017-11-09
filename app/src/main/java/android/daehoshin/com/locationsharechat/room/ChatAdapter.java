@@ -41,11 +41,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
     public void onBindViewHolder(ChatAdapter.Holder holder, int position) {
         Msg msg = data.get(position);
         if(msg.getUid().equals(currentUserUid)){
-            holder.rightLayout.setVisibility(View.GONE);
+            holder.leftLayout.setVisibility(View.GONE);
             holder.txt_rmsg.setText(msg.getMessage());
             holder.txt_rtime.setText(msg.getTime()+"");
         }else{
-            holder.leftLayout.setVisibility(View.GONE);
+            holder.rightLayout.setVisibility(View.GONE);
             holder.txt_msg.setText(msg.getMessage());
             holder.txt_name.setText(msg.getName());
             holder.txt_time.setText(msg.getTime()+"");

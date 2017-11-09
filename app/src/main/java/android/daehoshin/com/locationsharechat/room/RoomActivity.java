@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -68,8 +70,47 @@ public class RoomActivity extends AppCompatActivity {
         });
     }
 
-    private void setSupportActionBar(Toolbar toolbar) {
+    public void setSupportActionBar(Toolbar toolbar) {
+        getDelegate().setSupportActionBar(toolbar);
+    }
 
+    public void type(View view){
+
+    }
+
+    public void send(View view){
+        String text = edit_msg.getText().toString();
+        if(text != null && !"".equals(text)) {
+            final Msg msg = new Msg();
+            msg.setId(room_id);
+            msgRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.hasChildren()){
+                        msg.setIdx(dataSnapshot.getChildrenCount()+1);
+                    }else{
+                        msg.setIdx(1);
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            msg.setUid(currentUser.getUid());
+            msg.setName(currentUser.getName());
+            msg.setTime(System.currentTimeMillis());
+            msg.setType("text");
+            msg.setMessage(text);
+            msgRef.child(room_id).child(msg.getIdx()+"").setValue(msg);
+            edit_msg.setText("");
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.chat_menu,menu);
+        return true;
     }
 
     private void initView(){

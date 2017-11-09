@@ -49,6 +49,7 @@
         </activity>
         <activity android:name=".user.SigninActivity" />
 
+
         <!-- 사진을 저장하기 위해 파일에 대한 권한 획득 설정 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
