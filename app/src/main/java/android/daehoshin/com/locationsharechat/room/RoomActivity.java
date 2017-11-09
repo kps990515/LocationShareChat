@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.daehoshin.com.locationsharechat.Const.Consts.ROOM_ID;
+import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
 
 public class RoomActivity extends AppCompatActivity {
 

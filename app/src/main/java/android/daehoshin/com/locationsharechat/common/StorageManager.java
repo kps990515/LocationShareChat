@@ -9,7 +9,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import static android.daehoshin.com.locationsharechat.Const.Consts.DIR_PROFILE;
+import static android.daehoshin.com.locationsharechat.constant.Consts.DIR_PROFILE;
 
 /**
  * Created by daeho on 2017. 11. 8..

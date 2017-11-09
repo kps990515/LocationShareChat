@@ -25,9 +25,9 @@ import com.google.android.gms.maps.model.Marker;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.daehoshin.com.locationsharechat.Const.Consts.LOGIN_REQ;
-import static android.daehoshin.com.locationsharechat.Const.Consts.PERMISSION_REQ;
-import static android.daehoshin.com.locationsharechat.Const.Consts.ROOM_ID;
+import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
+import static android.daehoshin.com.locationsharechat.constant.Consts.PERMISSION_REQ;
+import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
 
 public class RoomListActivity extends FragmentActivity implements OnMapReadyCallback, CustomMapPopup.DelteThis {
 

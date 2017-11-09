@@ -2,7 +2,7 @@ package android.daehoshin.com.locationsharechat.common;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
-import android.daehoshin.com.locationsharechat.Const.Consts;
+import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;

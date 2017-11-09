@@ -1,4 +1,4 @@
-package android.daehoshin.com.locationsharechat.Const;
+package android.daehoshin.com.locationsharechat.constant;
 
 /**
  * Created by user on 2017-11-09.

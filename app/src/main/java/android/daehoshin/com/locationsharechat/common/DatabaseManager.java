@@ -3,10 +3,10 @@ package android.daehoshin.com.locationsharechat.common;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static android.daehoshin.com.locationsharechat.Const.Consts.TB_MEMBER;
-import static android.daehoshin.com.locationsharechat.Const.Consts.TB_MSG;
-import static android.daehoshin.com.locationsharechat.Const.Consts.TB_ROOM;
-import static android.daehoshin.com.locationsharechat.Const.Consts.TB_USER;
+import static android.daehoshin.com.locationsharechat.constant.Consts.TB_MEMBER;
+import static android.daehoshin.com.locationsharechat.constant.Consts.TB_MSG;
+import static android.daehoshin.com.locationsharechat.constant.Consts.TB_ROOM;
+import static android.daehoshin.com.locationsharechat.constant.Consts.TB_USER;
 
 /**
  * Created by daeho on 2017. 11. 7..

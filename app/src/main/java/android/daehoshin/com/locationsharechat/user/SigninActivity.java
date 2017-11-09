@@ -29,9 +29,9 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 
-import static android.daehoshin.com.locationsharechat.Const.Consts.CAMERA_PERMISSION_REQ;
-import static android.daehoshin.com.locationsharechat.Const.Consts.CAMERA_REQ;
-import static android.daehoshin.com.locationsharechat.Const.Consts.GALLERY_REQ;
+import static android.daehoshin.com.locationsharechat.constant.Consts.CAMERA_PERMISSION_REQ;
+import static android.daehoshin.com.locationsharechat.constant.Consts.CAMERA_REQ;
+import static android.daehoshin.com.locationsharechat.constant.Consts.GALLERY_REQ;
 
 public class SigninActivity extends AppCompatActivity {
 
