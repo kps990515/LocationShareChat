@@ -7,6 +7,8 @@ import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -36,6 +38,7 @@ public class SigninActivity extends AppCompatActivity {
     private ImageButton btnAddProfile;
     private EditText etNickname;
     private TextView tvNicknameMsg;
+    private Uri profileUri = null;
 
     private ConstraintLayout popupChoice;
 
@@ -52,6 +55,9 @@ public class SigninActivity extends AppCompatActivity {
 
     private void init(){
         ivProfile = findViewById(R.id.ivProfile);
+        ivProfile.setBackground(new ShapeDrawable(new OvalShape()));
+        ivProfile.setClipToOutline(true);
+
         btnAddProfile = findViewById(R.id.btnAddProfile);
         etNickname = findViewById(R.id.etNickname);
         etNickname.setOnTouchListener(new View.OnTouchListener() {
@@ -89,10 +95,11 @@ public class SigninActivity extends AppCompatActivity {
             return;
         }
 
-        AuthManager.getInstance().signInAnonymously(etNickname.getText().toString(), new AuthManager.IAuthCallback() {
+        AuthManager.getInstance().signInAnonymously(etNickname.getText().toString(), profileUri, new AuthManager.IAuthCallback() {
             @Override
             public void signinAnonymously(boolean isSuccessful) {
                 if(isSuccessful) {
+
                     setResult(RESULT_OK);
                     finish();
                 }
@@ -195,12 +202,12 @@ public class SigninActivity extends AppCompatActivity {
         pUtil.check(this, new PermissionUtil.IPermissionGrant() {
             @Override
             public void run() {
-                btnAddProfile.setVisibility(View.GONE);
+//                btnAddProfile.setVisibility(View.GONE);
             }
 
             @Override
             public void fail() {
-                btnAddProfile.setVisibility(View.GONE);
+//                btnAddProfile.setVisibility(View.GONE);
             }
         });
 
@@ -221,19 +228,24 @@ public class SigninActivity extends AppCompatActivity {
                 if(resultCode == RESULT_OK){
                     // 버전체크
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                        ivProfile.setImageURI(fileUri);
+                        profileUri = fileUri;
+                        ivProfile.setImageURI(profileUri);
                     }
-                    else ivProfile.setImageURI(data.getData());
+                    else {
+                        profileUri = data.getData();
+                        ivProfile.setImageURI(profileUri);
+                    }
                 }
                 break;
             case GALLERY_REQ:
                 // 갤러리 액티비티 종료시 호출 - 정상종료 된 경우만 이미지설정
                 if(resultCode == RESULT_OK) {
-                    ivProfile.setImageURI(data.getData());
+                    profileUri = data.getData();
+                    ivProfile.setImageURI(profileUri);
                 }
                 break;
         }
 
-        popupChoice.setVisibility(View.GONE);
+        if(resultCode == RESULT_OK) popupChoice.setVisibility(View.GONE);
     }
 }

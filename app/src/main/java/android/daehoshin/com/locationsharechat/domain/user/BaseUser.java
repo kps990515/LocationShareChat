@@ -1,5 +1,8 @@
 package android.daehoshin.com.locationsharechat.domain.user;
 
+import android.daehoshin.com.locationsharechat.common.StorageManager;
+import android.net.Uri;
+
 import com.google.firebase.database.Exclude;
 
 /**
@@ -11,7 +14,6 @@ abstract class BaseUser {
     protected String name;
     protected String let;
     protected String lan;
-    protected String profile_filename;
 
     public BaseUser(){
 
@@ -22,6 +24,21 @@ abstract class BaseUser {
      */
     @Exclude
     abstract void save();
+
+    @Exclude
+    public void uploadProfile(Uri profileUri){
+        StorageManager.uploadProfile(uid, profileUri, new StorageManager.IUploadCallback() {
+            @Override
+            public void uploaded(boolean isSuccess, Uri uri) {
+
+            }
+        });
+    }
+
+    @Exclude
+    public void getProfile(StorageManager.IDownloadCallback callback){
+        StorageManager.downloadProfile(uid, callback);
+    }
 
     public String getUid() {
         return uid;
@@ -55,11 +72,4 @@ abstract class BaseUser {
         this.lan = lan;
     }
 
-    public String getProfile_filename() {
-        return profile_filename;
-    }
-
-    public void setProfile_filename(String profile_filename) {
-        this.profile_filename = profile_filename;
-    }
 }
