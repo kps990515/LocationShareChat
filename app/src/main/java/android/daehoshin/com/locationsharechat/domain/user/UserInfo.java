@@ -62,7 +62,7 @@ public class UserInfo extends BaseUser {
 
     public void addRoom(String roomId){
         if(room.length() > 0) room += ",";
-        room += "," + roomId;
+        room += roomId;
     }
 
     public void getRoom(String roomId, final IUserInfoCallback callback){
