@@ -32,7 +32,7 @@ public class Member extends BaseUser {
 
     @Override
     public void save() {
-        DatabaseManager.getMemberRef(id).setValue(this);
+        DatabaseManager.getMemberRef(id, uid).setValue(this);
     }
 
     @Override

@@ -33,6 +33,10 @@ public class DatabaseManager {
         return getInstance().database.getReference(TB_MEMBER + "/" + roomid);
     }
 
+    public static DatabaseReference getMemberRef(String roomid, String uid){
+        return getInstance().database.getReference(TB_MEMBER + "/" + roomid + "/" + uid);
+    }
+
     public static DatabaseReference getRoomRef(){
         return getInstance().roomRef;
     }

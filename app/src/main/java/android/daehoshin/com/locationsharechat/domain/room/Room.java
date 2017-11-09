@@ -45,7 +45,9 @@ public class Room {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<Member> members = new ArrayList<>();
 
-                for(DataSnapshot item : dataSnapshot.getChildren()) members.add(item.getValue(Member.class));
+                for(DataSnapshot item : dataSnapshot.getChildren()) {
+                    members.add(item.getValue(Member.class));
+                }
 
                 callback.getMember(members);
             }

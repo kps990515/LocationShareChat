@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -137,9 +138,12 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
             @Override
             public boolean onMarkerClick(Marker marker) {
                 if(marker.getTag() != null){
-                    Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
-                    intent.putExtra(ROOM_ID, marker.getTag().toString());
-                    startActivity(intent);
+                    if(marker.getTag() instanceof Room) {
+                        Room room = (Room)marker.getTag();
+                        Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
+                        intent.putExtra(ROOM_ID, room.id);
+                        startActivity(intent);
+                    }
                 }
                 return false;
             }
@@ -149,7 +153,10 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
             @Override
             public View getInfoWindow(Marker marker) {
                 if(marker.getTag() instanceof Room){
+                    Room room = (Room)marker.getTag();
                     View view = LayoutInflater.from(RoomListActivity.this).inflate(R.layout.marker_room_info, null, false);
+                    ((TextView)view.findViewById(R.id.tvTitle)).setText(room.title);
+                    ((TextView)view.findViewById(R.id.tvTime)).setText(room.time+"");
                     return view;
                 }
                 return null;
