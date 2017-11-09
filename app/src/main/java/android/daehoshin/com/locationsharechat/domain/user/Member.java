@@ -21,6 +21,15 @@ public class Member extends BaseUser {
 
     }
 
+    public Member(UserInfo userInfo, String roomid){
+        uid = userInfo.uid;
+        name = userInfo.name;
+        lat = userInfo.lat;
+        lng = userInfo.lng;
+
+        id = roomid;
+    }
+
     @Override
     public void save() {
         DatabaseManager.getMemberRef(id).setValue(this);
