@@ -179,10 +179,10 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
      * 지도 터치 반응 메소드
      * - 팝업을 생성시키는 인터페이스 콜백 구현
      */
-    public void touchMap(GoogleMap mMap, final IMakeRoom makeRoom){
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+    public void longClick(GoogleMap mMap, final IMakeRoom makeRoom){
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
-            public void onMapClick(LatLng latLng) {
+            public void onMapLongClick(LatLng latLng) {
                 makeRoom.makePopup(latLng);
             }
         });

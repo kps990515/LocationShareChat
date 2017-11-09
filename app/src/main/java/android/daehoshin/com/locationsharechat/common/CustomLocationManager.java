@@ -7,6 +7,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 위치 정보에 대한 것을 관리하는 Manager (LocationManager는 이미 있어서 다시 정의)
  * - 아마 필요하지 않을수도..... (서비스시?? 엑티비티 사용 안할때 사용??? 일단 생각...)
@@ -18,6 +21,8 @@ public class CustomLocationManager implements LocationListener {
     private Location lastLocation;
     private double lastLat;
     private double lastLan;
+
+    Map map = null;
 
 
     private boolean gps_enabled = false;

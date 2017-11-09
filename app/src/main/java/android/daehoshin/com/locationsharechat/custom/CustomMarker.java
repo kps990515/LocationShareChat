@@ -20,18 +20,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * 찍을 마커 커스텀
+ * type
+ *  - RoomList : List에서 RoomList 마커
+ *  - FriendDetail : Detail에서 Friend 마커
+ *  - RoomDetail : Detail에서 목적지 마커
  */
 
 public class CustomMarker extends FrameLayout {
     // 마커에 let, lan 저장
     private String room_id;
+    private String type;
     double let;
     double lan;
     private View marker;
     private TextView roomTitle;
     private TextView roomTime;
 
-    public CustomMarker(@NonNull Context context, double let, double lan){
+    public CustomMarker(@NonNull Context context, double let, double lan, String type){
         super(context);
         initView();
         this.let = let;
@@ -77,18 +82,43 @@ public class CustomMarker extends FrameLayout {
     }
 
     // 마커를 추가
-    public Marker addMarker(GoogleMap googleMap, boolean isSelectedMarker){
+    public Marker addMarker(GoogleMap googleMap){
         LatLng position = new LatLng(let,lan);
-
-        // 마커 선택시 효과 주려면 여기에..
-        if(isSelectedMarker){
-        } else{
-        }
         // 마커 옵션 설정
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(position);
         // 아이콘을 변경
-//        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(FormatUtil.createDrawbleFromView(getContext(),marker)));
+        switch (type){
+            case "RoomList":
+                // 1. 아이콘 : 일반 마커와 그림??
+                break;
+            case "FriendDetail":
+                // 2. 아이콘 : 사람의 프로필과 이름
+                break;
+            case "RoomDetail":
+                // 3. 아이콘 : 일반 마커와 그림
+                break;
+        }
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(FormatUtil.createDrawbleFromView(getContext(),marker)));
         return googleMap.addMarker(markerOptions);
+    }
+
+    public void goRoom(){
+        marker.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (type){
+                    case "RoomList":
+                        // 1. room_id를 넘겨서 리스트로 이동
+                        break;
+                    case "FriendDetail":
+                        // 2. 사람?의 정보를 보여줌
+                        break;
+                    case "RoomDetail":
+                        // 3. 방 정보를 보여줌
+                        break;
+                }
+            }
+        });
     }
 }

@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -109,7 +110,13 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        MapManager mapManager = new MapManager(this);
+        mapManager.longClick(mMap, new MapManager.IMakeRoom() {
+            @Override
+            public void makePopup(LatLng latLng) {
 
+            }
+        });
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
@@ -121,5 +128,9 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     public void goTemp(View view){
         Intent intent = new Intent(RoomListActivity.this,RoomActivity.class); // 뒤에 바꿀 것
         startActivity(intent);
+    }
+    public void signout(View view){
+        AuthManager.getInstance().signout();
+        finish();
     }
 }
