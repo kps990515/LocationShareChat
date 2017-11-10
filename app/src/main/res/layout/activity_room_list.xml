@@ -51,21 +51,20 @@
         android:elevation="2dp"
         android:visibility="visible">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            map:srcCompat="@drawable/loading_image" />
 
+        <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+            map:srcCompat="@drawable/logo_image" />
+
     </FrameLayout>
 
 
