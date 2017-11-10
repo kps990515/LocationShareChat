@@ -2,6 +2,7 @@ package android.daehoshin.com.locationsharechat.common;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.content.Context;
 import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.location.Location;
 import android.os.Bundle;
@@ -105,12 +106,9 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
     @SuppressLint("MissingPermission")
     public void startUpdateMyLocation(){
         LocationServices.FusedLocationApi.requestLocationUpdates(mapGoogleApiClient,mLocationRequest,this);
-
-        Log.e("startUpdateMyLocation","======================");
     }
     public void stopUpdateMyLocation(){
         LocationServices.FusedLocationApi.removeLocationUpdates(mapGoogleApiClient,this);
-        Log.e("stopUpdateMyLocation","======================");
     }
 
     /**
@@ -118,25 +116,25 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
      * @return
      */
     @SuppressLint("MissingPermission")
-    public Location getMyRecentLocation(){
+    public void refreshMyRecentLocation(){
         lastLocation = LocationServices.FusedLocationApi.getLastLocation(mapGoogleApiClient);
-        lastLat = lastLocation.getLatitude();
-        lastLng = lastLocation.getLongitude();
-        return lastLocation;
+        if(lastLocation != null) {
+            lastLat = lastLocation.getLatitude();
+            lastLng = lastLocation.getLongitude();
+        }
     }
     /**
      * 지도에서 내 최근 위치로 이동하는 메소드 (커스텀하게 되면 사용)
      */
     public void moveToMyLocation(GoogleMap mMap){
+        refreshMyRecentLocation();
+        LatLng latLng;
         if(lastLocation != null){
-            startUpdateMyLocation();
-            LatLng latLng = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+            latLng = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
         } else {
-            LatLng latLng = new LatLng(lastLat, lastLng);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+            latLng = new LatLng(lastLat, lastLng);
         }
-        Log.e("moveToMyLocation","======================"+lastLat + "//" +lastLng);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, Consts.Zoom_SIZE));
     }
 
     /**
@@ -149,7 +147,6 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
         lastLat = location.getLatitude();
         lastLng = location.getLongitude();
         lastLocation = location;
-        Log.e("onlocationchagned","======================"+lastLat + "//" +lastLng);
     }
 
     public double getLastLat(){

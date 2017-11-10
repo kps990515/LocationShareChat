@@ -2,11 +2,15 @@ package android.daehoshin.com.locationsharechat.common;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 
 import java.util.Map;
 
@@ -20,10 +24,10 @@ public class CustomLocationManager implements LocationListener {
     private LocationManager locationManager;
     private Location lastLocation;
     private double lastLat;
-    private double lastLan;
+    private double lastLng;
 
-    Map map = null;
-
+    private LocationThread thread;
+    private static boolean runFlag = true;
 
     private boolean gps_enabled = false;
     private boolean network_enabled = false;
@@ -32,25 +36,36 @@ public class CustomLocationManager implements LocationListener {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
+    public void startCheckGPS(){
+        runFlag= false;
+        thread = new LocationThread(handler);
+        runFlag=true;
+        thread.start();
+        startUpdateLocation();
+    }
+    public void stopCheckGPS(){
+        runFlag = false;
+        stopUpdateLocation();
+    }
+
     /**
      * 내 위치를 자동으로 업데이트 해주는 메소드 (시작, 끝을 선언해준다,)
      * - GPS 혹은 Network가 켜져 있어야 실행
      * - 시간은 milisecond 단위, 거리는 meter단위로 넣어준다. (Const에 지정해야 할듯)
      */
     @SuppressLint("MissingPermission")
-    public void stratUpdateLocation(){
-        gps_enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        network_enabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        if(gps_enabled){
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000, 1, this);
-        } else if(network_enabled) {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,1000, 1, this);
+    public void startUpdateLocation(){
+        if(gps_enabled || network_enabled){
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Consts.LOCATION_INTERVAL_TIME, Consts.LOCATION_INTERVAL_METER, this);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,Consts.LOCATION_INTERVAL_TIME, Consts.LOCATION_INTERVAL_METER, this);
         } else {
             // popup 으로 GPS 혹은 network 설정할지 요청?? 안하면 start 하지 않음
         }
+        Log.e("startUpdateLocation","=======================================" + gps_enabled + " // "+ network_enabled);
     }
     public void stopUpdateLocation(){
         locationManager.removeUpdates(this);
+        Log.e("stopUpdateLocation","=======================================");
     }
 
     /**
@@ -60,36 +75,84 @@ public class CustomLocationManager implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         lastLat = location.getLatitude();
-        lastLan = location.getLongitude();
+        lastLng = location.getLongitude();
         lastLocation = location;
+        Log.e("onLocationChanged","============="+lastLat + " //" + lastLng);
 
-        AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
-            @Override
-            public void signinAnonymously(boolean isSuccessful) {
-
-            }
-
-            @Override
-            public void getCurrentUser(UserInfo userInfo) {
-                userInfo.setLat(lastLat + "");
-                userInfo.setLng(lastLan + "");
-                userInfo.save();
-            }
-        });
+//        AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
+//            @Override
+//            public void signinAnonymously(boolean isSuccessful) {
+//
+//            }
+//
+//            @Override
+//            public void getCurrentUser(UserInfo userInfo) {
+//                userInfo.setLat(lastLat + "");
+//                userInfo.setLng(lastLng + "");
+//                userInfo.save();
+//            }
+//        });
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
 
     }
-
     @Override
     public void onProviderEnabled(String provider) {
 
     }
-
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case Consts.LOCATION_UPDATE_START:
+                    startUpdateLocation();
+                    break;
+                case Consts.LOCATION_UPDATE_STOP:
+                    stopUpdateLocation();
+                    break;
+            }
+        }
+    };
+
+    private class LocationThread extends Thread{
+        Handler handler;
+        boolean check;
+        public LocationThread(Handler handler){
+            this.handler = handler;
+            check = gps_enabled || network_enabled;
+        }
+        public void run(){
+            while(runFlag){
+                gps_enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                network_enabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+                if(check != (gps_enabled || network_enabled)){
+                    check = gps_enabled || network_enabled;
+                    Message msg = new Message();
+                    if(check){
+                        msg.what = Consts.LOCATION_UPDATE_START;
+                        handler.sendMessage(msg);
+                    } else {
+                        msg.what = Consts.LOCATION_UPDATE_STOP;
+                        handler.sendMessage(msg);
+                    }
+                }
+                else {
+                    Log.e("ThreadContinue",gps_enabled + " // "+ network_enabled);
+                }
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

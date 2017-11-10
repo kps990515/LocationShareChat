@@ -3,11 +3,14 @@ package android.daehoshin.com.locationsharechat;
 import android.Manifest;
 import android.content.Intent;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
+import android.daehoshin.com.locationsharechat.common.CustomLocationManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
+import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.room.RoomActivity;
+import android.daehoshin.com.locationsharechat.service.LocationService;
 import android.daehoshin.com.locationsharechat.user.SigninActivity;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.os.Bundle;
@@ -40,6 +43,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     private FrameLayout popUpStage;
     CustomMapPopup customMapPopup;
     MapManager mapManager;
+    Intent serviceIntent;
 
     private UserInfo currentUser;
 
@@ -52,6 +56,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
 
         setPopUpStage();
         mapManager = new MapManager(this);
+        serviceIntent = new Intent(this, LocationService.class);
 
         checkPermission();
     }
@@ -131,6 +136,9 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
             }
         });
         mapManager.moveToMyLocation(mMap);
+
+        serviceIntent.setAction(Consts.Thread_START);
+        startService(serviceIntent);
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
@@ -228,5 +236,15 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
         finish();
     }
 
-
+    boolean checkService = true;
+    public void onService(View view){
+        if(checkService){
+            serviceIntent.setAction(Consts.Thread_START);
+            startService(serviceIntent);
+            checkService = false;
+        } else{
+            stopService(serviceIntent);
+            checkService = true;
+        }
+    }
 }

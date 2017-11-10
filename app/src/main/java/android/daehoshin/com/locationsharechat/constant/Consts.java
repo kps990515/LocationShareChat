@@ -20,7 +20,15 @@ public class Consts {
     public static final int PERMISSION_REQ = 901;
 
     // 업데이트 시간
-    public static final int LOCATION_INTERVAL_TIME = 6000;
-    public static final int LOCATION_INTERVAL_METER = 10;
+    public static final int LOCATION_INTERVAL_TIME = 100;
+    public static final int LOCATION_INTERVAL_METER = 1;
 
+    // 줌 크기
+    public static final int Zoom_SIZE = 13;
+
+    // 서비스 관련 중지
+    public static final String Thread_START = "thread_start";
+    public static final String Thread_STOP = "thread_stop";
+    public static final int LOCATION_UPDATE_START = 700;
+    public static final int LOCATION_UPDATE_STOP = 701;
 }
