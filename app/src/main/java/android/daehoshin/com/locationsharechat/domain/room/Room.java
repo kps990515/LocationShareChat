@@ -5,6 +5,7 @@ import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.util.MarkerUtil;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -114,14 +115,19 @@ public class Room implements Serializable{
     @Exclude
     private List<Msg> msgs = new ArrayList<>();
     @Exclude
+    public void msgsClear(){
+        msgs = new ArrayList<>();
+    }
+    @Exclude
     public void getRealtimeMsg(final IRoomMsgCallback callback){
-        msgs.clear();
         DatabaseManager.getMsgRef(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if(msgs.size() >= dataSnapshot.getChildrenCount()) msgs.clear();
+
                 int idx = 0;
                 for(DataSnapshot item : dataSnapshot.getChildren()) {
-                    if(idx >= msgs.size()) {
+                    if(idx >= msgs.size() - 1) {
                         Msg msg = item.getValue(Msg.class);
                         msgs.add(msg);
                         callback.getRealtimeMsg(msg);
@@ -132,7 +138,7 @@ public class Room implements Serializable{
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //callback.getRealtimeMsg(null);
+                Log.d("Room_getRealtimeMsg", databaseError.getMessage());
             }
         });
     }

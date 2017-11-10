@@ -88,7 +88,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        checkDynamicLink();
+        //checkDynamicLink();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
@@ -98,11 +98,9 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar toolbar = findViewById(R.id.toolbar);
         getDelegate().setSupportActionBar(toolbar);
 
-        mapManager = new MapManager(this,1);
+        mapManager = new MapManager(this, 1);
 
         initMap();
-
-
     }
 
     private void initMap(){
@@ -164,17 +162,6 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         chatList = findViewById(R.id.chatList);
         edit_msg = findViewById(R.id.edit_msg);
 
-//        KeyboardVisibilityEvent.setEventListener(this, new KeyboardVisibilityEventListener() {
-//                    @Override
-//                    public void onVisibilityChanged(boolean isOpen) {
-//                        View v = mapFragment.getView();
-//                        FrameLayout.LayoutParams p = null;
-//                        if(isOpen) p = new FrameLayout.LayoutParams(v.getWidth(), v.getHeight() / 2);
-//                        else p = new FrameLayout.LayoutParams(v.getWidth(), v.getHeight() * 2);
-//                        v.setLayoutParams(p);
-//                        v.requestLayout();
-//                    }
-//                });
         adapter = new ChatAdapter(currentUser.getUid());
         chatList.setAdapter(adapter);
         chatList.setLayoutManager(new LinearLayoutManager(this));
@@ -234,6 +221,12 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
+    protected void onDestroy() {
+        if(currentRoom != null) currentRoom.msgsClear();
+        super.onDestroy();
+    }
+
+    @Override
     public void onBackPressed() {
         if(popUpLayout.getVisibility() == View.VISIBLE) popUpLayout.setVisibility(View.GONE);
         else super.onBackPressed();
@@ -283,7 +276,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void invite(){
         DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
                 .setLink(Uri.parse("https://example.com/"))
-                .setDynamicLinkDomain(DYNAMICLINK_BASE_URL + "/addRoom")
+                .setDynamicLinkDomain(DYNAMICLINK_BASE_URL)
                 .setAndroidParameters(
                         new DynamicLink.AndroidParameters.Builder("android.daehoshin.com.locationsharechat")
                                 .setMinimumVersion(16)
