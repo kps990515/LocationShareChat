@@ -224,6 +224,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         addUser(currentUser);
         loadData();
 
+        mapManager.setMyLocation(mMap);
         progress.setVisibility(View.GONE);
 
         findViewById(R.id.appBarLayout).setVisibility(View.VISIBLE);
@@ -248,6 +249,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
                         currentUser.getRoom(roomIds[i], new UserInfo.IUserInfoCallback() {
                             @Override
                             public void getRoom(Room room) {
+                                Log.e("Room","===================" + room.title);
                                 addRoom(room);
                                 if (finalI == roomIds.length - 1) {
                                     LatLngBounds bounds = builder.build();

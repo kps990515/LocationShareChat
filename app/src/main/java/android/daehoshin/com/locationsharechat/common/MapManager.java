@@ -184,12 +184,12 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
      * @param mMap
      */
     @SuppressLint("MissingPermission")
-    public void setMyLocation(GoogleMap mMap){
+    public void setMyLocation(final GoogleMap mMap){
         if(mMap == null){
             return;
         }
         mMap.setMyLocationEnabled(true); // 내위치를 찍고, 버튼을 사용 가능하게 함
-        mMap.getUiSettings().setMyLocationButtonEnabled(true); // 현재 위치로 이동하는 버튼 활성화
+        mMap.getUiSettings().setMyLocationButtonEnabled(true); // 현재 위치로 이동하는 버튼 활성화=
         mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
             public boolean onMyLocationButtonClick() {
