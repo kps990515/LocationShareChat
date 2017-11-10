@@ -228,6 +228,8 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         loadData();
 
         progress.setVisibility(View.GONE);
+
+        findViewById(R.id.appBarLayout).setVisibility(View.VISIBLE);
     }
 
     List<Marker> markers = new ArrayList<>();

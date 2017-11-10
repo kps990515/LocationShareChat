@@ -79,6 +79,8 @@ public class AuthManager {
                     UserInfo ui = new UserInfo();
                     ui.setUid(currentUser.getUid());
                     ui.setName(nickname);
+                    ui.setLat(CurrentLocation.getLatitude() + "");
+                    ui.setLng(CurrentLocation.getLongitude() + "");
                     ui.save();
 
                     if(profileUri != null) {

@@ -134,6 +134,8 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public void getRoom(Room room) {
                         currentRoom = room;
+                        getSupportActionBar().setTitle(currentRoom.getTitle());
+
                         LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
                         mapManager.moveCameraLocationZoom(mMap, latLng, 12);
                         currentRoom.addMarker(mMap);
@@ -239,7 +241,8 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         int menu = item.getItemId();
         switch(menu){
             case R.id.menu_getout:
-                DatabaseManager.leaveRoom(currentUser,roomid);
+                DatabaseManager.leaveRoom(currentUser, roomid);
+                currentRoom.removeMarker();
                 finish();
                 break;
             case R.id.menu_invite:

@@ -101,8 +101,8 @@ public class UserInfo extends BaseUser {
     }
 
     public void removeRoom(String roomId){
-        room.replace(roomId, "");
-        room.replace(",,", ",");
+        room = room.replace(roomId, "");
+        room = room.replace(",,", ",");
         if(",".equals(room)) room = "";
     }
 

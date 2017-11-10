@@ -19,7 +19,7 @@ abstract class BaseUser implements Serializable {
     public String lng;
 
     public BaseUser(){
-        realtimeRefresh();
+
     }
 
     /**

@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ValueEventListener;
 
@@ -70,31 +71,36 @@ public class Room implements Serializable{
     @Exclude
     private boolean realtimeRunning = false;
     @Exclude
+    private DatabaseReference realtimeRef = null;
+    @Exclude
     void realtimeRefresh() {
         if(realtimeRunning) return;
-        DatabaseManager.getRoomRef(id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Member m = dataSnapshot.getValue(Member.class);
-                if(m != null) {
-                    lat = m.getLat();
-                    lng = m.getLng();
-                }
-
-                for(Marker marker : markers){
-                    if (lat != null && lng != null) {
-                        marker.setPosition(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        if(realtimeRef == null) realtimeRef = DatabaseManager.getRoomRef(id);
+        realtimeRef.addValueEventListener(realtimeListener);
         realtimeRunning = true;
     }
+    @Exclude
+    private ValueEventListener realtimeListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            Member m = dataSnapshot.getValue(Member.class);
+            if(m != null) {
+                lat = m.getLat();
+                lng = m.getLng();
+            }
+
+            for(Marker marker : markers){
+                if (lat != null && lng != null) {
+                    marker.setPosition(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
+                }
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
 
     @Exclude
     private List<Msg> msgs = new ArrayList<>();
@@ -130,6 +136,14 @@ public class Room implements Serializable{
         marker.setTag(this);
         markers.add(marker);
         return marker;
+    }
+    @Exclude
+    public void removeMarker(){
+        realtimeRunning = false;
+        realtimeRef.removeEventListener(realtimeListener);
+
+        for(Marker marker : markers) marker.remove();
+        markers.clear();
     }
 
     @Exclude

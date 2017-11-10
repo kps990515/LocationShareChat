@@ -61,6 +61,7 @@ public class DatabaseManager {
 
     public static void leaveRoom(UserInfo userInfo, String roomid){
         userInfo.removeRoom(roomid);
+        userInfo.save();
         getMemberRef(roomid, userInfo.getUid()).removeValue();
     }
     public static void delete(Room room){
