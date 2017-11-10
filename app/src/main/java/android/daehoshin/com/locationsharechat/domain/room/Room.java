@@ -21,7 +21,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by daeho on 2017. 11. 8..
@@ -113,26 +115,24 @@ public class Room implements Serializable{
     };
 
     @Exclude
-    private List<Msg> msgs = new ArrayList<>();
+    private Map<Long, Msg> msgs = new HashMap<>();
     @Exclude
     public void msgsClear(){
-        msgs = new ArrayList<>();
+        msgs = new HashMap<>();
     }
     @Exclude
     public void getRealtimeMsg(final IRoomMsgCallback callback){
         DatabaseManager.getMsgRef(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(msgs.size() >= dataSnapshot.getChildrenCount()) msgs.clear();
-
-                int idx = 0;
                 for(DataSnapshot item : dataSnapshot.getChildren()) {
-                    if(idx >= msgs.size() - 1) {
-                        Msg msg = item.getValue(Msg.class);
-                        msgs.add(msg);
+                    Msg msg = item.getValue(Msg.class);
+
+                    if(msgs.containsKey(msg.getIdx())) continue;
+                    else{
+                        msgs.put(msg.getIdx(), msg);
                         callback.getRealtimeMsg(msg);
                     }
-                    idx++;
                 }
             }
 
