@@ -103,7 +103,7 @@ public class RoomActivity extends AppCompatActivity {
         if(text != null && !"".equals(text)) {
             Msg msg = new Msg();
             msg.setId(roomid);
-            msg.setIdx(adapter.getItemCount());
+            msg.setIdx(adapter.getItemCount() + 1);
             msg.setUid(currentUser.getUid());
             msg.setName(currentUser.getName());
             msg.setTime(System.currentTimeMillis());

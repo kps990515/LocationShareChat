@@ -72,7 +72,11 @@ public class Room {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int idx = 0;
                 for(DataSnapshot item : dataSnapshot.getChildren()) {
-                    if(idx >= msgs.size()) callback.getMsg(item.getValue(Msg.class));
+                    if(idx >= msgs.size()) {
+                        Msg msg = item.getValue(Msg.class);
+                        msgs.add(msg);
+                        callback.getMsg(item.getValue(Msg.class));
+                    }
                     idx++;
                 }
             }
