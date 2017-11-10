@@ -46,6 +46,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Holder> {
         Uri uri = profiles_uri.get(position);
 
         if(uri != null) Glide.with(holder.itemView.getContext()).load(uri).apply(RequestOptions.circleCropTransform()).into(holder.image_memberProfile);
+        else holder.image_memberProfile.setImageResource(R.drawable.ic_action_name);
     }
 
     @Override

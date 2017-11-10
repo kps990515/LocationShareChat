@@ -94,8 +94,6 @@ public class SigninActivity extends AppCompatActivity {
 
     private void init(){
         ivProfile = findViewById(R.id.ivProfile);
-//        ivProfile.setBackground(new ShapeDrawable(new OvalShape()));
-//        ivProfile.setClipToOutline(true);
 
         if(!isSignin) ((Button)findViewById(R.id.btnSignin)).setText(ResourceUtil.getString(this, R.string.btn_apply));
 
@@ -294,28 +292,24 @@ public class SigninActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        profileUri = null;
+
         switch (requestCode){
             case CAMERA_REQ:
                 if(resultCode == RESULT_OK){
                     // 버전체크
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                        profileUri = fileUri;
-                        Glide.with(SigninActivity.this).load(profileUri).apply(RequestOptions.circleCropTransform()).into(ivProfile);
-                    }
-                    else {
-                        profileUri = data.getData();
-                        Glide.with(SigninActivity.this).load(profileUri).apply(RequestOptions.circleCropTransform()).into(ivProfile);
-                    }
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) profileUri = fileUri;
+                    else profileUri = data.getData();
                 }
                 break;
             case GALLERY_REQ:
                 // 갤러리 액티비티 종료시 호출 - 정상종료 된 경우만 이미지설정
-                if(resultCode == RESULT_OK) {
-                    profileUri = data.getData();
-                    Glide.with(SigninActivity.this).load(profileUri).apply(RequestOptions.circleCropTransform()).into(ivProfile);
-                }
+                if(resultCode == RESULT_OK) profileUri = data.getData();
                 break;
         }
+
+        if(profileUri == null) ivProfile.setImageResource(R.drawable.ic_action_name);
+        else Glide.with(SigninActivity.this).load(profileUri).apply(RequestOptions.circleCropTransform()).into(ivProfile);
 
         if(resultCode == RESULT_OK) popupChoice.setVisibility(View.GONE);
     }

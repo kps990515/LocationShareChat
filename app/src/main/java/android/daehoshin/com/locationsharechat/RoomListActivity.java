@@ -32,19 +32,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
-import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.daehoshin.com.locationsharechat.constant.Consts.DYNAMICLINK_BASE_URL;
 import static android.daehoshin.com.locationsharechat.constant.Consts.IS_SIGNIN;
 import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.PERMISSION_REQ;
@@ -328,45 +320,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
 
 
     //======== 임시용 버튼(삭제 할 것) 생성=================================
-    public void goTemp(View view){
-        DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
-                .setLink(Uri.parse("https://example.com/"))
-                .setDynamicLinkDomain(DYNAMICLINK_BASE_URL)
-                .setAndroidParameters(
-                        new DynamicLink.AndroidParameters.Builder("android.daehoshin.com.locationsharechat")
-                                .setMinimumVersion(16)
-                                .build())
-                .buildDynamicLink();
 
-        Task<ShortDynamicLink> shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
-                .setLongLink(dynamicLink.getUri())
-                .buildShortDynamicLink()
-                .addOnCompleteListener(this, new OnCompleteListener<ShortDynamicLink>() {
-                    @Override
-                    public void onComplete(@NonNull Task<ShortDynamicLink> task) {
-                        if (task.isSuccessful()) {
-                            // Short link created
-                            Uri shortLink = task.getResult().getShortLink();
-                            Uri flowchartLink = task.getResult().getPreviewLink();
-
-                            Intent sendIntent = new Intent();
-                            String msg = shortLink.toString();
-                            sendIntent.setAction(Intent.ACTION_SEND);
-                            sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
-                            sendIntent.setType("text/plain");
-                            startActivity(sendIntent);
-                        } else {
-                            // Error
-                            // ...
-                        }
-                    }
-                });
-
-
-
-
-
-    }
 
     boolean checkService = false;
     public void onService(View view){
