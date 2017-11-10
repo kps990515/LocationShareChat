@@ -1,7 +1,6 @@
 package android.daehoshin.com.locationsharechat.room;
 
 import android.daehoshin.com.locationsharechat.R;
-import android.daehoshin.com.locationsharechat.RoomListActivity;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
 import android.daehoshin.com.locationsharechat.constant.Consts;
@@ -9,8 +8,8 @@ import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -103,8 +102,7 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
                         currentRoom = room;
                         LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
                         mapManager.moveCameraLocationZoom(mMap, latLng, 12);
-                        roomMarker = mMap.addMarker(currentRoom.getMarker());
-                        roomMarker.setTag(currentRoom);
+                        currentRoom.addMarker(mMap);
 
                         popUpStage.setVisibility(View.VISIBLE);
                         customMapPopup = new CustomMapPopup(SettingActivity.this,latLng.latitude,latLng.longitude, currentRoom, mMap, Consts.ROOM_UPDATE_NOTLOC);
@@ -129,8 +127,8 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void getMember(List<Member> members) {
                 for(Member member : members){
-                    if(currentUser.getUid().equals(member.getUid())) mMap.addMarker(currentUser.getMarker());
-                    else mMap.addMarker(member.getMarker());
+                    if(currentUser.getUid().equals(member.getUid())) currentUser.addMarker(mMap);
+                    else member.addMarker(mMap);
                 }
             }
         });
@@ -138,9 +136,7 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
 
     private void updateRoom(Room room){
         if(room == null) return;
-        roomMarker.remove();
-        roomMarker = mMap.addMarker(room.getMarker());
-        roomMarker.setTag(room);
+        roomMarker = room.addMarker(mMap);
         roomMarker.showInfoWindow();
     }
 

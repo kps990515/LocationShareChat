@@ -24,7 +24,7 @@ public class Consts {
     public static final int PERMISSION_REQ = 901;
 
     // 업데이트 시간
-    public static final int LOCATION_INTERVAL_TIME = 60000;
+    public static final int LOCATION_INTERVAL_TIME = 100;
     public static final int LOCATION_INTERVAL_METER = 100;
 
     // 줌 크기

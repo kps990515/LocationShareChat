@@ -136,7 +136,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                         currentRoom = room;
                         LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
                         mapManager.moveCameraLocationZoom(mMap, latLng, 12);
-                        mMap.addMarker(currentRoom.getMarker());
+                        currentRoom.addMarker(mMap);
 
                         initView();
                         loadMember();
@@ -176,8 +176,8 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void getMember(List<Member> members) {
                 for(final Member member : members){
-                    if(currentUser.getUid().equals(member.getUid())) mMap.addMarker(currentUser.getMarker());
-                    else mMap.addMarker(member.getMarker());
+                    if(currentUser.getUid().equals(member.getUid())) currentUser.addMarker(mMap);
+                    else member.addMarker(mMap);
 
                     member.getProfile(new StorageManager.IDownloadCallback() {
                         @Override

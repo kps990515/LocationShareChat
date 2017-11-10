@@ -250,15 +250,13 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
 
     private void addRoom(Room room){
         if(room == null) return;
-        Marker marker = mMap.addMarker(room.getMarker());
-        marker.setTag(room);
+        Marker marker = room.addMarker(mMap);
         marker.showInfoWindow();
     }
 
     private void addUser(UserInfo userInfo){
         if(userInfo == null) return;
-        Marker marker = mMap.addMarker(userInfo.getMarker());
-        marker.setTag(userInfo);
+        Marker marker = userInfo.addMarker(mMap);
         marker.showInfoWindow();
     }
 

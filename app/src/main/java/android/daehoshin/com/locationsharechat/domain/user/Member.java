@@ -3,8 +3,9 @@ package android.daehoshin.com.locationsharechat.domain.user;
 import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Exclude;
@@ -39,8 +40,11 @@ public class Member extends BaseUser {
         DatabaseManager.getMemberRef(id, uid).setValue(this);
     }
 
+    @Exclude
+    private boolean realtimeRunning = false;
     @Override
     void realtimeRefresh() {
+        if(realtimeRunning) return;
         DatabaseManager.getUserRef(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -50,8 +54,8 @@ public class Member extends BaseUser {
                     lng = m.getLng();
                 }
 
-                for(MarkerOptions marker : markers){
-                    marker.position(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
+                for(Marker marker : markers){
+                    marker.setPosition(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
                 }
             }
 
@@ -60,13 +64,17 @@ public class Member extends BaseUser {
 
             }
         });
+
+        realtimeRunning = true;
     }
 
     @Exclude
-    private List<MarkerOptions> markers = new ArrayList<>();
+    private List<Marker> markers = new ArrayList<>();
     @Exclude
-    public MarkerOptions getMarker(){
-        MarkerOptions marker = MarkerUtil.createMarkerOptions(this);
+    public Marker addMarker(GoogleMap googleMap){
+        realtimeRefresh();
+        Marker marker = googleMap.addMarker(MarkerUtil.createMarkerOptions(this));
+        marker.setTag(this);
         markers.add(marker);
         return marker;
     }
