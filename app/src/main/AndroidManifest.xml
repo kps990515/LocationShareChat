@@ -44,12 +44,12 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-
+<!--
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:host="szyx6.app.goo.gl" android:scheme="http"/>
-                <data android:host="szyx6.app.goo.gl" android:scheme="https"/>
+                <data android:host="szyx6.app.goo.gl" android:scheme="https"/> -->
             </intent-filter>
         </activity>
         <activity android:name=".user.SigninActivity" />
@@ -70,13 +70,13 @@
 
         <activity android:name=".user.ProfileActivity"></activity>
         <activity android:name=".room.RoomActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="szyx6.app.goo.gl" android:scheme="http"/>
-                <data android:host="szyx6.app.goo.gl" android:scheme="https"/>
-            </intent-filter>
+            <!--  <intent-filter>
+                  <action android:name="android.intent.action.VIEW"/>
+                  <category android:name="android.intent.category.DEFAULT"/>
+                  <category android:name="android.intent.category.BROWSABLE"/>
+                  <data android:host="szyx6.app.goo.gl" android:scheme="http"/>
+                  <data android:host="szyx6.app.goo.gl" android:scheme="https"/>
+            </intent-filter>-->
         </activity>
     </application>
 
