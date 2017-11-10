@@ -127,8 +127,13 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
                     if(i == members.size()-1) {
                         LatLngBounds bounds = builder.build();
                         mMap.setMaxZoomPreference(18.0f);
-                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 70);
-                        mMap.moveCamera(cu);
+                        final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 140);
+                        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                            @Override
+                            public void onMapLoaded() {
+                                mMap.moveCamera(cu);
+                            }
+                        });
                     }
                 }
             }

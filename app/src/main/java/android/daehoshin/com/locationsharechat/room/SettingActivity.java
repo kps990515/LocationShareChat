@@ -100,8 +100,13 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
                     public void getRoom(Room room) {
                         initView();
                         currentRoom = room;
-                        LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
-                        mapManager.moveCameraLocationZoom(mMap, latLng, 12);
+                        final LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
+                        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                            @Override
+                            public void onMapLoaded() {
+                                mapManager.moveCameraLocationZoom(mMap, latLng, 12);
+                            }
+                        });
                         currentRoom.addMarker(mMap);
 
                         popUpStage.setVisibility(View.VISIBLE);

@@ -255,8 +255,13 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
                                 if (finalI == roomIds.length - 1) {
                                     LatLngBounds bounds = builder.build();
                                     mMap.setMaxZoomPreference(18.0f);
-                                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 90);
-                                    mMap.animateCamera(cu, 600, null);
+                                    final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 90);
+                                    mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                                        @Override
+                                        public void onMapLoaded() {
+                                            mMap.animateCamera(cu, 600, null);
+                                        }
+                                    });
                                 }
                             }
                         });

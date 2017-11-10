@@ -135,9 +135,13 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public void getRoom(Room room) {
                         currentRoom = room;
                         getSupportActionBar().setTitle(currentRoom.getTitle());
-
-                        LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
-                        mapManager.moveCameraLocationZoom(mMap, latLng, 12);
+                        final LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
+                        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                            @Override
+                            public void onMapLoaded() {
+                                mapManager.moveCameraLocationZoom(mMap, latLng, 12);
+                            }
+                        });
                         currentRoom.addMarker(mMap);
 
                         initView();
