@@ -62,12 +62,17 @@ public class CustomMapPopup extends FrameLayout {
     private String loc_name;
     private String msg_count;
 
-    public CustomMapPopup(@NonNull Context context, Double lat, Double lng, GoogleMap googleMap) {
+    // 생성인지 수정인지 설정
+    // CREATE, UPDATE
+    private String type;
+
+    public CustomMapPopup(@NonNull Context context, Double lat, Double lng, GoogleMap googleMap, String type) {
         super(context);
         delteThis = (DelteThis) context;
         initView();
         this.lat = lat+"";
         this.lng = lng+"";
+        this.type = type;
         this.mMap = googleMap;
         popUpMarker = mMap.addMarker(MarkerUtil.createMarkerOptions(R.drawable.temp_room_icon, this.lat, this.lng));
 

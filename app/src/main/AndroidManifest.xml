@@ -42,14 +42,21 @@
             android:label="@string/title_activity_room_list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="szyx6.app.goo.gl" android:scheme="http"/>
-                <data android:host="szyx6.app.goo.gl" android:scheme="https"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="szyx6.app.goo.gl"
+                    android:scheme="http" />
+                <data
+                    android:host="szyx6.app.goo.gl"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
         <activity android:name=".user.SigninActivity" />
@@ -72,20 +79,27 @@
             android:name=".room.RoomActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                  <action android:name="android.intent.action.VIEW"/>
-                  <category android:name="android.intent.category.DEFAULT"/>
-                  <category android:name="android.intent.category.BROWSABLE"/>
-                  <data android:host="szyx6.app.goo.gl" android:scheme="http"/>
-                  <data android:host="szyx6.app.goo.gl" android:scheme="https"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="szyx6.app.goo.gl"
+                    android:scheme="http" />
+                <data
+                    android:host="szyx6.app.goo.gl"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
 
         <service
             android:name=".service.LocationService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
-        <activity android:name=".room.DetailActivity"></activity>
+        <activity android:name=".room.DetailActivity" />
+        <activity android:name=".room.SettingActivity"></activity>
     </application>
 
 </manifest>

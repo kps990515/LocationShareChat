@@ -1,18 +1,14 @@
 package android.daehoshin.com.locationsharechat.room;
 
-import android.content.Intent;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
-import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,9 +22,7 @@ import com.google.android.gms.maps.model.Marker;
 
 import java.util.List;
 
-import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
-
-public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class SettingActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private MapManager mapManager;
@@ -42,18 +36,15 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-        initView();
+        setContentView(R.layout.activity_setting);
 
         room_id = getIntent().getStringExtra(Consts.ROOM_ID);
         mapManager = new MapManager(this,2);
         initMap();
-
     }
-
     private void initMap(){
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.detailMap);
+                .findFragmentById(R.id.settingMap);
         mapFragment.getMapAsync(this);
     }
 
@@ -71,7 +62,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
             public View getInfoContents(Marker marker) {
                 if(marker.getTag() instanceof Room){
                     Room room = (Room)marker.getTag();
-                    return room.getInfoView(DetailActivity.this);
+                    return room.getInfoView(SettingActivity.this);
                 }
                 return null;
             }
@@ -94,9 +85,6 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
                         currentRoom = room;
                         LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
                         mapManager.moveCameraLocationZoom(mMap, latLng, 12);
-                        roomMarker = mMap.addMarker(currentRoom.getMarker());
-                        roomMarker.setTag(currentRoom);
-                        roomMarker.showInfoWindow();
 
                         initView();
                         loadMember();

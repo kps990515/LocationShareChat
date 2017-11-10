@@ -239,6 +239,9 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                 });
                 break;
             case R.id.menu_setting:
+                Intent intent = new Intent(RoomActivity.this, SettingActivity.class);
+                intent.putExtra(ROOM_ID, roomid);
+                startActivity(intent);
                 break;
         }
 

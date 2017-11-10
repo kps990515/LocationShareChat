@@ -38,4 +38,8 @@ public class Consts {
     // 현재 시간 및 분
     public static final String CURRENT_HOUR = "current_hour";
     public static final String CURRENT_MIN = "current_min";
+
+    // 방 생성 및 수정에 대한 값
+    public static final String ROOM_CREATE = "create_room";
+    public static final String ROOM_UPDATE = "update_room";
 }
