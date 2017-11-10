@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -45,6 +46,9 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     private UserInfo currentUser;
     private Room currentRoom;
     private String roomid;
+
+    private FrameLayout popUpLayout;
+    private CustomMemberPopup customMemberPopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,13 +144,15 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         adapter = new ChatAdapter(currentUser.getUid());
         chatList.setAdapter(adapter);
         chatList.setLayoutManager(new LinearLayoutManager(this));
+        popUpLayout = findViewById(R.id.popUpLayout);
+        customMemberPopup = new CustomMemberPopup(this);
     }
 
     private void loadMember(){
         currentRoom.getMember(new Room.IRoomMemberCallback() {
             @Override
             public void getMember(List<Member> members) {
-                for(Member member : members){
+                for(final Member member : members){
                     if(currentUser.getUid() == member.getUid()) mMap.addMarker(currentUser.getMarker());
                     else mMap.addMarker(member.getMarker());
 
@@ -154,6 +160,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                         @Override
                         public void downloaded(String id, Uri uri) {
                             adapter.addProfile(id, uri);
+                            customMemberPopup.addMember(id,uri,member.getName());
                         }
                     });
                 }
@@ -213,7 +220,13 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
             case R.id.menu_invite:
                 break;
             case R.id.menu_member:
-
+                popUpLayout.setVisibility(View.VISIBLE);
+                popUpLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popUpLayout.setVisibility(View.GONE);
+                    }
+                });
                 break;
             case R.id.menu_setting:
                 break;
