@@ -94,10 +94,12 @@ public class UserInfo extends BaseUser {
         }
     }
 
-    public void addRoom(String roomId){
+    public void addRoom(Room newRoom){
         if(room == null) room = "";
         if(room.length() > 0) room += ",";
-        room += roomId;
+        room += newRoom.getId();
+
+        rooms.add(newRoom);
     }
 
     public void removeRoom(String roomId){
@@ -106,11 +108,23 @@ public class UserInfo extends BaseUser {
         if(",".equals(room)) room = "";
     }
 
+    @Exclude
+    private List<Room> rooms = new ArrayList<>();
+
     public void getRoom(String roomId, final IUserInfoCallback callback){
+        for(Room room : rooms){
+            if(room.getId().equals(roomId)) {
+                callback.getRoom(room);
+                return;
+            }
+        }
+
         DatabaseManager.getRoomRef(roomId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                callback.getRoom(dataSnapshot.getValue(Room.class));
+                Room room = dataSnapshot.getValue(Room.class);
+                rooms.add(room);
+                callback.getRoom(room);
             }
 
             @Override

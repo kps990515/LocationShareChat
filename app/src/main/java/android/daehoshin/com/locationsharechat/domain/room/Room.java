@@ -48,14 +48,23 @@ public class Room implements Serializable{
     }
 
     @Exclude
+    private List<Member> members = new ArrayList<>();
+
+    @Exclude
     public void getMember(final IRoomMemberCallback callback){
         DatabaseManager.getMemberRef(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Member> members = new ArrayList<>();
-
                 for(DataSnapshot item : dataSnapshot.getChildren()) {
-                    members.add(item.getValue(Member.class));
+                    Member member = item.getValue(Member.class);
+                    boolean isContain = false;
+                    for(Member m : members){
+                        if(m.getUid().equals(member.getUid())) {
+                            isContain = true;
+                            break;
+                        }
+                    }
+                    if(!isContain) members.add(member);
                 }
 
                 callback.getMember(members);
