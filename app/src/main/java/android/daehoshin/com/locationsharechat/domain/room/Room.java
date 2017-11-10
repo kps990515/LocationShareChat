@@ -115,6 +115,7 @@ public class Room implements Serializable{
     private List<Msg> msgs = new ArrayList<>();
     @Exclude
     public void getRealtimeMsg(final IRoomMsgCallback callback){
+        msgs.clear();
         DatabaseManager.getMsgRef(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

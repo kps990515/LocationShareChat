@@ -59,7 +59,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
             holder.rightLayout.setVisibility(View.VISIBLE);
             holder.txt_rmsg.setText(msg.getMessage());
             holder.txt_rtime.setText(FormatUtil.changeTimeFormatLongToString(msg.getTime()));
-        }else{
+        }
+        else{
             holder.rightLayout.setVisibility(View.GONE);
             holder.leftLayout.setVisibility(View.VISIBLE);
             holder.txt_msg.setText(msg.getMessage());
@@ -67,6 +68,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
             holder.txt_time.setText(FormatUtil.changeTimeFormatLongToString(msg.getTime()));
             Uri uri = profiles.get(msg.getUid());
             if(uri != null) Glide.with(holder.itemView.getContext()).load(uri).apply(RequestOptions.circleCropTransform()).into(holder.image_profile);
+            else holder.image_profile.setImageResource(R.drawable.ic_action_name);
         }
     }
 
