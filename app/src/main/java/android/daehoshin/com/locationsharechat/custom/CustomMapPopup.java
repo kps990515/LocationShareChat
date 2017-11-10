@@ -7,6 +7,7 @@ import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.util.FormatUtil;
+import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,9 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Marker;
 
 /**
  * Created by Kyung on 2017-11-09.
@@ -33,6 +37,12 @@ public class CustomMapPopup extends FrameLayout {
     private Button btnMakeRoom;
     private DelteThis delteThis;
 
+    private int location_Y;
+    private int location_X;
+
+    private Marker popUpMarker;
+    private GoogleMap mMap;
+
     private String hour;
     private String minute;
     private String endString;
@@ -47,13 +57,19 @@ public class CustomMapPopup extends FrameLayout {
     private String loc_name;
     private String msg_count;
 
-    public CustomMapPopup(@NonNull Context context, Double lat, Double lng) {
+    public CustomMapPopup(@NonNull Context context, Double lat, Double lng, GoogleMap googleMap) {
         super(context);
         delteThis = (DelteThis) context;
         initView();
         this.lat = lat+"";
         this.lng = lng+"";
+        this.mMap = googleMap;
+        popUpMarker = mMap.addMarker(MarkerUtil.createMarkerOptions(R.drawable.userinfoicon, this.lat, this.lng));
 
+        // 팝업 나타나는 위치 지정
+        this.setPivotX(50);
+        location_X = 0;
+        location_Y = 20;
         init();
     }
 
@@ -74,6 +90,7 @@ public class CustomMapPopup extends FrameLayout {
 
         addView(view);
     }
+
 
     /**
      * 스피너 세팅
@@ -141,7 +158,7 @@ public class CustomMapPopup extends FrameLayout {
                 } else {
                     setTime(hour,minute,endString);
                     makeThisRoom();
-                    delteThis.deletePopUp(room);
+                    delteThis.deletePopUp(room, popUpMarker);
                 }
             }
         });
@@ -193,11 +210,22 @@ public class CustomMapPopup extends FrameLayout {
 
     }
 
+    public void deletePopUpMarker(){
+        popUpMarker.remove();
+    }
+
     /**
      * 버튼 클릭시 popup을 삭제하고 마커를 추가
      */
     public interface DelteThis{
-        public void deletePopUp(Room room);
+        public void deletePopUp(Room room, Marker popUpMarker);
+    }
+
+    public void setLocationY(){
+        this.setY(location_Y);
+    }
+    public void setLocationX(){
+        this.setX(location_X);
     }
 
 }

@@ -11,6 +11,7 @@ import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.room.RoomActivity;
 import android.daehoshin.com.locationsharechat.service.LocationService;
 import android.daehoshin.com.locationsharechat.user.SigninActivity;
+import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -156,20 +157,28 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mapManager.moveToMyLocation(mMap);
+        serviceIntent.setAction(Consts.Thread_START);
+        startService(serviceIntent);
+
         mapManager.longClick(mMap, new MapManager.IMakeRoom() {
             @Override
             public void makePopup(LatLng latLng) {
                 popUpStage.setVisibility(View.VISIBLE);
-                customMapPopup = new CustomMapPopup(RoomListActivity.this,latLng.latitude,latLng.longitude);
-                customMapPopup.setX(100);
-                customMapPopup.setY(100);
+                customMapPopup = new CustomMapPopup(RoomListActivity.this,latLng.latitude,latLng.longitude, mMap);
+                customMapPopup.setLocationX();
+                customMapPopup.setLocationY();
+                mapManager.moveToClickLocation(mMap,latLng);
+                popUpStage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popUpStage.setVisibility(View.GONE);
+                        customMapPopup.deletePopUpMarker();
+                    }
+                });
                 popUpStage.addView(customMapPopup);
             }
         });
-        mapManager.moveToMyLocation(mMap);
-
-        serviceIntent.setAction(Consts.Thread_START);
-        startService(serviceIntent);
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
@@ -240,22 +249,16 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     }
 
     @Override
-    public void deletePopUp(Room room) {
+    public void deletePopUp(Room room, Marker PopUpMarker) {
         popUpStage.removeView(customMapPopup);
         popUpStage.setVisibility(View.GONE);
-        // dialog 혹은 Toast 띄우고, 마커 찍기
+        PopUpMarker.remove();
         addRoom(room);
     }
 
     private void setPopUpStage(){
         popUpStage = findViewById(R.id.popUpStage);
         popUpStage.setVisibility(View.GONE);
-        popUpStage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popUpStage.setVisibility(View.GONE);
-            }
-        });
     }
 
 

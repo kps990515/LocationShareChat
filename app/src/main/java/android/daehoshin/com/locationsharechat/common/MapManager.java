@@ -17,6 +17,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -135,6 +136,11 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
             latLng = new LatLng(lastLat, lastLng);
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, Consts.Zoom_SIZE));
+    }
+
+    public void moveToClickLocation(GoogleMap mMap, LatLng latLng){
+        CameraUpdate center = CameraUpdateFactory.newLatLng(latLng);
+        mMap.animateCamera(center, 400, null);
     }
 
     /**
