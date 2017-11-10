@@ -11,7 +11,6 @@ import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.room.RoomActivity;
 import android.daehoshin.com.locationsharechat.service.LocationService;
 import android.daehoshin.com.locationsharechat.user.SigninActivity;
-import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,9 +28,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
+import static android.daehoshin.com.locationsharechat.constant.Consts.DYNAMICLINK_BASE_URL;
 import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.PERMISSION_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
@@ -271,7 +272,16 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
 
     //======== 임시용 버튼(삭제 할 것) 생성=================================
     public void goTemp(View view){
-        Intent intent = new Intent(RoomListActivity.this, RoomActivity.class); // 뒤에 바꿀 것
+        DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                .setLink(Uri.parse("https://example.com/"))
+                .setDynamicLinkDomain(DYNAMICLINK_BASE_URL)
+                .setAndroidParameters(
+                        new DynamicLink.AndroidParameters.Builder("android.daehoshin.com.locationsharechat")
+                                .setMinimumVersion(16)
+                                .build())
+                .buildDynamicLink();
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, dynamicLink.getUri());
         startActivity(intent);
     }
     public void signout(View view){

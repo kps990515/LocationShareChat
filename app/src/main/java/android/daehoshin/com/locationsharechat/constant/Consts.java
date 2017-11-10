@@ -5,6 +5,8 @@ package android.daehoshin.com.locationsharechat.constant;
  */
 
 public class Consts {
+    public static final String DYNAMICLINK_BASE_URL = "szyx6.app.goo.gl";
+
     public static final String ROOM_ID = "room_id";
 
     public static final String TB_USER = "user";
