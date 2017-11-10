@@ -62,6 +62,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
             holder.txt_msg.setText(msg.getMessage());
             holder.txt_name.setText(msg.getName());
             holder.txt_time.setText(FormatUtil.changeTimeFormatLongToString(msg.getTime()));
+            holder.image_profile.setImageURI(profiles.get(msg.getUid()));
         }
     }
 
@@ -90,10 +91,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
             cardView = itemView.findViewById(R.id.cardView);
             cardViewL = itemView.findViewById(R.id.cardViewR);
             txt_msg = itemView.findViewById(R.id.txt_msg);
-            txt_name = itemView.findViewById(R.id.txt_name);
+            txt_name = itemView.findViewById(R.id.txt_membername);
             txt_count = itemView.findViewById(R.id.txt_count);
             txt_time = itemView.findViewById(R.id.txt_time);
-            image_profile = itemView.findViewById(R.id.image_profile);
+            image_profile = itemView.findViewById(R.id.image_memerProfile);
             txt_rmsg = itemView.findViewById(R.id.txt_rmsg);
             txt_rcount = itemView.findViewById(R.id.txt_rcount);
             txt_rtime = itemView.findViewById(R.id.txt_rtime);
