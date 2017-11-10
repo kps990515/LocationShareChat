@@ -236,7 +236,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
         finish();
     }
 
-    boolean checkService = true;
+    boolean checkService = false;
     public void onService(View view){
         if(checkService){
             serviceIntent.setAction(Consts.Thread_START);

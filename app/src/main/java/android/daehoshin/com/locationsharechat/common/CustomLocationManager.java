@@ -12,6 +12,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,6 +29,7 @@ public class CustomLocationManager implements LocationListener {
     private double lastLng;
 
     private LocationThread thread;
+    private static boolean threadCheck = false;
     private static boolean runFlag = true;
 
     private boolean gps_enabled = false;
@@ -34,15 +37,17 @@ public class CustomLocationManager implements LocationListener {
 
     public CustomLocationManager(Context context){
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        thread = new LocationThread(handler);
     }
 
     public void startCheckGPS(){
-        runFlag= false;
-        thread = new LocationThread(handler);
-        runFlag=true;
-        thread.start();
+        runFlag= true;
+        if(!thread.isAlive()) {
+            thread.start();
+        }
         startUpdateLocation();
     }
+
     public void stopCheckGPS(){
         runFlag = false;
         stopUpdateLocation();
