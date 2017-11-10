@@ -14,12 +14,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -72,6 +76,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         });
     }
 
+    LatLngBounds.Builder builder = new LatLngBounds.Builder();
     private void loadCurrentUser(){
         AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
             @Override
@@ -91,6 +96,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
                         roomMarker = currentRoom.addMarker(mMap);
                         roomMarker.showInfoWindow();
 
+                        builder.include(roomMarker.getPosition());
                         initView();
                         loadMember();
                     }
@@ -110,9 +116,20 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         currentRoom.getMember(new Room.IRoomMemberCallback() {
             @Override
             public void getMember(List<Member> members) {
-                for(Member member : members){
-                    if(currentUser.getUid().equals(member.getUid())) currentUser.addMarker(mMap);
-                    else member.addMarker(mMap);
+                for(int i=0 ; i<members.size() ; i++){
+                    Marker marker;
+                    if(currentUser.getUid().equals(members.get(i).getUid())) {
+                        marker = currentUser.addMarker(mMap);
+                    } else {
+                        marker = members.get(i).addMarker(mMap);
+                    }
+                    builder.include(marker.getPosition());
+                    if(i == members.size()-1) {
+                        LatLngBounds bounds = builder.build();
+                        mMap.setMaxZoomPreference(18.0f);
+                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 70);
+                        mMap.moveCamera(cu);
+                    }
                 }
             }
         });
