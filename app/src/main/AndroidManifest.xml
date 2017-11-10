@@ -33,20 +33,27 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+            android:value="@integer/google_play_services_version"/>
 
         <activity
             android:name=".RoomListActivity"
             android:label="@string/title_activity_room_list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="szyx6.app.goo.gl" android:scheme="http"/>
+                <data android:host="szyx6.app.goo.gl" android:scheme="https"/>
             </intent-filter>
         </activity>
         <activity android:name=".user.SigninActivity" />
+
 
         <!-- 사진을 저장하기 위해 파일에 대한 권한 획득 설정 -->
         <provider
@@ -61,13 +68,16 @@
                 android:resource="@xml/file_path" />
         </provider>
 
-        <activity android:name=".user.ProfileActivity" />
-        <activity android:name=".room.RoomActivity" />
-
-        <service
-            android:name=".service.LocationService"
-            android:enabled="true"
-            android:exported="true"></service>
+        <activity android:name=".user.ProfileActivity"></activity>
+        <activity android:name=".room.RoomActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="szyx6.app.goo.gl" android:scheme="http"/>
+                <data android:host="szyx6.app.goo.gl" android:scheme="https"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

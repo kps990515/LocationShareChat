@@ -3,7 +3,6 @@ package android.daehoshin.com.locationsharechat;
 import android.Manifest;
 import android.content.Intent;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
-import android.daehoshin.com.locationsharechat.common.CustomLocationManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
 import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
@@ -13,8 +12,11 @@ import android.daehoshin.com.locationsharechat.room.RoomActivity;
 import android.daehoshin.com.locationsharechat.service.LocationService;
 import android.daehoshin.com.locationsharechat.user.SigninActivity;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -24,6 +26,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
 import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.PERMISSION_REQ;
@@ -58,7 +64,32 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
         mapManager = new MapManager(this);
         serviceIntent = new Intent(this, LocationService.class);
 
+        checkDynamicLink();
+
         checkPermission();
+    }
+
+    private void checkDynamicLink(){
+        FirebaseDynamicLinks.getInstance()
+                .getDynamicLink(getIntent())
+                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                    @Override
+                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                        // Get deep link from result (may be null if no link is found)
+                        Uri deepLink = null;
+                        if (pendingDynamicLinkData != null) {
+                            deepLink = pendingDynamicLinkData.getLink();
+                        }
+
+
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("RoomListActivity", "getDynamicLink:onFailure", e);
+                    }
+                });
     }
 
     /**
@@ -202,6 +233,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     }
 
     private void addRoom(Room room){
+        if(room == null) return;
         Marker marker = mMap.addMarker(room.getMarker());
         marker.setTag(room);
         marker.showInfoWindow();
@@ -225,6 +257,14 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
             }
         });
     }
+
+
+
+
+
+
+
+
 
     //======== 임시용 버튼(삭제 할 것) 생성=================================
     public void goTemp(View view){

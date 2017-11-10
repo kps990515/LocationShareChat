@@ -64,21 +64,22 @@ public class Room {
         });
     }
 
+    private List<Msg> msgs = new ArrayList<>();
     @Exclude
     public void getMsg(final IRoomMsgCallback callback){
-        DatabaseManager.getMsgRef(id).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseManager.getMsgRef(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Msg> msgs = new ArrayList<>();
-
-                for(DataSnapshot item : dataSnapshot.getChildren()) msgs.add(item.getValue(Msg.class));
-
-                callback.getMsg(msgs);
+                int idx = 0;
+                for(DataSnapshot item : dataSnapshot.getChildren()) {
+                    if(idx >= msgs.size()) callback.getMsg(item.getValue(Msg.class));
+                    idx++;
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                callback.getMsg(new ArrayList<Msg>());
+                callback.getMsg(null);
             }
         });
     }
@@ -150,6 +151,6 @@ public class Room {
         void getMember(List<Member> members);
     }
     public interface IRoomMsgCallback{
-        void getMsg(List<Msg> msgs);
+        void getMsg(Msg msg);
     }
 }
