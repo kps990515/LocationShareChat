@@ -119,6 +119,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Intent intent = new Intent(RoomActivity.this, DetailActivity.class);
                 intent.putExtra(ROOM_ID, roomid);
                 startActivity(intent);
+                overridePendingTransition(R.anim.anim_slide_in_top,R.anim.anim_slide_out_bottom);
             }
         });
     }
