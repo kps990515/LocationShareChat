@@ -22,6 +22,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.List;
+
 /**
  * Created by daeho on 2017. 11. 7..
  */
@@ -147,6 +149,23 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
     }
     public void moveCameraLocationZoom(GoogleMap mMap, LatLng latLng, int zoomSize){
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomSize));
+    }
+    public void moveCameraMiddleLocationZoom(GoogleMap mMap, List<LatLng> latLngList, int zoomSize){
+        if(latLngList.size()>0) {
+            double middleLat = 0;
+            double middleLng = 0;
+            for (int i = 0; i < latLngList.size(); i++) {
+                middleLat += latLngList.get(i).latitude;
+                middleLng += latLngList.get(i).longitude;
+            }
+            middleLat = middleLat / (double)latLngList.size();
+            middleLng = middleLng / (double)latLngList.size();
+            Log.e("좌표","========================"+middleLat+" // "+middleLng);
+
+            LatLng middleLatLng = new LatLng(middleLat,middleLng);
+
+            moveCameraLocationZoom(mMap,middleLatLng,zoomSize);
+        }
     }
 
     /**

@@ -24,11 +24,11 @@ public class Consts {
     public static final int PERMISSION_REQ = 901;
 
     // 업데이트 시간
-    public static final int LOCATION_INTERVAL_TIME = 60000;
+    public static final int LOCATION_INTERVAL_TIME = 100;
     public static final int LOCATION_INTERVAL_METER = 100;
 
     // 줌 크기
-    public static final int Zoom_SIZE = 13;
+    public static final int Zoom_SIZE = 12;
 
     // 서비스 관련 중지
     public static final String Thread_START = "thread_start";
@@ -36,9 +36,9 @@ public class Consts {
     public static final int LOCATION_UPDATE_START = 700;
     public static final int LOCATION_UPDATE_STOP = 701;
 
-    // 현재 시간 및 분
-    public static final String CURRENT_HOUR = "current_hour";
-    public static final String CURRENT_MIN = "current_min";
+    // 시간 및 분
+    public static final String Custom_HOUR = "custom_hour";
+    public static final String Custom_MIN = "custom_min";
 
     // 방 생성 및 수정에 대한 값
     public static final String ROOM_CREATE = "create_room";

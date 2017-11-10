@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +44,8 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Holder> {
         member.uri = profiles_uri.get(position);
         holder.txt_membername.setText(member.name);
         Uri uri = profiles_uri.get(position);
-        holder.image_memberProfile.setImageURI(uri);
+
+        if(uri != null) Glide.with(holder.itemView.getContext()).load(uri).apply(RequestOptions.circleCropTransform()).into(holder.image_memberProfile);
     }
 
     @Override

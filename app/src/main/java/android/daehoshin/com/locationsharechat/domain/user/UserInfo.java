@@ -3,12 +3,18 @@ package android.daehoshin.com.locationsharechat.domain.user;
 import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.util.MarkerUtil;
+import android.util.Log;
 
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by daeho on 2017. 11. 8..
@@ -29,8 +35,11 @@ public class UserInfo extends BaseUser {
         DatabaseManager.getUserRef(uid).setValue(this);
     }
 
+    @Exclude
+    private boolean realtimeRunning = false;
     @Override
     void realtimeRefresh() {
+        if(realtimeRunning) return;
         DatabaseManager.getUserRef(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -39,18 +48,31 @@ public class UserInfo extends BaseUser {
                     lat = m.getLat();
                     lng = m.getLng();
                 }
+
+                for(Marker marker : markers) {
+                    if (lat != null && lng != null) {
+                        marker.setPosition(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
+                    }
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Log.d("UserInfo", databaseError.getMessage());
             }
         });
+        realtimeRunning = true;
     }
 
     @Exclude
-    public MarkerOptions getMarker(){
-        return MarkerUtil.createMarkerOptions(this);
+    private List<Marker> markers = new ArrayList<>();
+    @Exclude
+    public Marker addMarker(GoogleMap googleMap){
+        realtimeRefresh();
+        Marker marker = googleMap.addMarker(MarkerUtil.createMarkerOptions(this));
+        marker.setTag(this);
+        markers.add(marker);
+        return marker;
     }
 
     @Exclude
@@ -79,8 +101,8 @@ public class UserInfo extends BaseUser {
     }
 
     public void removeRoom(String roomId){
-        room.replace(roomId, "");
-        room.replace(",,", ",");
+        room = room.replace(roomId, "");
+        room = room.replace(",,", ",");
         if(",".equals(room)) room = "";
     }
 

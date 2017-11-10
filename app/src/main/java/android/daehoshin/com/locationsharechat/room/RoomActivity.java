@@ -38,6 +38,7 @@ import java.util.List;
 import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
 
 public class RoomActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private SupportMapFragment mapFragment;
     private GoogleMap mMap;
     private MapManager mapManager;
     private RecyclerView chatList;
@@ -100,7 +101,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void initMap(){
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.roomMap);
         mapFragment.getMapAsync(this);
     }
@@ -133,9 +134,11 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public void getRoom(Room room) {
                         currentRoom = room;
+                        getSupportActionBar().setTitle(currentRoom.getTitle());
+
                         LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
                         mapManager.moveCameraLocationZoom(mMap, latLng, 12);
-                        mMap.addMarker(currentRoom.getMarker());
+                        currentRoom.addMarker(mMap);
 
                         initView();
                         loadMember();
@@ -146,9 +149,23 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
+
+
     private void initView(){
         chatList = findViewById(R.id.chatList);
         edit_msg = findViewById(R.id.edit_msg);
+
+//        KeyboardVisibilityEvent.setEventListener(this, new KeyboardVisibilityEventListener() {
+//                    @Override
+//                    public void onVisibilityChanged(boolean isOpen) {
+//                        View v = mapFragment.getView();
+//                        FrameLayout.LayoutParams p = null;
+//                        if(isOpen) p = new FrameLayout.LayoutParams(v.getWidth(), v.getHeight() / 2);
+//                        else p = new FrameLayout.LayoutParams(v.getWidth(), v.getHeight() * 2);
+//                        v.setLayoutParams(p);
+//                        v.requestLayout();
+//                    }
+//                });
         adapter = new ChatAdapter(currentUser.getUid());
         chatList.setAdapter(adapter);
         chatList.setLayoutManager(new LinearLayoutManager(this));
@@ -161,8 +178,8 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void getMember(List<Member> members) {
                 for(final Member member : members){
-                    if(currentUser.getUid().equals(member.getUid())) mMap.addMarker(currentUser.getMarker());
-                    else mMap.addMarker(member.getMarker());
+                    if(currentUser.getUid().equals(member.getUid())) currentUser.addMarker(mMap);
+                    else member.addMarker(mMap);
 
                     member.getProfile(new StorageManager.IDownloadCallback() {
                         @Override
@@ -208,6 +225,12 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
+    public void onBackPressed() {
+        if(popUpLayout.getVisibility() == View.VISIBLE) popUpLayout.setVisibility(View.GONE);
+        else super.onBackPressed();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.chat_menu,menu);
         return true;
@@ -218,7 +241,8 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         int menu = item.getItemId();
         switch(menu){
             case R.id.menu_getout:
-                DatabaseManager.leaveRoom(currentUser,roomid);
+                DatabaseManager.leaveRoom(currentUser, roomid);
+                currentRoom.removeMarker();
                 finish();
                 break;
             case R.id.menu_invite:

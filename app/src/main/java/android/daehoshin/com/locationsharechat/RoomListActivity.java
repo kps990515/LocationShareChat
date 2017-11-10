@@ -24,10 +24,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,13 +41,16 @@ import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.daehoshin.com.locationsharechat.constant.Consts.DYNAMICLINK_BASE_URL;
 import static android.daehoshin.com.locationsharechat.constant.Consts.IS_SIGNIN;
 import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.PERMISSION_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
 
-public class RoomListActivity extends AppCompatActivity implements OnMapReadyCallback, CustomMapPopup.DelteThis {
+public class RoomListActivity extends AppCompatActivity implements OnMapReadyCallback, CustomMapPopup.IDelteThis {
 
     public static final String[] Permission = new String[] {
               Manifest.permission.ACCESS_FINE_LOCATION
@@ -138,7 +144,11 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
                     Intent intent = new Intent(RoomListActivity.this, SigninActivity.class);
                     startActivityForResult(intent, LOGIN_REQ);
                 }
-                else initMap();
+                else {
+                    currentUser = userInfo;
+
+                    initMap();
+                }
             }
         });
     }
@@ -150,7 +160,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         switch (requestCode){
             case LOGIN_REQ:
                 switch (resultCode){
-                    case RESULT_OK: initMap(); break;
+                    case RESULT_OK: checkSignin(); break;
                     case RESULT_CANCELED: finish(); break;
                 }
                 break;
@@ -161,14 +171,11 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        progress.setVisibility(View.GONE);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mapManager.moveToMyLocation(mMap);
         serviceIntent.setAction(Consts.Thread_START);
         startService(serviceIntent);
 
@@ -217,17 +224,18 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
             }
         });
 
-
+        addUser(currentUser);
         loadData();
 
+        progress.setVisibility(View.GONE);
 
-        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        findViewById(R.id.appBarLayout).setVisibility(View.VISIBLE);
     }
 
+    List<Marker> markers = new ArrayList<>();
+    LatLngBounds.Builder builder = new LatLngBounds.Builder();
     private void loadData(){
+        markers.clear();
         AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
             @Override
             public void signinAnonymously(boolean isSuccessful) {
@@ -237,12 +245,19 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
             @Override
             public void getCurrentUser(UserInfo userInfo) {
                 currentUser = userInfo;
-
-                for(String roomid : currentUser.getRoomIds()){
-                    currentUser.getRoom(roomid, new UserInfo.IUserInfoCallback() {
+                final String roomIds[] = currentUser.getRoomIds();
+                for(int i=0 ; i<roomIds.length ; i++){
+                    final int finalI = i;
+                    currentUser.getRoom(roomIds[i], new UserInfo.IUserInfoCallback() {
                         @Override
                         public void getRoom(Room room) {
                             addRoom(room);
+                            if(finalI == roomIds.length-1){
+                                LatLngBounds bounds = builder.build();
+                                int padding = 90;
+                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                                mMap.animateCamera(cu, 600, null);
+                            }
                         }
                     });
                 }
@@ -252,11 +267,18 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
 
     private void addRoom(Room room){
         if(room == null) return;
-        Marker marker = mMap.addMarker(room.getMarker());
-        marker.setTag(room);
+        Marker marker = room.addMarker(mMap);
         marker.showInfoWindow();
+
+        markers.add(marker);
+        builder.include(marker.getPosition());
     }
 
+    private void addUser(UserInfo userInfo){
+        if(userInfo == null) return;
+        Marker marker = userInfo.addMarker(mMap);
+        marker.showInfoWindow();
+    }
 
     @Override
     public void deletePopUp(Room room, Marker PopUpMarker) {

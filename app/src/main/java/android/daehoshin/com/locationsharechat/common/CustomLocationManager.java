@@ -92,11 +92,14 @@ public class CustomLocationManager implements LocationListener {
     public void onLocationChanged(Location location) {
         lastLat = location.getLatitude();
         lastLng = location.getLongitude();
+        CurrentLocation.setLatitude(lastLat);
+        CurrentLocation.setLongitude(lastLng);
         lastLocation = location;
         Log.e("onLocationChanged","============="+lastLat + " //" + lastLng);
 
         if(currentUser != null){
             currentUser.updateLocation(lastLat, lastLng);
+
         }
     }
 

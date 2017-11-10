@@ -1,5 +1,7 @@
 package android.daehoshin.com.locationsharechat.common;
 
+import android.content.Context;
+import android.daehoshin.com.locationsharechat.util.FormatUtil;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
@@ -8,6 +10,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.io.FileNotFoundException;
 
 import static android.daehoshin.com.locationsharechat.constant.Consts.DIR_PROFILE;
 
@@ -24,8 +28,16 @@ public class StorageManager {
         return sm;
     }
 
-    public static void uploadProfile(String uid, Uri uploadFile, final IUploadCallback callback){
+
+
+    public static void uploadProfile(Context context, String uid, Uri uploadFile, final IUploadCallback callback){
         StorageReference riversRef = getInstance().stRef.child(DIR_PROFILE + "/" + uid + ".jpg");
+
+        try {
+            uploadFile = FormatUtil.decodeUri(context, uploadFile, 1024);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         riversRef.putFile(uploadFile)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

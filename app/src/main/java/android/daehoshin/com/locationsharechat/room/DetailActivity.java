@@ -1,18 +1,14 @@
 package android.daehoshin.com.locationsharechat.room;
 
-import android.content.Intent;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
-import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,8 +21,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 import java.util.List;
-
-import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
 
 public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -94,8 +88,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
                         currentRoom = room;
                         LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
                         mapManager.moveCameraLocationZoom(mMap, latLng, 12);
-                        roomMarker = mMap.addMarker(currentRoom.getMarker());
-                        roomMarker.setTag(currentRoom);
+                        roomMarker = currentRoom.addMarker(mMap);
                         roomMarker.showInfoWindow();
 
                         initView();
@@ -118,8 +111,8 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
             @Override
             public void getMember(List<Member> members) {
                 for(Member member : members){
-                    if(currentUser.getUid().equals(member.getUid())) mMap.addMarker(currentUser.getMarker());
-                    else mMap.addMarker(member.getMarker());
+                    if(currentUser.getUid().equals(member.getUid())) currentUser.addMarker(mMap);
+                    else member.addMarker(mMap);
                 }
             }
         });
