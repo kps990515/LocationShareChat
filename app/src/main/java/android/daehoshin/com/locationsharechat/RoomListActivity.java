@@ -41,6 +41,9 @@ import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.daehoshin.com.locationsharechat.constant.Consts.DYNAMICLINK_BASE_URL;
 import static android.daehoshin.com.locationsharechat.constant.Consts.IS_SIGNIN;
 import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
@@ -241,20 +244,23 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
             public void getCurrentUser(UserInfo userInfo) {
                 currentUser = userInfo;
                 final String roomIds[] = currentUser.getRoomIds();
-                for(int i = 0; i < roomIds.length; i++){
-                    final int finalI = i;
-                    currentUser.getRoom(roomIds[i], new UserInfo.IUserInfoCallback() {
-                        @Override
-                        public void getRoom(Room room) {
-                            addRoom(room);
-                            if(finalI == roomIds.length-1){
-                                LatLngBounds bounds = builder.build();
-                                int padding = 90;
-                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-                                mMap.animateCamera(cu, 600, null);
+                if(roomIds.length == 0) mapManager.moveToMyLocation(mMap);
+                else {
+                    for (int i = 0; i < roomIds.length; i++) {
+                        final int finalI = i;
+                        currentUser.getRoom(roomIds[i], new UserInfo.IUserInfoCallback() {
+                            @Override
+                            public void getRoom(Room room) {
+                                addRoom(room);
+                                if (finalI == roomIds.length - 1) {
+                                    LatLngBounds bounds = builder.build();
+                                    mMap.setMaxZoomPreference(18.0f);
+                                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 90);
+                                    mMap.animateCamera(cu, 600, null);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             }
         });

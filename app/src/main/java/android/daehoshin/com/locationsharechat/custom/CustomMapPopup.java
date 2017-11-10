@@ -65,12 +65,12 @@ public class CustomMapPopup extends FrameLayout {
     public CustomMapPopup(@NonNull Context context, Double lat, Double lng, GoogleMap googleMap, String type) {
         super(context);
         delteThis = (IDelteThis) context;
+        this.type = type;
         initView();
 
         room = new Room();
         this.lat = lat+"";
         this.lng = lng+"";
-        this.type = type;
         this.mMap = googleMap;
         popUpMarker = mMap.addMarker(MarkerUtil.createMarkerOptions(R.drawable.temp_room_icon, this.lat, this.lng));
 
@@ -80,6 +80,7 @@ public class CustomMapPopup extends FrameLayout {
     public CustomMapPopup(@NonNull Context context, Double lat, Double lng, Room room, GoogleMap googleMap, String type) {
         super(context);
         delteThis = (IDelteThis) context;
+        this.type = type;
         initView();
         this.room = room;
         editTitle.setText(room.title);
@@ -93,7 +94,6 @@ public class CustomMapPopup extends FrameLayout {
                 this.lng = lng+"";
                 break;
         }
-        this.type = type;
         this.mMap = googleMap;
         popUpMarker = mMap.addMarker(MarkerUtil.createMarkerOptions(R.drawable.temp_room_icon, this.lat, this.lng));
 
