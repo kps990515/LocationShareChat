@@ -142,6 +142,9 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
         CameraUpdate center = CameraUpdateFactory.newLatLng(latLng);
         mMap.animateCamera(center, 400, null);
     }
+    public void moveCameraLocationZoom(GoogleMap mMap, LatLng latLng, int zoomSize){
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomSize));
+    }
 
     /**
      * location 찾는 리스너 설정 (내 위치 변할때마다 호출됨)

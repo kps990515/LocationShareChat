@@ -2,11 +2,13 @@ package android.daehoshin.com.locationsharechat.room;
 
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
+import android.daehoshin.com.locationsharechat.common.MapManager;
 import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.daehoshin.com.locationsharechat.domain.room.Msg;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
+import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,12 +19,18 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.List;
 
 import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
 
-public class RoomActivity extends AppCompatActivity {
+public class RoomActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    private GoogleMap mMap;
     RecyclerView chatList;
     EditText edit_msg;
 //    FirebaseDatabase database;
@@ -82,9 +90,7 @@ public class RoomActivity extends AppCompatActivity {
 
                             }
                         });
-
-
-
+                        initMap();
                     }
                 });
             }
@@ -128,5 +134,20 @@ public class RoomActivity extends AppCompatActivity {
         adapter = new ChatAdapter(currentUser.getUid());
         chatList.setAdapter(adapter);
         chatList.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void initMap(){
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.roomMap);
+        mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        MapManager mapManager = new MapManager(this);
+        LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
+        mapManager.moveCameraLocationZoom(mMap,latLng,12);
+        mMap.addMarker(MarkerUtil.createMarkerOptions(currentRoom));
     }
 }

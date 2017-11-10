@@ -78,6 +78,12 @@
                   <data android:host="szyx6.app.goo.gl" android:scheme="https"/>
             </intent-filter>-->
         </activity>
+        <service
+            android:name=".service.LocationService"
+            android:enabled="true"
+            android:exported="true">
+
+        </service>
     </application>
 
 </manifest>
