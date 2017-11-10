@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#673AB7</item>
+        <item name="colorPrimaryDark">#512DA8</item>
+        <item name="colorAccent">#4686C6</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#4686C6</item>
+        <item name="android:divider">#BDBDBD</item>
+        <item name="android:navigationBarColor">#FFC107</item>
+        <item name="android:colorControlHighlight">#512DA8</item>
+
+    </style>
+
+
+
+</resources>
