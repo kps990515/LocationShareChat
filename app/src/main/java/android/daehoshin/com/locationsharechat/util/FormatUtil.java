@@ -2,6 +2,7 @@ package android.daehoshin.com.locationsharechat.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
@@ -14,6 +15,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Kyung on 2017-11-08.
@@ -95,5 +98,21 @@ public class FormatUtil {
         DateFormat df = new SimpleDateFormat(format);
         String str_time = df.format(time);
         return str_time;
+    }
+
+    /**
+     * 현재 시간 및 분을 Map<조건,int>형으로 반환
+     * @return
+     */
+    public static Map currentHourMin(){
+        Map<String, Integer> result = new HashMap<>();
+        long now = System.currentTimeMillis();
+        SimpleDateFormat sdfH =new SimpleDateFormat("HH");
+        SimpleDateFormat sdfM =new SimpleDateFormat("mm");
+        int hour = Integer.parseInt(sdfH.format(now));
+        int min = Integer.parseInt(sdfM.format(now));
+        result.put(Consts.CURRENT_HOUR, hour);
+        result.put(Consts.CURRENT_MIN, min);
+        return result;
     }
 }

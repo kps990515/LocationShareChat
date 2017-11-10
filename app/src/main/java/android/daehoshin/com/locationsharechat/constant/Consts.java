@@ -33,4 +33,8 @@ public class Consts {
     public static final String Thread_STOP = "thread_stop";
     public static final int LOCATION_UPDATE_START = 700;
     public static final int LOCATION_UPDATE_STOP = 701;
+
+    // 현재 시간 및 분
+    public static final String CURRENT_HOUR = "current_hour";
+    public static final String CURRENT_MIN = "current_min";
 }

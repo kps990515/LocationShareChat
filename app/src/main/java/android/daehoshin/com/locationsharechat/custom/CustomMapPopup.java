@@ -3,12 +3,14 @@ package android.daehoshin.com.locationsharechat.custom;
 import android.content.Context;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
+import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.util.FormatUtil;
 import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Kyung on 2017-11-09.
@@ -96,13 +101,29 @@ public class CustomMapPopup extends FrameLayout {
      * 스피너 세팅
      */
     private void setSpinnerHour(){
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),R.array.hour,android.R.layout.simple_list_item_1);
+        int start = (int)FormatUtil.currentHourMin().get(Consts.CURRENT_HOUR);
+        int size = 23 - start-1;
+        start = start+2;
+
+        String[] data;
+        if(size>0){
+            data = new String[size];
+            for(int i=start ; i<=23 ; i++) {
+                if (i < 10) data[i-start] = "0";
+                else data[i-start] = "";
+                data[i-start] += i;
+            }
+        } else {
+                data = new String[1];
+                data[0] = "-1";
+        }
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_expandable_list_item_1,data);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHour.setAdapter(adapter);
         spinnerHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                hour = (String) adapter.getItem(position);
+                hour = adapter.getItem(position);
             }
 
             @Override
@@ -155,10 +176,13 @@ public class CustomMapPopup extends FrameLayout {
                 title =editTitle.getText().toString();
                 if("".equals(title) || title == null){
                     Toast.makeText(getContext(), "방 제목을 입력해주세요", Toast.LENGTH_SHORT).show();
+                } else if("-1".equals(hour)){
+                    Toast.makeText(getContext(), "만들 수 있는 시간이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     setTime(hour,minute,endString);
                     makeThisRoom();
                     delteThis.deletePopUp(room, popUpMarker);
+                    Toast.makeText(getContext(), "모임이 생성되었습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
