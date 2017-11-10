@@ -81,7 +81,7 @@ public class FormatUtil {
 
 
     /**
-     * System.currentTimeMillis() 을 long형으로 받아서 23:15:12형식으로 변환
+     * System.currentTimeMillis() 을 long형으로 받아서 23:15형식으로 변환
      * @param time
      * @return
      */

@@ -1,5 +1,6 @@
 package android.daehoshin.com.locationsharechat.room;
 
+import android.content.Intent;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
@@ -10,7 +11,6 @@ import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -63,8 +63,15 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         loadCurrentUser();
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                Intent intent = new Intent(RoomActivity.this, DetailActivity.class);
+                intent.putExtra(ROOM_ID, roomid);
+                startActivity(intent);
+            }
+        });
     }
 
     private void loadCurrentUser(){
@@ -162,6 +169,8 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         getMenuInflater().inflate(R.menu.chat_menu,menu);
         return true;
     }
+
+
 
 
 

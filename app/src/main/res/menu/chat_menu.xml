@@ -7,6 +7,10 @@
         app:showAsAction="always" />
 
         <item
+            android:id="@+id/menu_member"
+            android:title="멤버보기"
+            app:showAsAction="never" />
+        <item
             android:id="@+id/menu_setting"
             android:title="방 설정"
             app:showAsAction="never" />
