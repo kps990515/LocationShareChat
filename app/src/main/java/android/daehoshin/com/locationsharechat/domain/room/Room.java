@@ -18,6 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.daehoshin.com.locationsharechat.util.FormatUtil.changeTimeFormatLongToString;
+
 /**
  * Created by daeho on 2017. 11. 8..
  */
@@ -97,7 +99,13 @@ public class Room {
     public View getInfoView(Context context){
         View view = LayoutInflater.from(context).inflate(R.layout.marker_room_info, null, false);
         ((TextView)view.findViewById(R.id.tvTitle)).setText(title);
-        ((TextView)view.findViewById(R.id.tvTime)).setText(time+"");
+
+        String t = changeTimeFormatLongToString(time, "yyyy-MM-dd HH:mm");
+        t += " " + changeTimeFormatLongToString(System.currentTimeMillis(), "yyyy-MM-dd HH:mm");
+        t+=" " + changeTimeFormatLongToString(time - System.currentTimeMillis(), "yyyy-MM-dd HH:mm");
+
+        ((TextView)view.findViewById(R.id.tvTime)).setText(t);
+        //((TextView)view.findViewById(R.id.tvTime)).setText(changeTimeFormatLongToString(time - System.currentTimeMillis(), "H시간 m분전"));
 
         return view;
     }

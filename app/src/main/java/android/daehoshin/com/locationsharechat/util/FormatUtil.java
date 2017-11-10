@@ -90,4 +90,10 @@ public class FormatUtil {
         String str_time = df.format(time);
         return str_time;
     }
+
+    public static String changeTimeFormatLongToString(long time, String format){
+        DateFormat df = new SimpleDateFormat(format);
+        String str_time = df.format(time);
+        return str_time;
+    }
 }
