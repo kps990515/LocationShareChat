@@ -62,7 +62,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
         progress.setVisibility(View.VISIBLE);
 
         setPopUpStage();
-        mapManager = new MapManager(this);
+        mapManager = new MapManager(this,0);
         serviceIntent = new Intent(this, LocationService.class);
 
         checkDynamicLink();
@@ -289,5 +289,17 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
             stopService(serviceIntent);
             checkService = true;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapManager.conControlGoogleApiClient(this,true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapManager.conControlGoogleApiClient(this,false);
     }
 }

@@ -36,13 +36,13 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
     private double lastLat = 37.56;
     private double lastLng = 126.97;
 
-    public MapManager(FragmentActivity fragmentActivity){
-        setMapGoogleApiClient(fragmentActivity);
+    public MapManager(FragmentActivity fragmentActivity,int assign){
+        setMapGoogleApiClient(fragmentActivity, assign);
         setLocationRequest();
     }
     // map이 fragment인 경우의 생성자 (appcompatActivity 혹은 fragmentActivity 내에서만 가능)
     public MapManager(Fragment fragmentMap){
-        setMapGoogleApiClient((FragmentActivity) fragmentMap.getActivity());
+        conControlGoogleApiClient((FragmentActivity) fragmentMap.getActivity(),true);
         setLocationRequest();
     }
 
@@ -50,25 +50,28 @@ public class MapManager implements GoogleApiClient.ConnectionCallbacks
      * GoogleApiClient 초기화 메소드 및 연결관련 메소드 설정
      */
     // GoogleApiClient를 초기화 (Map과 관련된 것)
-    private void setMapGoogleApiClient(FragmentActivity fragmentActivity){
+    private void setMapGoogleApiClient(FragmentActivity fragmentActivity, int assign){
         // 사용하기 위해서 google-playservice gradle에 추가해야함
-        mapGoogleApiClient = new GoogleApiClient.Builder(fragmentActivity)
-                .enableAutoManage(fragmentActivity,this)
-                .addConnectionCallbacks(this)
-                .addApi(LocationServices.API) // 현재 위치(좌표) 가져오기 등 기능
-                .addApi(Places.GEO_DATA_API) // 자동완성, palce 상세정보 검색 등 기능
-                .addApi(Places.PLACE_DETECTION_API) // 가장 최근 android device가 있었던 place(장소?_건물)의 정보를 얻음
-                .build();
-
-        conControlGoogleApiClient(true);
+        if(mapGoogleApiClient == null) {
+            mapGoogleApiClient = new GoogleApiClient.Builder(fragmentActivity)
+                    .enableAutoManage(fragmentActivity, assign, this)
+                    .addConnectionCallbacks(this)
+                    .addApi(LocationServices.API) // 현재 위치(좌표) 가져오기 등 기능
+                    .addApi(Places.GEO_DATA_API) // 자동완성, palce 상세정보 검색 등 기능
+                    .addApi(Places.PLACE_DETECTION_API) // 가장 최근 android device가 있었던 place(장소?_건물)의 정보를 얻음
+                    .build();
+        }
     }
 
     // GoogleApiClient에 대한 연결 및 해제 요청
-    public void conControlGoogleApiClient(boolean connect){
-        if(connect)
+    public void conControlGoogleApiClient(FragmentActivity fragmentActivity, boolean connect){
+        if(connect) {
             mapGoogleApiClient.connect();
-        else
+        }
+        else {
+            mapGoogleApiClient.stopAutoManage(fragmentActivity);
             mapGoogleApiClient.disconnect();
+        }
     }
 
     // GoogleApiClient에 연결 실패시 진행

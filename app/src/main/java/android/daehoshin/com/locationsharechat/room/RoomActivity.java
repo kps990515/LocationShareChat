@@ -10,6 +10,7 @@ import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,6 +49,8 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mapManager = new MapManager(this,1);
+
         initMap();
     }
 
@@ -60,7 +63,6 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mapManager = new MapManager(this);
 
         loadCurrentUser();
     }
@@ -81,7 +83,6 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                         currentRoom = room;
                         LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
                         mapManager.moveCameraLocationZoom(mMap, latLng, 12);
-
                         mMap.addMarker(currentRoom.getMarker());
 
                         initView();

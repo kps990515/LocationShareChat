@@ -64,7 +64,7 @@ public class CustomMapPopup extends FrameLayout {
         this.lat = lat+"";
         this.lng = lng+"";
         this.mMap = googleMap;
-        popUpMarker = mMap.addMarker(MarkerUtil.createMarkerOptions(R.drawable.userinfoicon, this.lat, this.lng));
+        popUpMarker = mMap.addMarker(MarkerUtil.createMarkerOptions(R.drawable.temp_room_icon, this.lat, this.lng));
 
         // 팝업 나타나는 위치 지정
         this.setPivotX(50);
