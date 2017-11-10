@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -60,6 +61,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Uri deepLink = null;
                         if (pendingDynamicLinkData != null) {
                             deepLink = pendingDynamicLinkData.getLink();
+                            Toast.makeText(RoomActivity.this, deepLink.getHost(), Toast.LENGTH_LONG).show();
                         }
 
                         // Handle the deep link. For example, open the linked
@@ -88,7 +90,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         roomid = getIntent().getStringExtra(ROOM_ID);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        getDelegate().setSupportActionBar(toolbar);
 
         mapManager = new MapManager(this,1);
 
@@ -182,10 +184,6 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                 chatList.scrollToPosition(adapter.getItemCount() - 1);
             }
         });
-    }
-
-    public void setSupportActionBar(Toolbar toolbar) {
-        getDelegate().setSupportActionBar(toolbar);
     }
 
     public void type(View view){

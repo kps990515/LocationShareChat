@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.daehoshin.com.locationsharechat.BuildConfig;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
+import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
+import android.daehoshin.com.locationsharechat.util.ResourceUtil;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -20,11 +20,16 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,8 +37,10 @@ import java.io.IOException;
 import static android.daehoshin.com.locationsharechat.constant.Consts.CAMERA_PERMISSION_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.CAMERA_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.GALLERY_REQ;
+import static android.daehoshin.com.locationsharechat.constant.Consts.IS_SIGNIN;
 
 public class SigninActivity extends AppCompatActivity {
+    private boolean isSignin = true;
 
     private ImageView ivProfile;
     private ImageButton btnAddProfile;
@@ -42,22 +49,55 @@ public class SigninActivity extends AppCompatActivity {
     private Uri profileUri = null;
 
     private ConstraintLayout popupChoice;
+    private FrameLayout progress;
 
     // 저장된 파일의 경로를 가지는 컨텐츠 Uri
     private Uri fileUri = null;
+
+    private UserInfo currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
+        isSignin = getIntent().getBooleanExtra(IS_SIGNIN, true);
+
         init();
+
+        if(!isSignin){
+            progress.setVisibility(View.VISIBLE);
+
+            AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
+                @Override
+                public void signinAnonymously(boolean isSuccessful) {
+
+                }
+
+                @Override
+                public void getCurrentUser(UserInfo userInfo) {
+                    currentUser = userInfo;
+                    etNickname.setText(currentUser.getName());
+                    currentUser.getProfile(new StorageManager.IDownloadCallback() {
+                        @Override
+                        public void downloaded(String id, Uri uri) {
+                            profileUri = uri;
+                            Glide.with(SigninActivity.this).load(profileUri).apply(RequestOptions.circleCropTransform()).into(ivProfile);
+
+                            progress.setVisibility(View.GONE);
+                        }
+                    });
+                }
+            });
+        }
     }
 
     private void init(){
         ivProfile = findViewById(R.id.ivProfile);
-        ivProfile.setBackground(new ShapeDrawable(new OvalShape()));
-        ivProfile.setClipToOutline(true);
+//        ivProfile.setBackground(new ShapeDrawable(new OvalShape()));
+//        ivProfile.setClipToOutline(true);
+
+        if(!isSignin) ((Button)findViewById(R.id.btnSignin)).setText(ResourceUtil.getString(this, R.string.btn_apply));
 
         btnAddProfile = findViewById(R.id.btnAddProfile);
         etNickname = findViewById(R.id.etNickname);
@@ -78,6 +118,8 @@ public class SigninActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        progress = findViewById(R.id.progress);
     }
 
     @Override
@@ -91,29 +133,57 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     public void signin(View v){
-        if("".equals(etNickname.getText().toString())) {
-            tvNicknameMsg.setVisibility(View.VISIBLE);
-            return;
+        if(isSignin) {
+            if ("".equals(etNickname.getText().toString())) {
+                tvNicknameMsg.setVisibility(View.VISIBLE);
+                return;
+            }
+
+            progress.setVisibility(View.VISIBLE);
+
+            AuthManager.getInstance().signInAnonymously(etNickname.getText().toString(), profileUri, new AuthManager.IAuthCallback() {
+                @Override
+                public void signinAnonymously(boolean isSuccessful) {
+                    if (isSuccessful) {
+                        setResult(RESULT_OK);
+                        progress.setVisibility(View.GONE);
+                        Toast.makeText(SigninActivity.this, ResourceUtil.getString(SigninActivity.this, R.string.success_signin), Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        progress.setVisibility(View.GONE);
+                        Toast.makeText(SigninActivity.this, "Signin failed", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void getCurrentUser(UserInfo userInfo) {
+
+                }
+            });
         }
-
-        AuthManager.getInstance().signInAnonymously(etNickname.getText().toString(), profileUri, new AuthManager.IAuthCallback() {
-            @Override
-            public void signinAnonymously(boolean isSuccessful) {
-                if(isSuccessful) {
-
-                    setResult(RESULT_OK);
-                    finish();
-                }
-                else{
-                    Toast.makeText(SigninActivity.this, "Signin failed", Toast.LENGTH_LONG).show();
-                }
+        else{
+            if ("".equals(etNickname.getText().toString())) {
+                tvNicknameMsg.setVisibility(View.VISIBLE);
+                return;
             }
 
-            @Override
-            public void getCurrentUser(UserInfo userInfo) {
+            progress.setVisibility(View.VISIBLE);
 
+            currentUser.setName(etNickname.getText().toString());
+            currentUser.save();
+
+            if(profileUri != null) {
+                StorageManager.uploadProfile(currentUser.getUid(), profileUri, new StorageManager.IUploadCallback() {
+                    @Override
+                    public void uploaded(boolean isSuccess, Uri uri) {
+
+                    }
+                });
             }
-        });
+            progress.setVisibility(View.GONE);
+            Toast.makeText(this, ResourceUtil.getString(this, R.string.success_apply), Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     public void onCamera(View v){
@@ -230,11 +300,11 @@ public class SigninActivity extends AppCompatActivity {
                     // 버전체크
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                         profileUri = fileUri;
-                        ivProfile.setImageURI(profileUri);
+                        Glide.with(SigninActivity.this).load(profileUri).apply(RequestOptions.circleCropTransform()).into(ivProfile);
                     }
                     else {
                         profileUri = data.getData();
-                        ivProfile.setImageURI(profileUri);
+                        Glide.with(SigninActivity.this).load(profileUri).apply(RequestOptions.circleCropTransform()).into(ivProfile);
                     }
                 }
                 break;
@@ -242,7 +312,7 @@ public class SigninActivity extends AppCompatActivity {
                 // 갤러리 액티비티 종료시 호출 - 정상종료 된 경우만 이미지설정
                 if(resultCode == RESULT_OK) {
                     profileUri = data.getData();
-                    ivProfile.setImageURI(profileUri);
+                    Glide.with(SigninActivity.this).load(profileUri).apply(RequestOptions.circleCropTransform()).into(ivProfile);
                 }
                 break;
         }

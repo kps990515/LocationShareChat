@@ -9,6 +9,7 @@ public class Consts {
 
     public static final String ROOM_ID = "room_id";
     public static final String CURRENT_USER_UID = "current_user_uid";
+    public static final String IS_SIGNIN = "is_signin";
 
     public static final String TB_USER = "user";
     public static final String TB_MEMBER = "member";

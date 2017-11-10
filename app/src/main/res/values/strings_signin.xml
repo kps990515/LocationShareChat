@@ -1,4 +1,8 @@
 <resources>
     <string name="nickname">Input your nickname</string>
     <string name="nickname_check">Nickname is empty!</string>
+    <string name="btn_sign_in">Sign in</string>
+    <string name="btn_apply">Apply</string>
+    <string name="success_apply">Success apply</string>
+    <string name="success_signin">Success signin</string>
 </resources>

@@ -15,11 +15,14 @@ import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -36,11 +39,12 @@ import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
 import static android.daehoshin.com.locationsharechat.constant.Consts.DYNAMICLINK_BASE_URL;
+import static android.daehoshin.com.locationsharechat.constant.Consts.IS_SIGNIN;
 import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.PERMISSION_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
 
-public class RoomListActivity extends FragmentActivity implements OnMapReadyCallback, CustomMapPopup.DelteThis {
+public class RoomListActivity extends AppCompatActivity implements OnMapReadyCallback, CustomMapPopup.DelteThis {
 
     public static final String[] Permission = new String[] {
               Manifest.permission.ACCESS_FINE_LOCATION
@@ -49,7 +53,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
     private GoogleMap mMap;
     private PermissionUtil pUtil;
 
-    private ProgressBar progress;
+    private FrameLayout progress;
 
     private FrameLayout popUpStage;
     CustomMapPopup customMapPopup;
@@ -60,16 +64,18 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        checkDynamicLink();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
+
         progress = findViewById(R.id.progress);
-        progress.setVisibility(View.VISIBLE);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        getDelegate().setSupportActionBar(toolbar);
 
         setPopUpStage();
         mapManager = new MapManager(this,0);
         serviceIntent = new Intent(this, LocationService.class);
-
-        checkDynamicLink();
 
         checkPermission();
     }
@@ -84,6 +90,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
                         Uri deepLink = null;
                         if (pendingDynamicLinkData != null) {
                             deepLink = pendingDynamicLinkData.getLink();
+                            Toast.makeText(RoomListActivity.this, deepLink.getHost(), Toast.LENGTH_LONG).show();
                         }
 
 
@@ -250,6 +257,7 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
         marker.showInfoWindow();
     }
 
+
     @Override
     public void deletePopUp(Room room, Marker PopUpMarker) {
         popUpStage.removeView(customMapPopup);
@@ -263,7 +271,29 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
         popUpStage.setVisibility(View.GONE);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.roomlist_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int menu = item.getItemId();
+        switch(menu){
+            case R.id.menu_profile:
+                Intent intent = new Intent(this, SigninActivity.class);
+                intent.putExtra(IS_SIGNIN, false);
+                startActivity(intent);
+                break;
+            case R.id.menu_signout:
+                AuthManager.getInstance().signout();
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
 
@@ -310,10 +340,6 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
 
 
 
-    }
-    public void signout(View view){
-        AuthManager.getInstance().signout();
-        finish();
     }
 
     boolean checkService = false;
