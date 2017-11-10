@@ -78,4 +78,16 @@ public class FormatUtil {
         Log.e("result",result);
         return result;
     }
+
+
+    /**
+     * System.currentTimeMillis() 을 long형으로 받아서 23:15:12형식으로 변환
+     * @param time
+     * @return
+     */
+    public static String changeTimeFormatLongToString(long time){
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        String str_time = df.format(time);
+        return str_time;
+    }
 }

@@ -2,6 +2,7 @@ package android.daehoshin.com.locationsharechat.room;
 
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.domain.room.Msg;
+import android.daehoshin.com.locationsharechat.util.FormatUtil;
 import android.net.Uri;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
@@ -31,8 +32,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
         this.currentUserUid = currentUserUid;
     }
 
-    public void dataRefresh(List<Msg> data){
-        this.data = data;
+    public void addMsg(Msg msg){
+        this.data.add(msg);
         notifyDataSetChanged();
     }
 
@@ -52,12 +53,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
         if(msg.getUid().equals(currentUserUid)){
             holder.leftLayout.setVisibility(View.GONE);
             holder.txt_rmsg.setText(msg.getMessage());
-            holder.txt_rtime.setText(msg.getTime()+"");
+            holder.txt_rtime.setText(FormatUtil.changeTimeFormatLongToString(msg.getTime()));
         }else{
             holder.rightLayout.setVisibility(View.GONE);
             holder.txt_msg.setText(msg.getMessage());
             holder.txt_name.setText(msg.getName());
-            holder.txt_time.setText(msg.getTime()+"");
+            holder.txt_time.setText(FormatUtil.changeTimeFormatLongToString(msg.getTime()));
         }
     }
 

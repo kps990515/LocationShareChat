@@ -2,7 +2,6 @@ package android.daehoshin.com.locationsharechat.room;
 
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
-import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.daehoshin.com.locationsharechat.domain.room.Msg;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
@@ -14,18 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
@@ -34,8 +25,8 @@ public class RoomActivity extends AppCompatActivity {
 
     RecyclerView chatList;
     EditText edit_msg;
-    FirebaseDatabase database;
-    DatabaseReference msgRef;
+//    FirebaseDatabase database;
+//    DatabaseReference msgRef;
     ChatAdapter adapter;
 
     private UserInfo currentUser;
@@ -46,7 +37,7 @@ public class RoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
-        database = FirebaseDatabase.getInstance();
+//        database = FirebaseDatabase.getInstance();
 
         roomid = getIntent().getStringExtra(ROOM_ID);
 
@@ -66,8 +57,15 @@ public class RoomActivity extends AppCompatActivity {
                     @Override
                     public void getRoom(Room room) {
                         currentRoom = room;
-                        msgRef = DatabaseManager.getMsgRef(roomid);
+
+                        //msgRef = DatabaseManager.getMsgRef(roomid);
                         initView();
+                        currentRoom.getMsg(new Room.IRoomMsgCallback() {
+                            @Override
+                            public void getMsg(Msg msg) {
+                                adapter.addMsg(msg);
+                            }
+                        });
 
                         currentRoom.getMember(new Room.IRoomMemberCallback() {
                             @Override
@@ -103,28 +101,16 @@ public class RoomActivity extends AppCompatActivity {
     public void send(View view){
         String text = edit_msg.getText().toString();
         if(text != null && !"".equals(text)) {
-            final Msg msg = new Msg();
+            Msg msg = new Msg();
             msg.setId(roomid);
-            msgRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.hasChildren()){
-                        msg.setIdx(dataSnapshot.getChildrenCount()+1);
-                    }else{
-                        msg.setIdx(1);
-                    }
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
+            msg.setIdx(adapter.getItemCount());
             msg.setUid(currentUser.getUid());
             msg.setName(currentUser.getName());
             msg.setTime(System.currentTimeMillis());
             msg.setType("text");
             msg.setMessage(text);
-            msgRef.child(msg.getIdx()+"").setValue(msg);
+            msg.save();
+
             edit_msg.setText("");
         }
     }
@@ -141,22 +127,5 @@ public class RoomActivity extends AppCompatActivity {
         adapter = new ChatAdapter(currentUser.getUid());
         chatList.setAdapter(adapter);
         chatList.setLayoutManager(new LinearLayoutManager(this));
-        msgRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Msg> data = new ArrayList<>();
-                for(DataSnapshot item : dataSnapshot.getChildren()){
-                    Log.d("msg",item.getKey());
-                    Msg msg = item.getValue(Msg.class);
-                    data.add(msg);
-                }
-                adapter.dataRefresh(data);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 }
