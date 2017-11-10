@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,7 +65,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
             holder.txt_msg.setText(msg.getMessage());
             holder.txt_name.setText(msg.getName());
             holder.txt_time.setText(FormatUtil.changeTimeFormatLongToString(msg.getTime()));
-            holder.image_profile.setImageURI(profiles.get(msg.getUid()));
+            Uri uri = profiles.get(msg.getUid());
+            if(uri != null) Glide.with(holder.itemView.getContext()).load(uri).apply(RequestOptions.circleCropTransform()).into(holder.image_profile);
         }
     }
 

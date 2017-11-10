@@ -82,7 +82,9 @@ public class Room implements Serializable{
                 }
 
                 for(Marker marker : markers){
-                    marker.setPosition(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
+                    if (lat != null && lng != null) {
+                        marker.setPosition(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
+                    }
                 }
             }
 

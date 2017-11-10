@@ -49,8 +49,10 @@ public class UserInfo extends BaseUser {
                     lng = m.getLng();
                 }
 
-                for(Marker marker : markers){
-                    marker.setPosition(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
+                for(Marker marker : markers) {
+                    if (lat != null && lng != null) {
+                        marker.setPosition(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
+                    }
                 }
             }
 
