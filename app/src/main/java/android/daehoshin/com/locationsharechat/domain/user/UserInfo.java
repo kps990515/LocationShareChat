@@ -64,6 +64,8 @@ public class UserInfo extends BaseUser {
     public void updateLocation(double lat, double lng){
         this.lat = lat + "";
         this.lng = lng + "";
+        save();
+
         for(String roomid : getRoomIds()){
             Member member = new Member(this, roomid);
             DatabaseManager.getMemberRef(roomid, uid).setValue(member);

@@ -5,6 +5,8 @@ package android.daehoshin.com.locationsharechat.constant;
  */
 
 public class Consts {
+    public static final String DYNAMICLINK_BASE_URL = "szyx6.app.goo.gl";
+
     public static final String ROOM_ID = "room_id";
     public static final String CURRENT_USER_UID = "current_user_uid";
 
@@ -21,8 +23,8 @@ public class Consts {
     public static final int PERMISSION_REQ = 901;
 
     // 업데이트 시간
-    public static final int LOCATION_INTERVAL_TIME = 100;
-    public static final int LOCATION_INTERVAL_METER = 1;
+    public static final int LOCATION_INTERVAL_TIME = 60000;
+    public static final int LOCATION_INTERVAL_METER = 100;
 
     // 줌 크기
     public static final int Zoom_SIZE = 13;
