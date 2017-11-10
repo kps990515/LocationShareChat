@@ -96,7 +96,17 @@ public class AuthManager {
     }
 
     public void signout(){
-        DatabaseManager.getUserRef(currentUser.getUid()).removeValue();
+        getCurrentUser(new IAuthCallback() {
+            @Override
+            public void signinAnonymously(boolean isSuccessful) {
+
+            }
+
+            @Override
+            public void getCurrentUser(UserInfo userInfo) {
+                DatabaseManager.delete(userInfo);
+            }
+        });
         auth.signOut();
     }
 

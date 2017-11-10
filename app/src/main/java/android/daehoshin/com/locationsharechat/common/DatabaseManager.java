@@ -3,8 +3,11 @@ package android.daehoshin.com.locationsharechat.common;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static android.daehoshin.com.locationsharechat.constant.Consts.TB_MEMBER;
 import static android.daehoshin.com.locationsharechat.constant.Consts.TB_MSG;
@@ -63,8 +66,30 @@ public class DatabaseManager {
     public static void delete(Room room){
         getRoomRef(room.getId()).removeValue();
         getMemberRef(room.getId()).removeValue();
+        getMsgRef(room.getId()).removeValue();
     }
+    public static void delete(UserInfo userInfo){
+        getUserRef(userInfo.getUid()).removeValue();
+        for(final String roomid : userInfo.getRoomIds()){
+            getMemberRef(roomid, userInfo.getUid()).removeValue();
+            final String temp = roomid;
+            getMemberRef(temp).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.getChildrenCount() == 0){
+                        getRoomRef(temp).removeValue();
+                        getMemberRef(temp).removeValue();
+                        getMsgRef(temp).removeValue();
+                    }
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
 
 
     private FirebaseDatabase database;

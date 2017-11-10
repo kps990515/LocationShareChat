@@ -95,7 +95,6 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                         mMap.addMarker(currentRoom.getMarker());
 
                         initView();
-                        initMap();
                         loadMember();
                         setRealtimeMsgLitener();
                     }
