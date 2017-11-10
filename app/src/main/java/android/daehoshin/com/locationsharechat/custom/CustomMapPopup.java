@@ -125,8 +125,8 @@ public class CustomMapPopup extends FrameLayout {
         spinnerMin = view.findViewById(R.id.spinnerMin);
         spinnerEnd = view.findViewById(R.id.spinnerEnd);
         btnMakeRoom = view.findViewById(R.id.btnMakeRoom);
-        if(Consts.ROOM_CREATE.equals(type)) btnMakeRoom.setText("방 생성");
-        else btnMakeRoom.setText("방 수정");
+        if(Consts.ROOM_CREATE.equals(type)) btnMakeRoom.setText("모임 생성");
+        else btnMakeRoom.setText("모임 수정");
 
         addView(view);
     }

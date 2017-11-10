@@ -1,6 +1,7 @@
 package android.daehoshin.com.locationsharechat.room;
 
 import android.daehoshin.com.locationsharechat.R;
+import android.daehoshin.com.locationsharechat.RoomListActivity;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
 import android.daehoshin.com.locationsharechat.constant.Consts;
@@ -8,6 +9,7 @@ import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
+import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -68,6 +70,10 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
                 if(marker.getTag() instanceof Room){
                     Room room = (Room)marker.getTag();
                     return room.getInfoView(SettingActivity.this);
+                }
+                if(marker.getTag() instanceof UserInfo){
+                    UserInfo userInfo = (UserInfo)marker.getTag();
+                    return MarkerUtil.getInfoMemberView(SettingActivity.this,userInfo.name);
                 }
                 return null;
             }

@@ -11,6 +11,7 @@ import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.room.RoomActivity;
 import android.daehoshin.com.locationsharechat.service.LocationService;
 import android.daehoshin.com.locationsharechat.user.SigninActivity;
+import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -195,6 +196,10 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
                     Room room = (Room)marker.getTag();
                     return room.getInfoView(RoomListActivity.this);
                 }
+                if(marker.getTag() instanceof UserInfo){
+                    UserInfo userInfo = (UserInfo)marker.getTag();
+                    return MarkerUtil.getInfoMemberView(RoomListActivity.this,userInfo.name);
+                }
                 return null;
             }
 
@@ -266,7 +271,6 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
     private void addRoom(Room room){
         if(room == null) return;
         Marker marker = room.addMarker(mMap);
-        marker.showInfoWindow();
         builder.include(marker.getPosition());
     }
 
