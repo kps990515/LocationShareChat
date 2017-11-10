@@ -1,5 +1,6 @@
 package android.daehoshin.com.locationsharechat.common;
 
+import android.app.Activity;
 import android.content.Context;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.net.Uri;
@@ -101,7 +102,7 @@ public class AuthManager {
         });
     }
 
-    public void signout(){
+    public void signout(final Activity activity){
         getCurrentUser(new IAuthCallback() {
             @Override
             public void signinAnonymously(boolean isSuccessful) {
@@ -110,10 +111,11 @@ public class AuthManager {
 
             @Override
             public void getCurrentUser(UserInfo userInfo) {
-                DatabaseManager.delete(userInfo);
+                auth.signOut();
+                DatabaseManager.delete(activity, userInfo);
             }
         });
-        auth.signOut();
+
     }
 
     /**

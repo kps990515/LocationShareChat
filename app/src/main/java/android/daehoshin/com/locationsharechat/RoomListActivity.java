@@ -311,7 +311,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
                 startActivity(intent);
                 break;
             case R.id.menu_signout:
-                AuthManager.getInstance().signout();
+                AuthManager.getInstance().signout(this);
                 finish();
                 break;
         }

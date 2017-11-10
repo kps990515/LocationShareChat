@@ -1,5 +1,6 @@
 package android.daehoshin.com.locationsharechat.common;
 
+import android.app.Activity;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 
@@ -89,7 +90,7 @@ public class DatabaseManager {
         getMemberRef(room.getId()).removeValue();
         getMsgRef(room.getId()).removeValue();
     }
-    public static void delete(UserInfo userInfo){
+    public static void delete(final Activity activity, UserInfo userInfo){
         getUserRef(userInfo.getUid()).removeValue();
         for(final String roomid : userInfo.getRoomIds()){
             getMemberRef(roomid, userInfo.getUid()).removeValue();
@@ -102,6 +103,7 @@ public class DatabaseManager {
                         getMemberRef(temp).removeValue();
                         getMsgRef(temp).removeValue();
                     }
+                    activity.finish();
                 }
 
                 @Override
