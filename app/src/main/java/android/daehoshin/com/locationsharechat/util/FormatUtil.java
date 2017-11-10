@@ -86,7 +86,7 @@ public class FormatUtil {
      * @return
      */
     public static String changeTimeFormatLongToString(long time){
-        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("HH:mm");
         String str_time = df.format(time);
         return str_time;
     }

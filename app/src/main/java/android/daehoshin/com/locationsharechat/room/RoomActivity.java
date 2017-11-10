@@ -3,6 +3,7 @@ package android.daehoshin.com.locationsharechat.room;
 import android.content.Intent;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
+import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
 import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.daehoshin.com.locationsharechat.domain.room.Msg;
@@ -16,6 +17,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -170,9 +172,23 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int menu = item.getItemId();
+        switch(menu){
+            case R.id.menu_getout:
+                DatabaseManager.leaveRoom(currentUser,roomid);
+                finish();
+                break;
+            case R.id.menu_invite:
+                break;
+            case R.id.menu_member:
 
+                break;
+            case R.id.menu_setting:
+                break;
+        }
 
-
-
-
+        return super.onOptionsItemSelected(item);
+    }
 }
