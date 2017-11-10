@@ -38,6 +38,7 @@ import java.util.List;
 import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
 
 public class RoomActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private SupportMapFragment mapFragment;
     private GoogleMap mMap;
     private MapManager mapManager;
     private RecyclerView chatList;
@@ -100,7 +101,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void initMap(){
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.roomMap);
         mapFragment.getMapAsync(this);
     }
@@ -146,9 +147,23 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
+
+
     private void initView(){
         chatList = findViewById(R.id.chatList);
         edit_msg = findViewById(R.id.edit_msg);
+
+//        KeyboardVisibilityEvent.setEventListener(this, new KeyboardVisibilityEventListener() {
+//                    @Override
+//                    public void onVisibilityChanged(boolean isOpen) {
+//                        View v = mapFragment.getView();
+//                        FrameLayout.LayoutParams p = null;
+//                        if(isOpen) p = new FrameLayout.LayoutParams(v.getWidth(), v.getHeight() / 2);
+//                        else p = new FrameLayout.LayoutParams(v.getWidth(), v.getHeight() * 2);
+//                        v.setLayoutParams(p);
+//                        v.requestLayout();
+//                    }
+//                });
         adapter = new ChatAdapter(currentUser.getUid());
         chatList.setAdapter(adapter);
         chatList.setLayoutManager(new LinearLayoutManager(this));
@@ -205,6 +220,12 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             edit_msg.setText("");
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(popUpLayout.getVisibility() == View.VISIBLE) popUpLayout.setVisibility(View.GONE);
+        else super.onBackPressed();
     }
 
     @Override

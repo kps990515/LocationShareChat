@@ -4,7 +4,6 @@ import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,8 +50,8 @@ public class Member extends BaseUser {
                     lng = m.getLng();
                 }
 
-                for(Marker marker : markers){
-                    marker.setPosition(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
+                for(MarkerOptions marker : markers){
+                    marker.position(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
                 }
             }
 
@@ -64,19 +63,12 @@ public class Member extends BaseUser {
     }
 
     @Exclude
+    private List<MarkerOptions> markers = new ArrayList<>();
+    @Exclude
     public MarkerOptions getMarker(){
-        return MarkerUtil.createMarkerOptions(this);
-    }
-
-    @Exclude
-    private List<Marker> markers = new ArrayList<>();
-    @Exclude
-    public void addUpdateMarker(Marker marker){
+        MarkerOptions marker = MarkerUtil.createMarkerOptions(this);
         markers.add(marker);
-    }
-    @Exclude
-    public void removeUpdateMarker(Marker marker){
-        markers.remove(marker);
+        return marker;
     }
 
     public String getId() {

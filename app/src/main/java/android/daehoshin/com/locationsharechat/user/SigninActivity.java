@@ -141,7 +141,7 @@ public class SigninActivity extends AppCompatActivity {
 
             progress.setVisibility(View.VISIBLE);
 
-            AuthManager.getInstance().signInAnonymously(etNickname.getText().toString(), profileUri, new AuthManager.IAuthCallback() {
+            AuthManager.getInstance().signInAnonymously(this, etNickname.getText().toString(), profileUri, new AuthManager.IAuthCallback() {
                 @Override
                 public void signinAnonymously(boolean isSuccessful) {
                     if (isSuccessful) {
@@ -173,7 +173,7 @@ public class SigninActivity extends AppCompatActivity {
             currentUser.save();
 
             if(profileUri != null) {
-                StorageManager.uploadProfile(currentUser.getUid(), profileUri, new StorageManager.IUploadCallback() {
+                StorageManager.uploadProfile(this, currentUser.getUid(), profileUri, new StorageManager.IUploadCallback() {
                     @Override
                     public void uploaded(boolean isSuccess, Uri uri) {
 

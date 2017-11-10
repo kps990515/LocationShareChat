@@ -74,7 +74,6 @@
                 android:resource="@xml/file_path" />
         </provider>
 
-        <activity android:name=".user.ProfileActivity" />
         <activity
             android:name=".room.RoomActivity"
             android:windowSoftInputMode="adjustResize">

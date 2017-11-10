@@ -97,6 +97,7 @@ public class CustomLocationManager implements LocationListener {
 
         if(currentUser != null){
             currentUser.updateLocation(lastLat, lastLng);
+
         }
     }
 

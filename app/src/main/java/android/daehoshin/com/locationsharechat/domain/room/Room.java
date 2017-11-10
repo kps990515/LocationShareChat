@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +35,7 @@ public class Room implements Serializable{
     public String msg_count;
 
     public Room(){
-
+        realtimeRefresh();
     }
 
     @Exclude
@@ -65,6 +66,30 @@ public class Room implements Serializable{
         });
     }
 
+    @Exclude
+    void realtimeRefresh() {
+        DatabaseManager.getRoomRef(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Member m = dataSnapshot.getValue(Member.class);
+                if(m != null) {
+                    lat = m.getLat();
+                    lng = m.getLng();
+                }
+
+                for(MarkerOptions marker : markers){
+                    marker.position(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Exclude
     private List<Msg> msgs = new ArrayList<>();
     @Exclude
     public void getRealtimeMsg(final IRoomMsgCallback callback){
@@ -90,8 +115,12 @@ public class Room implements Serializable{
     }
 
     @Exclude
+    private List<MarkerOptions> markers = new ArrayList<>();
+    @Exclude
     public MarkerOptions getMarker(){
-        return MarkerUtil.createMarkerOptions(this);
+        MarkerOptions marker = MarkerUtil.createMarkerOptions(this);
+        markers.add(marker);
+        return marker;
     }
 
     @Exclude

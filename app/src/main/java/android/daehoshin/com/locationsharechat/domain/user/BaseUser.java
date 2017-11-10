@@ -1,5 +1,6 @@
 package android.daehoshin.com.locationsharechat.domain.user;
 
+import android.content.Context;
 import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.net.Uri;
 
@@ -31,8 +32,8 @@ abstract class BaseUser implements Serializable {
     abstract void realtimeRefresh();
 
     @Exclude
-    public void uploadProfile(Uri profileUri){
-        StorageManager.uploadProfile(uid, profileUri, new StorageManager.IUploadCallback() {
+    public void uploadProfile(Context context, Uri profileUri){
+        StorageManager.uploadProfile(context, uid, profileUri, new StorageManager.IUploadCallback() {
             @Override
             public void uploaded(boolean isSuccess, Uri uri) {
 

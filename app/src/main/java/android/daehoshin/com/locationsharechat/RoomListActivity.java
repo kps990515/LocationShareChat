@@ -138,7 +138,11 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
                     Intent intent = new Intent(RoomListActivity.this, SigninActivity.class);
                     startActivityForResult(intent, LOGIN_REQ);
                 }
-                else initMap();
+                else {
+                    currentUser = userInfo;
+
+                    initMap();
+                }
             }
         });
     }
@@ -150,7 +154,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         switch (requestCode){
             case LOGIN_REQ:
                 switch (resultCode){
-                    case RESULT_OK: initMap(); break;
+                    case RESULT_OK: checkSignin(); break;
                     case RESULT_CANCELED: finish(); break;
                 }
                 break;
@@ -161,8 +165,6 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        progress.setVisibility(View.GONE);
     }
 
     @Override
@@ -217,14 +219,10 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
             }
         });
 
-
+        addUser(currentUser);
         loadData();
 
-
-        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        progress.setVisibility(View.GONE);
     }
 
     private void loadData(){
@@ -257,6 +255,12 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         marker.showInfoWindow();
     }
 
+    private void addUser(UserInfo userInfo){
+        if(userInfo == null) return;
+        Marker marker = mMap.addMarker(userInfo.getMarker());
+        marker.setTag(userInfo);
+        marker.showInfoWindow();
+    }
 
     @Override
     public void deletePopUp(Room room, Marker PopUpMarker) {

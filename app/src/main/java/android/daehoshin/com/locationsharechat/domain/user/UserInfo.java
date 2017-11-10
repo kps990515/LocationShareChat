@@ -4,11 +4,15 @@ import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by daeho on 2017. 11. 8..
@@ -39,6 +43,10 @@ public class UserInfo extends BaseUser {
                     lat = m.getLat();
                     lng = m.getLng();
                 }
+
+                for(MarkerOptions marker : markers){
+                    marker.position(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
+                }
             }
 
             @Override
@@ -49,8 +57,12 @@ public class UserInfo extends BaseUser {
     }
 
     @Exclude
+    private List<MarkerOptions> markers = new ArrayList<>();
+    @Exclude
     public MarkerOptions getMarker(){
-        return MarkerUtil.createMarkerOptions(this);
+        MarkerOptions marker = MarkerUtil.createMarkerOptions(this);
+        markers.add(marker);
+        return marker;
     }
 
     @Exclude
