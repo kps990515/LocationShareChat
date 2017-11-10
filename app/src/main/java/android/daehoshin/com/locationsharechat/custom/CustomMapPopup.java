@@ -10,8 +10,6 @@ import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.util.FormatUtil;
 import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,9 +22,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Kyung on 2017-11-09.
@@ -295,7 +290,7 @@ public class CustomMapPopup extends FrameLayout {
 
                 @Override
                 public void getCurrentUser(UserInfo userInfo) {
-                    userInfo.addRoom(room.id);
+                    userInfo.addRoom(room);
                     userInfo.save();
 
                     // 맴버에 자신을 추가

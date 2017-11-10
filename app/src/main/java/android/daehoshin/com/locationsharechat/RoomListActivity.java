@@ -41,9 +41,6 @@ import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static android.daehoshin.com.locationsharechat.constant.Consts.DYNAMICLINK_BASE_URL;
 import static android.daehoshin.com.locationsharechat.constant.Consts.IS_SIGNIN;
 import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
@@ -232,10 +229,8 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         findViewById(R.id.appBarLayout).setVisibility(View.VISIBLE);
     }
 
-    List<Marker> markers = new ArrayList<>();
     LatLngBounds.Builder builder = new LatLngBounds.Builder();
     private void loadData(){
-        markers.clear();
         AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
             @Override
             public void signinAnonymously(boolean isSuccessful) {
@@ -246,7 +241,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
             public void getCurrentUser(UserInfo userInfo) {
                 currentUser = userInfo;
                 final String roomIds[] = currentUser.getRoomIds();
-                for(int i=0 ; i<roomIds.length ; i++){
+                for(int i = 0; i < roomIds.length; i++){
                     final int finalI = i;
                     currentUser.getRoom(roomIds[i], new UserInfo.IUserInfoCallback() {
                         @Override
@@ -269,8 +264,6 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         if(room == null) return;
         Marker marker = room.addMarker(mMap);
         marker.showInfoWindow();
-
-        markers.add(marker);
         builder.include(marker.getPosition());
     }
 

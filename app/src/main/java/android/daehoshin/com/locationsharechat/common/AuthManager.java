@@ -28,18 +28,15 @@ public class AuthManager {
     }
 
     private FirebaseAuth auth;
-    private FirebaseUser currentUser;
+    private FirebaseUser fUser;
+    private UserInfo currentUser;
     private AuthManager(){
         auth = FirebaseAuth.getInstance();
         setCurrentUser();
     }
 
     private void setCurrentUser(){
-        currentUser = auth.getCurrentUser();
-
-        if(currentUser != null){
-
-        }
+        fUser = auth.getCurrentUser();
     }
 
     /**
@@ -47,15 +44,21 @@ public class AuthManager {
      * @param callback 현재 UserInfo 반환(로그인 안된경우 null)
      */
     public void getCurrentUser(final IAuthCallback callback){
-        if(currentUser == null) {
+        if(fUser == null) {
             callback.getCurrentUser(null);
             return;
         }
 
-        DatabaseManager.getUserRef(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        if(currentUser != null){
+            callback.getCurrentUser(currentUser);
+            return;
+        }
+
+        DatabaseManager.getUserRef(fUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                callback.getCurrentUser(dataSnapshot.getValue(UserInfo.class));
+                currentUser = dataSnapshot.getValue(UserInfo.class);
+                callback.getCurrentUser(currentUser);
             }
 
             @Override
@@ -77,7 +80,7 @@ public class AuthManager {
                     setCurrentUser();
 
                     UserInfo ui = new UserInfo();
-                    ui.setUid(currentUser.getUid());
+                    ui.setUid(fUser.getUid());
                     ui.setName(nickname);
                     ui.setLat(CurrentLocation.getLatitude() + "");
                     ui.setLng(CurrentLocation.getLongitude() + "");
