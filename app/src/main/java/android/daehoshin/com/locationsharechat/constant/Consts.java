@@ -41,5 +41,6 @@ public class Consts {
 
     // 방 생성 및 수정에 대한 값
     public static final String ROOM_CREATE = "create_room";
-    public static final String ROOM_UPDATE = "update_room";
+    public static final String ROOM_UPDATE_NOTLOC = "update_room_partial";
+    public static final String ROOM_UPDATE_TOTAL = "update_room_total";
 }

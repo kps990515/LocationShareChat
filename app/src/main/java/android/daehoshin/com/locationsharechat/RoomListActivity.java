@@ -170,8 +170,6 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
             public void makePopup(LatLng latLng) {
                 popUpStage.setVisibility(View.VISIBLE);
                 customMapPopup = new CustomMapPopup(RoomListActivity.this,latLng.latitude,latLng.longitude, mMap, Consts.ROOM_CREATE);
-                customMapPopup.setLocationX();
-                customMapPopup.setLocationY();
                 mapManager.moveToClickLocation(mMap,latLng);
                 popUpStage.setOnClickListener(new View.OnClickListener() {
                     @Override

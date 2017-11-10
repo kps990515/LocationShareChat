@@ -66,6 +66,7 @@ public class CustomMapPopup extends FrameLayout {
     // CREATE, UPDATE
     private String type;
 
+    // setting 혹은 list에서 수정
     public CustomMapPopup(@NonNull Context context, Double lat, Double lng, GoogleMap googleMap, String type) {
         super(context);
         delteThis = (DelteThis) context;
@@ -76,10 +77,19 @@ public class CustomMapPopup extends FrameLayout {
         this.mMap = googleMap;
         popUpMarker = mMap.addMarker(MarkerUtil.createMarkerOptions(R.drawable.temp_room_icon, this.lat, this.lng));
 
-        // 팝업 나타나는 위치 지정
-        this.setPivotX(50);
-        location_X = 0;
-        location_Y = 20;
+
+        init();
+    }
+    // setting 처음 때 수정할 수 있도록
+    public CustomMapPopup(@NonNull Context context, Room room, GoogleMap googleMap, String type) {
+        super(context);
+        delteThis = (DelteThis) context;
+        initView();
+        this.lat = room.lat+"";
+        this.lng = room.lng+"";
+        this.type = type;
+        this.mMap = googleMap;
+        popUpMarker = mMap.addMarker(MarkerUtil.createMarkerOptions(R.drawable.temp_room_icon, this.lat, this.lng));
         init();
     }
 
@@ -88,6 +98,13 @@ public class CustomMapPopup extends FrameLayout {
         setSpinnerMin();
         setSpinnerEnd();
         setBtnMakeRoom();
+
+        // 팝업 나타나는 위치 지정
+        this.setPivotX(50);
+        location_X = 0;
+        location_Y = 20;
+        setX(location_X);
+        setX(location_Y);
     }
 
     private void initView() {
@@ -97,6 +114,8 @@ public class CustomMapPopup extends FrameLayout {
         spinnerMin = view.findViewById(R.id.spinnerMin);
         spinnerEnd = view.findViewById(R.id.spinnerEnd);
         btnMakeRoom = view.findViewById(R.id.btnMakeRoom);
+        if(Consts.ROOM_CREATE.equals(type)) btnMakeRoom.setText("Make Room");
+        else btnMakeRoom.setText("Update Room");
 
         addView(view);
     }
@@ -178,13 +197,13 @@ public class CustomMapPopup extends FrameLayout {
         btnMakeRoom.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                title =editTitle.getText().toString();
-                if("".equals(title) || title == null){
+                title = editTitle.getText().toString();
+                if ("".equals(title) || title == null) {
                     Toast.makeText(getContext(), "방 제목을 입력해주세요", Toast.LENGTH_SHORT).show();
-                } else if("-1".equals(hour)){
+                } else if ("-1".equals(hour)) {
                     Toast.makeText(getContext(), "만들 수 있는 시간이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    setTime(hour,minute,endString);
+                    setTime(hour, minute, endString);
                     makeThisRoom();
                     delteThis.deletePopUp(room, popUpMarker);
                     Toast.makeText(getContext(), "모임이 생성되었습니다.", Toast.LENGTH_SHORT).show();
@@ -239,10 +258,10 @@ public class CustomMapPopup extends FrameLayout {
 
     }
 
+    // 마커 삭제
     public void deletePopUpMarker(){
         popUpMarker.remove();
     }
-
     /**
      * 버튼 클릭시 popup을 삭제하고 마커를 추가
      */
@@ -250,11 +269,5 @@ public class CustomMapPopup extends FrameLayout {
         public void deletePopUp(Room room, Marker popUpMarker);
     }
 
-    public void setLocationY(){
-        this.setY(location_Y);
-    }
-    public void setLocationX(){
-        this.setX(location_X);
-    }
 
 }
