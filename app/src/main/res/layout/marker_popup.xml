@@ -31,7 +31,7 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="Title"
+                android:hint="제목을 입력해주세요"
                 android:inputType="textPersonName"
                 android:maxLength="8"
                 android:textAppearance="@android:style/TextAppearance.Small"
@@ -57,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
+                    android:tooltipText="시간"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTitle" />
 
@@ -66,6 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
+                    android:tooltipText="분"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTitle" />
             </LinearLayout>
@@ -76,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:tooltipText="끝나는시간"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
@@ -86,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:text="Make Room"
+                android:text="방 생성"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerEnd" />
