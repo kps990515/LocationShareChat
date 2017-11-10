@@ -76,6 +76,12 @@ public class UserInfo extends BaseUser {
         room += roomId;
     }
 
+    public void removeRoom(String roomId){
+        room.replace(roomId, "");
+        room.replace(",,", ",");
+        if(",".equals(room)) room = "";
+    }
+
     public void getRoom(String roomId, final IUserInfoCallback callback){
         DatabaseManager.getRoomRef(roomId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

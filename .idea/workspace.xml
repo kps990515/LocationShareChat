@@ -9,7 +9,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce54d265-2674-49bc-b9bb-4716845a378c" name="Default" comment="long to date format관련 함수추가 / 메니패스트 수정">
+    <list default="true" id="ce54d265-2674-49bc-b9bb-4716845a378c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" />
@@ -19,9 +19,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/CustomLocationManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/CustomLocationManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DatabaseManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DatabaseManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,46 +52,17 @@
               <caret line="73" column="42" lean-forward="false" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
               <folding>
                 <element signature="method#onCreate#0;class#RoomListActivity#0" expanded="true" />
-                <element signature="e#3024#3529#0" expanded="true" />
-                <element signature="e#3528#3529#0" expanded="true" />
-                <element signature="e#3575#3818#0" expanded="true" />
-                <element signature="e#3817#3818#0" expanded="true" />
-                <element signature="method#checkPermission#0;class#RoomListActivity#0" expanded="true" />
-                <element signature="e#4075#4076#0" expanded="true" />
-                <element signature="e#4120#4121#0" expanded="true" />
-                <element signature="e#4176#4177#0" expanded="true" />
-                <element signature="e#4216#4217#0" expanded="true" />
-                <element signature="method#signinAnonymously#0;class#4355:4839" expanded="true" />
-                <element signature="method#getCurrentUser#0;class#4355:4839" expanded="true" />
-                <element signature="method#onActivityResult#0;class#RoomListActivity#0" expanded="true" />
-                <element signature="method#initMap#0;class#RoomListActivity#0" expanded="true" />
-                <element signature="method#onMapReady#0;class#RoomListActivity#0" expanded="true" />
-                <element signature="method#getInfoWindow#0;class#6653:7131" expanded="true" />
-                <element signature="e#7077#7078#0" expanded="true" />
-                <element signature="e#7120#7121#0" expanded="true" />
-                <element signature="e#7177#7642#0" expanded="true" />
-                <element signature="e#7641#7642#0" expanded="true" />
-                <element signature="method#loadData#0;class#RoomListActivity#0" expanded="true" />
-                <element signature="method#signinAnonymously#0;class#8016:8644" expanded="true" />
-                <element signature="method#getCurrentUser#0;class#8016:8644" expanded="true" />
-                <element signature="e#8384#8600#0" expanded="true" />
-                <element signature="e#8599#8600#0" expanded="true" />
-                <element signature="method#addRoom#0;class#RoomListActivity#0" expanded="true" />
-                <element signature="method#deletePopUp#0;class#RoomListActivity#0" expanded="true" />
-                <element signature="method#setPopUpStage#0;class#RoomListActivity#0" expanded="true" />
-                <element signature="method#goTemp#0;class#RoomListActivity#0" expanded="true" />
-                <element signature="method#signout#0;class#RoomListActivity#0" expanded="true" />
-                <element signature="method#onService#0;class#RoomListActivity#0" expanded="true" />
+                <marker date="1510293673017" expanded="true" signature="10160:10166" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <file leaf-file-name="BaseUser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/BaseUser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="18" column="1" lean-forward="false" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+            <state relative-caret-position="508">
+              <caret line="49" column="20" lean-forward="false" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -111,14 +81,31 @@
       <file leaf-file-name="UserInfo.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="68" column="35" lean-forward="false" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
+            <state relative-caret-position="562">
+              <caret line="81" column="39" lean-forward="false" selection-start-line="81" selection-start-column="39" selection-end-line="81" selection-end-column="39" />
               <folding>
                 <element signature="method#onDataChange#0;class#931:1364" expanded="true" />
                 <element signature="method#onCancelled#0;class#931:1364" expanded="true" />
+                <element signature="method#updateLocation#0;class#UserInfo#0" expanded="true" />
                 <element signature="method#addRoom#0;class#UserInfo#0" expanded="true" />
                 <element signature="method#getRoom#0;class#UserInfo#0" expanded="true" />
-                <element signature="method#onDataChange#0;class#2254:2601" expanded="true" />
+                <element signature="method#onDataChange#0;class#2411:2758" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Member.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/Member.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#onDataChange#0;class#1185:1781" expanded="true" />
+                <element signature="method#onCancelled#0;class#1185:1781" expanded="true" />
+                <element signature="e#2318#2319#0" expanded="true" />
+                <element signature="e#2349#2350#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -142,37 +129,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoomActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/RoomActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="62" column="32" lean-forward="false" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#loadCurrentUser#0;class#RoomActivity#0" expanded="true" />
-                <element signature="method#signinAnonymously#0;class#2357:3322" expanded="true" />
-                <element signature="method#getCurrentUser#0;class#2357:3322" expanded="true" />
-                <element signature="e#2657#3296#0" expanded="true" />
-                <element signature="e#3295#3296#0" expanded="true" />
-                <element signature="e#3686#4342#0" expanded="true" />
-                <element signature="e#4050#4298#0" expanded="true" />
-                <element signature="e#4297#4298#0" expanded="true" />
-                <element signature="e#4341#4342#0" expanded="true" />
-                <element signature="e#4429#4662#0" expanded="true" />
-                <element signature="e#4661#4662#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DatabaseManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DatabaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="39" column="40" lean-forward="false" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+            <state relative-caret-position="400">
+              <caret line="62" column="34" lean-forward="false" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="34" />
               <folding>
-                <element signature="method#delete#0;class#DatabaseManager#0" expanded="true" />
-                <element signature="method#delete#1;class#DatabaseManager#0" expanded="true" />
+                <element signature="method#getMemberRef#1;class#DatabaseManager#0" expanded="true" />
                 <element signature="method#DatabaseManager#0;class#DatabaseManager#0" expanded="true" />
               </folding>
             </state>
@@ -192,12 +155,40 @@
       <file leaf-file-name="MapManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/MapManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
+            <state relative-caret-position="524">
               <caret line="55" column="56" lean-forward="false" selection-start-line="55" selection-start-column="56" selection-end-line="55" selection-end-column="56" />
               <folding>
-                <element signature="method#MapManager#0;class#MapManager#0" expanded="true" />
-                <element signature="method#conControlGoogleApiClient#0;class#MapManager#0" expanded="true" />
-                <element signature="method#refreshMyRecentLocation#0;class#MapManager#0" expanded="true" />
+                <marker date="1510293673018" expanded="true" signature="2937:2943" ph="{...}" />
+                <marker date="1510293673018" expanded="false" signature="3072:3079" ph="{...}" />
+                <marker date="1510293673018" expanded="false" signature="3189:3196" ph="{...}" />
+                <marker date="1510293673018" expanded="false" signature="3287:3714" ph="{...}" />
+                <marker date="1510293673018" expanded="true" signature="3720:3777" ph="/**...*/" />
+                <marker date="1510293673018" expanded="false" signature="3815:4095" ph="{...}" />
+                <marker date="1510293673018" expanded="true" signature="4101:4185" ph="/**...*/" />
+                <marker date="1510293673018" expanded="false" signature="4264:4379" ph="{...}" />
+                <marker date="1510293673018" expanded="false" signature="4418:4515" ph="{...}" />
+                <marker date="1510293673018" expanded="true" signature="4521:4577" ph="/**...*/" />
+                <marker date="1510293673018" expanded="true" signature="4658:4905" ph="{...}" />
+                <marker date="1510293673018" expanded="true" signature="4910:4965" ph="/**...*/" />
+                <marker date="1510293673018" expanded="false" signature="5014:5366" ph="{...}" />
+                <marker date="1510293673018" expanded="false" signature="5434:5557" ph="{...}" />
+                <marker date="1510293673018" expanded="false" signature="5641:5726" ph="{...}" />
+                <marker date="1510293673018" expanded="true" signature="5732:5845" ph="/**...*/" />
+                <marker date="1510293673018" expanded="false" signature="5913:6038" ph="{...}" />
+                <marker date="1510293673018" expanded="false" signature="6070:6080" ph=" { " />
+                <marker date="1510293673018" expanded="false" signature="6095:6101" ph=" }" />
+                <marker date="1510293673018" expanded="false" signature="6132:6142" ph=" { " />
+                <marker date="1510293673018" expanded="false" signature="6157:6163" ph=" }" />
+                <marker date="1510293673018" expanded="false" signature="6253:6263" ph=" { " />
+                <marker date="1510293673018" expanded="false" signature="6283:6289" ph=" }" />
+                <marker date="1510293673018" expanded="true" signature="6295:6403" ph="/**...*/" />
+                <marker date="1510293673018" expanded="false" signature="6488:7010" ph="{...}" />
+                <marker date="1510293673018" expanded="false" signature="6746:6872" ph="() → {" />
+                <marker date="1510293673018" expanded="false" signature="6987:7002" ph="}" />
+                <marker date="1510293673018" expanded="true" signature="7016:7078" ph="/**...*/" />
+                <marker date="1510293673018" expanded="false" signature="7146:7381" ph="{...}" />
+                <marker date="1510293673018" expanded="false" signature="7187:7322" ph="(latLng) → { " />
+                <marker date="1510293673018" expanded="false" signature="7349:7373" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -206,8 +197,8 @@
       <file leaf-file-name="Room.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="108" column="0" lean-forward="false" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+            <state relative-caret-position="308">
+              <caret line="107" column="35" lean-forward="false" selection-start-line="107" selection-start-column="30" selection-end-line="107" selection-end-column="35" />
               <folding>
                 <element signature="method#onDataChange#0;class#1387:1941" expanded="true" />
                 <element signature="method#onDataChange#0;class#2141:2792" expanded="true" />
@@ -2175,6 +2166,10 @@
               <option name="myItemId" value="domain" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="room" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2250,13 +2245,10 @@
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
           <PATH vcs="Git" revision="">$PROJECT_DIR$/app/app.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/AndroidManifest.xml</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/CustomLocationManager.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/MapManager.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/custom/CustomMapPopup.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/RoomActivity.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/layout/activity_room.xml</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -2264,7 +2256,10 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable/temproom.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable-hdpi/temp_room_icon.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable-mdpi/temp_room_icon.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/temp_room_icon.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/temp_room_icon.png</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -2272,6 +2267,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable/temproom.xml</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -2436,7 +2432,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510292826568" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510293764373" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2484,7 +2480,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510292826568" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510293764373" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2646,7 +2642,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510292826568" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510293764374" />
       </method>
     </configuration>
     <list size="1">
@@ -2867,7 +2863,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510290614254</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="databasemanager delete room, member 추가">
+      <created>1510292856759</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1510292856759</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2892,7 +2895,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2583682" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29393306" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29393306" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294979" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294979" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -3006,7 +3009,8 @@
     <MESSAGE value="dynamiclink 추가한 코드 일단 주석처리" />
     <MESSAGE value="room activity 코드 정리 / locationManager에서 실시간 반영하게 수정" />
     <MESSAGE value="long to date format관련 함수추가 / 메니패스트 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="long to date format관련 함수추가 / 메니패스트 수정" />
+    <MESSAGE value="databasemanager delete room, member 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="databasemanager delete room, member 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3229,14 +3233,6 @@
     </entry>
     <entry file="jar://$USER_HOME$/Library/Android/sdk/platforms/android-26/android.jar!/java/util/List.class" />
     <entry file="jar://$USER_HOME$/Library/Android/sdk/platforms/android-26/android.jar!/android/os/Looper.class" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/BaseUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="21" column="7" lean-forward="false" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/util/MarkerUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -3291,19 +3287,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/Member.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="91" column="5" lean-forward="false" selection-start-line="91" selection-start-column="5" selection-end-line="91" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Member#0;class#Member#0" expanded="true" />
-            <element signature="method#onDataChange#0;class#1185:1781" expanded="true" />
-            <element signature="method#onCancelled#0;class#1185:1781" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/util/FormatUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="409">
@@ -3336,17 +3319,6 @@
           <caret line="62" column="32" lean-forward="false" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#loadCurrentUser#0;class#RoomActivity#0" expanded="true" />
-            <element signature="method#signinAnonymously#0;class#2357:3322" expanded="true" />
-            <element signature="method#getCurrentUser#0;class#2357:3322" expanded="true" />
-            <element signature="e#2657#3296#0" expanded="true" />
-            <element signature="e#3295#3296#0" expanded="true" />
-            <element signature="e#3686#4342#0" expanded="true" />
-            <element signature="e#4050#4298#0" expanded="true" />
-            <element signature="e#4297#4298#0" expanded="true" />
-            <element signature="e#4341#4342#0" expanded="true" />
-            <element signature="e#4429#4662#0" expanded="true" />
-            <element signature="e#4661#4662#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3373,49 +3345,7 @@
           <caret line="73" column="42" lean-forward="false" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
           <folding>
             <element signature="method#onCreate#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="e#3024#3529#0" expanded="true" />
-            <element signature="e#3528#3529#0" expanded="true" />
-            <element signature="e#3575#3818#0" expanded="true" />
-            <element signature="e#3817#3818#0" expanded="true" />
-            <element signature="method#checkPermission#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="e#4075#4076#0" expanded="true" />
-            <element signature="e#4120#4121#0" expanded="true" />
-            <element signature="e#4176#4177#0" expanded="true" />
-            <element signature="e#4216#4217#0" expanded="true" />
-            <element signature="method#signinAnonymously#0;class#4355:4839" expanded="true" />
-            <element signature="method#getCurrentUser#0;class#4355:4839" expanded="true" />
-            <element signature="method#onActivityResult#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="method#initMap#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="method#onMapReady#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="method#getInfoWindow#0;class#6653:7131" expanded="true" />
-            <element signature="e#7077#7078#0" expanded="true" />
-            <element signature="e#7120#7121#0" expanded="true" />
-            <element signature="e#7177#7642#0" expanded="true" />
-            <element signature="e#7641#7642#0" expanded="true" />
-            <element signature="method#loadData#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="method#signinAnonymously#0;class#8016:8644" expanded="true" />
-            <element signature="method#getCurrentUser#0;class#8016:8644" expanded="true" />
-            <element signature="e#8384#8600#0" expanded="true" />
-            <element signature="e#8599#8600#0" expanded="true" />
-            <element signature="method#addRoom#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="method#deletePopUp#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="method#setPopUpStage#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="method#goTemp#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="method#signout#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="method#onService#0;class#RoomListActivity#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="108" column="0" lean-forward="false" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
-          <folding>
-            <element signature="method#onDataChange#0;class#1387:1941" expanded="true" />
-            <element signature="method#onDataChange#0;class#2141:2792" expanded="true" />
-            <element signature="method#onCancelled#0;class#2141:2792" expanded="true" />
-            <element signature="class#IRoomMemberCallback#0;class#Room#0" expanded="false" />
+            <marker date="1510293673017" expanded="true" signature="10160:10166" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -3436,20 +3366,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="68" column="35" lean-forward="false" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
-          <folding>
-            <element signature="method#onDataChange#0;class#931:1364" expanded="true" />
-            <element signature="method#onCancelled#0;class#931:1364" expanded="true" />
-            <element signature="method#addRoom#0;class#UserInfo#0" expanded="true" />
-            <element signature="method#getRoom#0;class#UserInfo#0" expanded="true" />
-            <element signature="method#onDataChange#0;class#2254:2601" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/AuthManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -3460,23 +3376,100 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/MapManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
+        <state relative-caret-position="524">
           <caret line="55" column="56" lean-forward="false" selection-start-line="55" selection-start-column="56" selection-end-line="55" selection-end-column="56" />
           <folding>
-            <element signature="method#MapManager#0;class#MapManager#0" expanded="true" />
-            <element signature="method#conControlGoogleApiClient#0;class#MapManager#0" expanded="true" />
-            <element signature="method#refreshMyRecentLocation#0;class#MapManager#0" expanded="true" />
+            <marker date="1510293673018" expanded="true" signature="2937:2943" ph="{...}" />
+            <marker date="1510293673018" expanded="false" signature="3072:3079" ph="{...}" />
+            <marker date="1510293673018" expanded="false" signature="3189:3196" ph="{...}" />
+            <marker date="1510293673018" expanded="false" signature="3287:3714" ph="{...}" />
+            <marker date="1510293673018" expanded="true" signature="3720:3777" ph="/**...*/" />
+            <marker date="1510293673018" expanded="false" signature="3815:4095" ph="{...}" />
+            <marker date="1510293673018" expanded="true" signature="4101:4185" ph="/**...*/" />
+            <marker date="1510293673018" expanded="false" signature="4264:4379" ph="{...}" />
+            <marker date="1510293673018" expanded="false" signature="4418:4515" ph="{...}" />
+            <marker date="1510293673018" expanded="true" signature="4521:4577" ph="/**...*/" />
+            <marker date="1510293673018" expanded="true" signature="4658:4905" ph="{...}" />
+            <marker date="1510293673018" expanded="true" signature="4910:4965" ph="/**...*/" />
+            <marker date="1510293673018" expanded="false" signature="5014:5366" ph="{...}" />
+            <marker date="1510293673018" expanded="false" signature="5434:5557" ph="{...}" />
+            <marker date="1510293673018" expanded="false" signature="5641:5726" ph="{...}" />
+            <marker date="1510293673018" expanded="true" signature="5732:5845" ph="/**...*/" />
+            <marker date="1510293673018" expanded="false" signature="5913:6038" ph="{...}" />
+            <marker date="1510293673018" expanded="false" signature="6070:6080" ph=" { " />
+            <marker date="1510293673018" expanded="false" signature="6095:6101" ph=" }" />
+            <marker date="1510293673018" expanded="false" signature="6132:6142" ph=" { " />
+            <marker date="1510293673018" expanded="false" signature="6157:6163" ph=" }" />
+            <marker date="1510293673018" expanded="false" signature="6253:6263" ph=" { " />
+            <marker date="1510293673018" expanded="false" signature="6283:6289" ph=" }" />
+            <marker date="1510293673018" expanded="true" signature="6295:6403" ph="/**...*/" />
+            <marker date="1510293673018" expanded="false" signature="6488:7010" ph="{...}" />
+            <marker date="1510293673018" expanded="false" signature="6746:6872" ph="() → {" />
+            <marker date="1510293673018" expanded="false" signature="6987:7002" ph="}" />
+            <marker date="1510293673018" expanded="true" signature="7016:7078" ph="/**...*/" />
+            <marker date="1510293673018" expanded="false" signature="7146:7381" ph="{...}" />
+            <marker date="1510293673018" expanded="false" signature="7187:7322" ph="(latLng) → { " />
+            <marker date="1510293673018" expanded="false" signature="7349:7373" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="107" column="35" lean-forward="false" selection-start-line="107" selection-start-column="30" selection-end-line="107" selection-end-column="35" />
+          <folding>
+            <element signature="method#onDataChange#0;class#1387:1941" expanded="true" />
+            <element signature="method#onDataChange#0;class#2141:2792" expanded="true" />
+            <element signature="method#onCancelled#0;class#2141:2792" expanded="true" />
+            <element signature="class#IRoomMemberCallback#0;class#Room#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/BaseUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="49" column="20" lean-forward="false" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/Member.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onDataChange#0;class#1185:1781" expanded="true" />
+            <element signature="method#onCancelled#0;class#1185:1781" expanded="true" />
+            <element signature="e#2318#2319#0" expanded="true" />
+            <element signature="e#2349#2350#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="562">
+          <caret line="81" column="39" lean-forward="false" selection-start-line="81" selection-start-column="39" selection-end-line="81" selection-end-column="39" />
+          <folding>
+            <element signature="method#onDataChange#0;class#931:1364" expanded="true" />
+            <element signature="method#onCancelled#0;class#931:1364" expanded="true" />
+            <element signature="method#updateLocation#0;class#UserInfo#0" expanded="true" />
+            <element signature="method#addRoom#0;class#UserInfo#0" expanded="true" />
+            <element signature="method#getRoom#0;class#UserInfo#0" expanded="true" />
+            <element signature="method#onDataChange#0;class#2411:2758" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DatabaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="39" column="40" lean-forward="false" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+        <state relative-caret-position="400">
+          <caret line="62" column="34" lean-forward="false" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="34" />
           <folding>
-            <element signature="method#delete#0;class#DatabaseManager#0" expanded="true" />
-            <element signature="method#delete#1;class#DatabaseManager#0" expanded="true" />
+            <element signature="method#getMemberRef#1;class#DatabaseManager#0" expanded="true" />
             <element signature="method#DatabaseManager#0;class#DatabaseManager#0" expanded="true" />
           </folding>
         </state>
