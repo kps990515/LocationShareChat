@@ -9,7 +9,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce54d265-2674-49bc-b9bb-4716845a378c" name="Default" comment="recyclerview item 수정">
+    <list default="true" id="ce54d265-2674-49bc-b9bb-4716845a378c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" />
@@ -18,13 +18,59 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/android_arch_lifecycle_runtime_1_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/android_arch_lifecycle_runtime_1_0_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_animated_vector_drawable_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_animated_vector_drawable_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_appcompat_v7_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_appcompat_v7_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_cardview_v7_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_cardview_v7_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_constraint_constraint_layout_1_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_constraint_constraint_layout_1_0_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_constraint_constraint_layout_solver_1_0_2_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_constraint_constraint_layout_solver_1_0_2_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_design_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_design_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_recyclerview_v7_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_recyclerview_v7_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_compat_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_compat_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_core_ui_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_core_ui_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_core_utils_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_core_utils_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_fragment_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_fragment_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_media_compat_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_media_compat_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_v4_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_v4_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_vector_drawable_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_vector_drawable_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_test_espresso_espresso_core_3_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_test_espresso_espresso_core_3_0_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_test_espresso_espresso_idling_resource_3_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_test_espresso_espresso_idling_resource_3_0_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_test_rules_1_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_test_rules_1_0_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_test_runner_1_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_test_runner_1_0_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_transition_26_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_transition_26_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_appinvite_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_appinvite_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_base_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_base_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_basement_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_basement_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_maps_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_maps_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_places_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_places_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_tasks_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_tasks_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_impl_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_impl_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_auth_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_auth_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_common_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_common_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_core_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_core_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_connection_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_connection_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_dynamic_links_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_dynamic_links_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_iid_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_iid_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_invites_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_invites_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_messaging_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_messaging_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_11_0_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_common_11_0_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_common_11_0_4.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/constant/Consts.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/constant/Consts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Msg.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Msg.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/BaseUser.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/BaseUser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/CustomMemberPopup.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/CustomMemberPopup.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/MemberAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/MemberAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/RoomActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/RoomActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_room.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_room.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_list_member.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_list_member.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_list_members.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_list_members.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -48,42 +94,124 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Room.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java">
+      <file leaf-file-name="RoomListActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="100" column="56" lean-forward="false" selection-start-line="100" selection-start-column="39" selection-end-line="100" selection-end-column="56" />
+            <state relative-caret-position="309">
+              <caret line="285" column="0" lean-forward="false" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
               <folding>
-                <element signature="method#getMember#0;class#Room#0" expanded="true" />
-                <element signature="method#onDataChange#0;class#1387:1941" expanded="true" />
-                <element signature="class#IRoomMemberCallback#0;class#Room#0" expanded="false" />
+                <element signature="method#checkDynamicLink#0;class#RoomListActivity#0" expanded="true" />
+                <element signature="e#10295#11270#0" expanded="true" />
+                <element signature="e#11269#11270#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoomActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/RoomActivity.java">
+      <file leaf-file-name="MarkerUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/util/MarkerUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="67" column="33" lean-forward="false" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+            <state relative-caret-position="212">
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2470#3229#0" expanded="true" />
-                <element signature="e#3228#3229#0" expanded="true" />
-                <element signature="method#onFailure#0;class#3279:3437" expanded="true" />
+                <element signature="method#createMarkerOptions#1;class#MarkerUtil#0" expanded="true" />
+                <element signature="method#createMarkerOptions#2;class#MarkerUtil#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomLocationManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/CustomLocationManager.java">
+      <file leaf-file-name="UserInfo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="174">
-              <caret line="98" column="31" lean-forward="false" selection-start-line="98" selection-start-column="31" selection-end-line="98" selection-end-column="31" />
+              <caret line="51" column="25" lean-forward="false" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
               <folding>
-                <element signature="method#startCheckGPS#0;class#CustomLocationManager#0" expanded="true" />
+                <element signature="e#1423#1424#0" expanded="true" />
+                <element signature="e#1482#1483#0" expanded="true" />
+                <element signature="method#updateLocation#0;class#UserInfo#0" expanded="true" />
+                <element signature="method#getRoom#0;class#UserInfo#0" expanded="true" />
+                <element signature="method#onDataChange#0;class#2428:2775" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Member.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/Member.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="358">
+              <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1899#1900#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RoomActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/RoomActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="165" column="25" lean-forward="false" selection-start-line="165" selection-start-column="25" selection-end-line="165" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2251#3010#0" expanded="true" />
+                <element signature="e#3009#3010#0" expanded="true" />
+                <element signature="method#onFailure#0;class#3060:3218" expanded="true" />
+                <element signature="method#onCreate#0;class#RoomActivity#0" expanded="true" />
+                <element signature="method#initMap#0;class#RoomActivity#0" expanded="true" />
+                <element signature="method#onMapReady#0;class#RoomActivity#0" expanded="true" />
+                <element signature="e#4008#4316#0" expanded="true" />
+                <element signature="e#4315#4316#0" expanded="true" />
+                <element signature="method#loadCurrentUser#0;class#RoomActivity#0" expanded="true" />
+                <element signature="method#signinAnonymously#0;class#4415:5344" expanded="true" />
+                <element signature="method#getCurrentUser#0;class#4415:5344" expanded="true" />
+                <element signature="e#4715#5318#0" expanded="true" />
+                <element signature="e#5317#5318#0" expanded="true" />
+                <element signature="method#initView#0;class#RoomActivity#0" expanded="true" />
+                <element signature="e#5819#6568#0" expanded="true" />
+                <element signature="e#6523#6524#0" expanded="true" />
+                <element signature="e#6567#6568#0" expanded="true" />
+                <element signature="method#setRealtimeMsgLitener#0;class#RoomActivity#0" expanded="true" />
+                <element signature="e#6655#6888#0" expanded="true" />
+                <element signature="e#6887#6888#0" expanded="true" />
+                <element signature="e#6951#6952#0" expanded="true" />
+                <element signature="e#7009#7010#0" expanded="true" />
+                <element signature="method#type#0;class#RoomActivity#0" expanded="true" />
+                <element signature="method#onCreateOptionsMenu#0;class#RoomActivity#0" expanded="true" />
+                <element signature="method#onOptionsItemSelected#0;class#RoomActivity#0" expanded="true" />
+                <element signature="e#8338#8683#0" expanded="true" />
+                <element signature="e#8682#8683#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="item_list_member.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_list_member.xml">
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CustomMemberPopup.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/CustomMemberPopup.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding>
+                <element signature="method#CustomMemberPopup#0;class#CustomMemberPopup#0" expanded="true" />
+                <element signature="e#747#748#0" expanded="true" />
+                <element signature="e#796#797#0" expanded="true" />
+                <element signature="method#initView#0;class#CustomMemberPopup#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,6 +224,31 @@
               <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
               <folding>
                 <element signature="e#612#613#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MemberAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/MemberAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="26" column="28" lean-forward="false" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+              <folding>
+                <element signature="method#onCreateViewHolder#0;class#MemberAdapter#0" expanded="true" />
+                <element signature="method#onBindViewHolder#0;class#MemberAdapter#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CustomLocationManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/CustomLocationManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="283">
+              <caret line="98" column="37" lean-forward="false" selection-start-line="98" selection-start-column="37" selection-end-line="98" selection-end-column="37" />
+              <folding>
+                <element signature="method#startCheckGPS#0;class#CustomLocationManager#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -128,6 +281,9 @@
       <find>save</find>
       <find>intent</find>
       <find>roommap</find>
+      <find>popUpLayout</find>
+      <find>customMemberPopup</find>
+      <find>addmar</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -1892,29 +2048,34 @@
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/user/SigninActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/MapManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/StorageManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Msg.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/BaseUser.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/Const/Consts.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/util/MarkerUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/custom/CustomMarkerInfoAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/custom/CustomMapPopup.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/marker_room_info.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/Member.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DynamicLinkManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/ChatAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/CustomLocationManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_room_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/util/FormatUtil.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_room.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DatabaseManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/AuthManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_list_chat.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/constant/Consts.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/CurrentManager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/BaseUser.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Msg.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/MemberAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/CustomMemberPopup.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_room.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_list_member.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_list_members.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/util/MarkerUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/RoomActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java" />
       </list>
     </option>
   </component>
@@ -1975,6 +2136,24 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LocationShareChat" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
@@ -1995,6 +2174,72 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="locationsharechat" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LocationShareChat" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="locationsharechat" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LocationShareChat" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="locationsharechat" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LocationShareChat" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="locationsharechat" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2037,7 +2282,11 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="constant" />
+              <option name="myItemId" value="domain" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2059,7 +2308,11 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
+              <option name="myItemId" value="domain" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="room" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2124,9 +2377,9 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/app.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/DetailActivity.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/layout/activity_detail.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/constant/Consts.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/custom/CustomMapPopup.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/util/FormatUtil.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -2134,8 +2387,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable/ic_close_black.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/menu/detail_menu.xml</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -2307,7 +2558,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510298716683" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510304626121" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2355,7 +2606,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510298716683" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510304626121" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2538,7 +2789,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510298716684" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510304626122" />
       </method>
     </configuration>
     <list size="1">
@@ -2787,7 +3038,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510296624618</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="실시간 위치정보 디비에 반영되게 수정">
+      <created>1510298754035</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1510298754035</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2937,7 +3195,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Ignore Gradle관련 수정" />
     <MESSAGE value="앱 아이콘/이름 수정" />
     <MESSAGE value="강제 사인아웃 제거" />
     <MESSAGE value="UserInfo array함수 firebase 저장시 제외" />
@@ -2962,62 +3219,36 @@
     <MESSAGE value="databasemanager delete room, member 추가" />
     <MESSAGE value="initMap 호출부분 수정 / signout 수정" />
     <MESSAGE value="recyclerview item 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="recyclerview item 수정" />
+    <MESSAGE value="실시간 위치정보 디비에 반영되게 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="실시간 위치정보 디비에 반영되게 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/CustomLocationManager.java</url>
-          <line>98</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/util/MarkerUtil.java</url>
+          <line>28</line>
           <properties />
-          <option name="timeStamp" value="37" />
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java</url>
+          <line>52</line>
+          <properties />
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="38" />
+      <option name="time" value="48" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
         <watch expression="pendingDynamicLinkData.getLink()" language="JAVA" />
+        <watch expression="currentUser.getUid()" language="JAVA" />
+        <watch expression="member.getUid()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gradle.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/proguard-rules.pro">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -3095,29 +3326,6 @@
     <entry file="jar://$USER_HOME$/Library/Android/sdk/platforms/android-26/android.jar!/java/util/List.class" />
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-dynamic-links-11.0.4.aar/eba4d8ede29ee1840c0b402133a27c43/jars/classes.jar!/com/google/firebase/dynamiclinks/PendingDynamicLinkData.class" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DynamicLinkManager.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Msg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="25" column="43" lean-forward="false" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
-          <folding>
-            <element signature="e#470#471#0" expanded="false" />
-            <element signature="e#535#536#0" expanded="false" />
-            <element signature="e#681#682#0" expanded="false" />
-            <element signature="e#707#708#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/ChatAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/service/LocationService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="470">
@@ -3213,17 +3421,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_room.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_room_list.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3235,24 +3432,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/util/MarkerUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/DatabaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getUserRef#1;class#DatabaseManager#0" expanded="true" />
-            <element signature="method#delete#0;class#DatabaseManager#0" expanded="true" />
-            <element signature="method#onDataChange#0;class#2884:3404" expanded="true" />
-            <element signature="method#onCancelled#0;class#2884:3404" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="method#getUserRef#1;class#DatabaseManager#0" expanded="false" />
+            <element signature="method#delete#0;class#DatabaseManager#0" expanded="false" />
+            <element signature="method#onDataChange#0;class#2884:3404" expanded="false" />
+            <element signature="method#onCancelled#0;class#2884:3404" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3262,36 +3451,14 @@
         <state relative-caret-position="418">
           <caret line="99" column="16" lean-forward="false" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="16" />
           <folding>
-            <element signature="method#getCurrentUser#0;class#AuthManager#0" expanded="true" />
-            <element signature="method#onDataChange#0;class#1520:1885" expanded="true" />
-            <element signature="method#signInAnonymously#0;class#AuthManager#0" expanded="true" />
-            <element signature="e#2124#2978#0" expanded="true" />
-            <element signature="e#2977#2978#0" expanded="true" />
-            <element signature="method#signinAnonymously#0;class#3042:3319" expanded="true" />
-            <element signature="e#3244#3245#0" expanded="true" />
-            <element signature="e#3308#3309#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/Member.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="66" column="36" lean-forward="false" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1840#1841#0" expanded="true" />
-            <element signature="e#1899#1900#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Library/Android/sdk/platforms/android-26/android.jar!/android/os/Looper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
-          <folding>
-            <element signature="e#612#613#0" expanded="true" />
+            <element signature="method#getCurrentUser#0;class#AuthManager#0" expanded="false" />
+            <element signature="method#onDataChange#0;class#1520:1885" expanded="false" />
+            <element signature="method#signInAnonymously#0;class#AuthManager#0" expanded="false" />
+            <element signature="e#2124#2978#0" expanded="false" />
+            <element signature="e#2977#2978#0" expanded="false" />
+            <element signature="method#signinAnonymously#0;class#3042:3319" expanded="false" />
+            <element signature="e#3244#3245#0" expanded="false" />
+            <element signature="e#3308#3309#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3315,51 +3482,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/RoomActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="67" column="33" lean-forward="false" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2470#3229#0" expanded="true" />
-            <element signature="e#3228#3229#0" expanded="true" />
-            <element signature="method#onFailure#0;class#3279:3437" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/CustomLocationManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="98" column="31" lean-forward="false" selection-start-line="98" selection-start-column="31" selection-end-line="98" selection-end-column="31" />
-          <folding>
-            <element signature="method#startCheckGPS#0;class#CustomLocationManager#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="68" column="29" lean-forward="true" selection-start-line="68" selection-start-column="29" selection-end-line="68" selection-end-column="29" />
-          <folding>
-            <element signature="method#getRoom#0;class#UserInfo#0" expanded="true" />
-            <element signature="method#onDataChange#0;class#2428:2775" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="58" column="17" lean-forward="false" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -3368,46 +3490,241 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/ChatAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
-          <caret line="259" column="21" lean-forward="false" selection-start-line="259" selection-start-column="21" selection-end-line="259" selection-end-column="21" />
+        <state relative-caret-position="240">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <element signature="method#checkDynamicLink#0;class#RoomListActivity#0" expanded="true" />
-            <element signature="method#goTemp#0;class#RoomListActivity#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <marker date="1510301801489" expanded="false" signature="3452:3659" ph="{...}" />
+            <marker date="1510301801489" expanded="true" signature="3452:3665" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-dynamic-links-11.0.4.aar/eba4d8ede29ee1840c0b402133a27c43/jars/classes.jar!/com/google/firebase/dynamiclinks/DynamicLink.class">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/CurrentManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="255" column="39" lean-forward="true" selection-start-line="255" selection-start-column="39" selection-end-line="255" selection-end-column="39" />
-          <folding>
-            <element signature="method#buildDynamicLink#0;class#Builder#0;class#DynamicLink#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="144">
+          <caret line="8" column="1" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="8" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/BaseUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="45" column="18" lean-forward="false" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
+        <state relative-caret-position="117">
+          <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
           <folding>
-            <element signature="e#1019#1020#0" expanded="true" />
-            <element signature="e#1045#1046#0" expanded="true" />
+            <element signature="e#1073#1074#0" expanded="false" />
+            <element signature="e#1099#1100#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Room.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="100" column="56" lean-forward="false" selection-start-line="100" selection-start-column="39" selection-end-line="100" selection-end-column="56" />
+        <state relative-caret-position="144">
+          <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
           <folding>
             <element signature="method#getMember#0;class#Room#0" expanded="true" />
-            <element signature="method#onDataChange#0;class#1387:1941" expanded="true" />
+            <element signature="method#onDataChange#0;class#1439:1993" expanded="true" />
+            <element signature="method#getInfoView#0;class#Room#0" expanded="true" />
             <element signature="class#IRoomMemberCallback#0;class#Room#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/room/Msg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+          <folding>
+            <element signature="e#523#524#0" expanded="false" />
+            <element signature="e#588#589#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-dynamic-links-11.0.4.aar/eba4d8ede29ee1840c0b402133a27c43/jars/classes.jar!/com/google/firebase/dynamiclinks/DynamicLink.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="249" column="55" lean-forward="false" selection-start-line="249" selection-start-column="55" selection-end-line="249" selection-end-column="55" />
+          <folding>
+            <element signature="method#Builder#1;class#Builder#0;class#AndroidParameters#0;class#DynamicLink#0" expanded="true" />
+            <element signature="method#build#0;class#Builder#0;class#AndroidParameters#0;class#DynamicLink#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="50" column="52" lean-forward="false" selection-start-line="50" selection-start-column="50" selection-end-line="50" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/common/CustomLocationManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="98" column="37" lean-forward="false" selection-start-line="98" selection-start-column="37" selection-end-line="98" selection-end-column="37" />
+          <folding>
+            <element signature="method#startCheckGPS#0;class#CustomLocationManager#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Library/Android/sdk/platforms/android-26/android.jar!/android/os/Looper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+          <folding>
+            <element signature="e#612#613#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/MemberAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="26" column="28" lean-forward="false" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+          <folding>
+            <element signature="method#onCreateViewHolder#0;class#MemberAdapter#0" expanded="true" />
+            <element signature="method#onBindViewHolder#0;class#MemberAdapter#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/CustomMemberPopup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="method#CustomMemberPopup#0;class#CustomMemberPopup#0" expanded="true" />
+            <element signature="e#747#748#0" expanded="true" />
+            <element signature="e#796#797#0" expanded="true" />
+            <element signature="method#initView#0;class#CustomMemberPopup#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_room.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="39" column="24" lean-forward="false" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_list_member.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_list_members.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/RoomListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="285" column="0" lean-forward="false" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
+          <folding>
+            <element signature="method#checkDynamicLink#0;class#RoomListActivity#0" expanded="true" />
+            <element signature="e#10295#11270#0" expanded="true" />
+            <element signature="e#11269#11270#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/Member.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1899#1900#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/util/MarkerUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="method#createMarkerOptions#1;class#MarkerUtil#0" expanded="true" />
+            <element signature="method#createMarkerOptions#2;class#MarkerUtil#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/domain/user/UserInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="51" column="25" lean-forward="false" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
+          <folding>
+            <element signature="e#1423#1424#0" expanded="true" />
+            <element signature="e#1482#1483#0" expanded="true" />
+            <element signature="method#updateLocation#0;class#UserInfo#0" expanded="true" />
+            <element signature="method#getRoom#0;class#UserInfo#0" expanded="true" />
+            <element signature="method#onDataChange#0;class#2428:2775" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/daehoshin/com/locationsharechat/room/RoomActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="165" column="25" lean-forward="false" selection-start-line="165" selection-start-column="25" selection-end-line="165" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2251#3010#0" expanded="true" />
+            <element signature="e#3009#3010#0" expanded="true" />
+            <element signature="method#onFailure#0;class#3060:3218" expanded="true" />
+            <element signature="method#onCreate#0;class#RoomActivity#0" expanded="true" />
+            <element signature="method#initMap#0;class#RoomActivity#0" expanded="true" />
+            <element signature="method#onMapReady#0;class#RoomActivity#0" expanded="true" />
+            <element signature="e#4008#4316#0" expanded="true" />
+            <element signature="e#4315#4316#0" expanded="true" />
+            <element signature="method#loadCurrentUser#0;class#RoomActivity#0" expanded="true" />
+            <element signature="method#signinAnonymously#0;class#4415:5344" expanded="true" />
+            <element signature="method#getCurrentUser#0;class#4415:5344" expanded="true" />
+            <element signature="e#4715#5318#0" expanded="true" />
+            <element signature="e#5317#5318#0" expanded="true" />
+            <element signature="method#initView#0;class#RoomActivity#0" expanded="true" />
+            <element signature="e#5819#6568#0" expanded="true" />
+            <element signature="e#6523#6524#0" expanded="true" />
+            <element signature="e#6567#6568#0" expanded="true" />
+            <element signature="method#setRealtimeMsgLitener#0;class#RoomActivity#0" expanded="true" />
+            <element signature="e#6655#6888#0" expanded="true" />
+            <element signature="e#6887#6888#0" expanded="true" />
+            <element signature="e#6951#6952#0" expanded="true" />
+            <element signature="e#7009#7010#0" expanded="true" />
+            <element signature="method#type#0;class#RoomActivity#0" expanded="true" />
+            <element signature="method#onCreateOptionsMenu#0;class#RoomActivity#0" expanded="true" />
+            <element signature="method#onOptionsItemSelected#0;class#RoomActivity#0" expanded="true" />
+            <element signature="e#8338#8683#0" expanded="true" />
+            <element signature="e#8682#8683#0" expanded="true" />
           </folding>
         </state>
       </provider>

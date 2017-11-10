@@ -10,37 +10,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by user on 2017-11-10.
  */
 
 public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Holder> {
-
-    private Map<String, Uri> profiles = new HashMap<>();
     private List<String> mem_names = new ArrayList<>();
     private List<String> profiles_uid = new ArrayList<>();
     private List<Uri> profiles_uri = new ArrayList<>();
 
-
-    public MemberAdapter(Map<String, Uri> profiles,List<String> mem_names){
-        this.profiles = profiles;
-        this.mem_names = mem_names;
-        seperateMap(profiles);
-    }
-
-    public void seperateMap(Map<String, Uri> profiles){
-        for(String key : profiles.keySet()){
-            profiles_uid.add(key);
-            profiles_uri.add(profiles.get(key));
-        }
-    }
-
     public void addMember(String uid, Uri uri, String name){
-        profiles.put(uid, uri);
+        profiles_uid.add(uid);
+        profiles_uri.add(uri);
         mem_names.add(name);
     }
 
@@ -57,12 +40,13 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Holder> {
         member.uid = profiles_uid.get(position);
         member.uri = profiles_uri.get(position);
         holder.txt_membername.setText(member.name);
-        holder.image_memberProfile.setImageURI(profiles.get(member.uid));
+        Uri uri = profiles_uri.get(position);
+        holder.image_memberProfile.setImageURI(uri);
     }
 
     @Override
     public int getItemCount() {
-        return profiles.size();
+        return profiles_uid.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {

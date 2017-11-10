@@ -50,20 +50,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FrameLayout popUpLayout;
     private CustomMemberPopup customMemberPopup;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_room);
-
-        roomid = getIntent().getStringExtra(ROOM_ID);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        mapManager = new MapManager(this,1);
-
-        initMap();
-
+    private void checkDynamicLink(){
         FirebaseDynamicLinks.getInstance()
                 .getDynamicLink(getIntent())
                 .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
@@ -89,6 +76,25 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     }
                 });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        checkDynamicLink();
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_room);
+
+        roomid = getIntent().getStringExtra(ROOM_ID);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        mapManager = new MapManager(this,1);
+
+        initMap();
+
+
     }
 
     private void initMap(){
@@ -153,7 +159,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void getMember(List<Member> members) {
                 for(final Member member : members){
-                    if(currentUser.getUid() == member.getUid()) mMap.addMarker(currentUser.getMarker());
+                    if(currentUser.getUid().equals(member.getUid())) mMap.addMarker(currentUser.getMarker());
                     else mMap.addMarker(member.getMarker());
 
                     member.getProfile(new StorageManager.IDownloadCallback() {
@@ -221,10 +227,14 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             case R.id.menu_member:
                 popUpLayout.setVisibility(View.VISIBLE);
+                popUpLayout.addView(customMemberPopup);
+                customMemberPopup.setVisibility(View.VISIBLE);
                 popUpLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         popUpLayout.setVisibility(View.GONE);
+                        popUpLayout.removeView(customMemberPopup);
+                        customMemberPopup.setVisibility(View.GONE);
                     }
                 });
                 break;

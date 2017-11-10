@@ -26,11 +26,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
+import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
 import static android.daehoshin.com.locationsharechat.constant.Consts.DYNAMICLINK_BASE_URL;
 import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
@@ -281,8 +284,34 @@ public class RoomListActivity extends FragmentActivity implements OnMapReadyCall
                                 .build())
                 .buildDynamicLink();
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, dynamicLink.getUri());
-        startActivity(intent);
+        Task<ShortDynamicLink> shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                .setLongLink(dynamicLink.getUri())
+                .buildShortDynamicLink()
+                .addOnCompleteListener(this, new OnCompleteListener<ShortDynamicLink>() {
+                    @Override
+                    public void onComplete(@NonNull Task<ShortDynamicLink> task) {
+                        if (task.isSuccessful()) {
+                            // Short link created
+                            Uri shortLink = task.getResult().getShortLink();
+                            Uri flowchartLink = task.getResult().getPreviewLink();
+
+                            Intent sendIntent = new Intent();
+                            String msg = shortLink.toString();
+                            sendIntent.setAction(Intent.ACTION_SEND);
+                            sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
+                            sendIntent.setType("text/plain");
+                            startActivity(sendIntent);
+                        } else {
+                            // Error
+                            // ...
+                        }
+                    }
+                });
+
+
+
+
+
     }
     public void signout(View view){
         AuthManager.getInstance().signout();

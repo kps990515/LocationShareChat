@@ -4,11 +4,13 @@ import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
+
 /**
  * Created by daeho on 2017. 11. 8..
  */
 
-public class Msg {
+public class Msg implements Serializable{
     public String id;
     public long idx;
     public String uid;

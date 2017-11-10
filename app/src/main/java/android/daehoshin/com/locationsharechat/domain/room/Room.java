@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
  * Created by daeho on 2017. 11. 8..
  */
 
-public class Room {
+public class Room implements Serializable{
     public String id;
     public String title;
     public long time;

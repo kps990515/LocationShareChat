@@ -5,11 +5,13 @@ import android.net.Uri;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
+
 /**
  * Created by daeho on 2017. 11. 8..
  * 사용자 Class
  */
-abstract class BaseUser {
+abstract class BaseUser implements Serializable {
     public String uid;
     public String name;
     public String lat;
