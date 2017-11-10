@@ -28,7 +28,7 @@ public class Consts {
     public static final int LOCATION_INTERVAL_METER = 100;
 
     // 줌 크기
-    public static final int Zoom_SIZE = 13;
+    public static final int Zoom_SIZE = 12;
 
     // 서비스 관련 중지
     public static final String Thread_START = "thread_start";
