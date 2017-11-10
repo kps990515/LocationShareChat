@@ -64,6 +64,7 @@ public class RoomActivity extends AppCompatActivity {
                             @Override
                             public void getMsg(Msg msg) {
                                 adapter.addMsg(msg);
+                                chatList.scrollToPosition(adapter.getItemCount()-1);
                             }
                         });
 
