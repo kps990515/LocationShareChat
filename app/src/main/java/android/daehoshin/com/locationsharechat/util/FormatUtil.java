@@ -101,18 +101,17 @@ public class FormatUtil {
     }
 
     /**
-     * 현재 시간 및 분을 Map<조건,int>형으로 반환
+     * long형으로 time을 맡아 시간 및 분을 Map<조건,int>형으로 반환
      * @return
      */
-    public static Map currentHourMin(){
+    public static Map extractHourMin(long time){
         Map<String, Integer> result = new HashMap<>();
-        long now = System.currentTimeMillis();
         SimpleDateFormat sdfH =new SimpleDateFormat("HH");
         SimpleDateFormat sdfM =new SimpleDateFormat("mm");
-        int hour = Integer.parseInt(sdfH.format(now));
-        int min = Integer.parseInt(sdfM.format(now));
-        result.put(Consts.CURRENT_HOUR, hour);
-        result.put(Consts.CURRENT_MIN, min);
+        int hour = Integer.parseInt(sdfH.format(time));
+        int min = Integer.parseInt(sdfM.format(time));
+        result.put(Consts.Custom_HOUR, hour);
+        result.put(Consts.Custom_MIN, min);
         return result;
     }
 }

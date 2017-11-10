@@ -1,9 +1,11 @@
 package android.daehoshin.com.locationsharechat.room;
 
 import android.daehoshin.com.locationsharechat.R;
+import android.daehoshin.com.locationsharechat.RoomListActivity;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.MapManager;
 import android.daehoshin.com.locationsharechat.constant.Consts;
+import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
@@ -13,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,12 +25,15 @@ import com.google.android.gms.maps.model.Marker;
 
 import java.util.List;
 
-public class SettingActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class SettingActivity extends AppCompatActivity implements OnMapReadyCallback, CustomMapPopup.IDelteThis {
 
     private GoogleMap mMap;
     private MapManager mapManager;
     private Marker roomMarker;
     private Toolbar toolbar;
+
+    private FrameLayout popUpStage;
+    private CustomMapPopup customMapPopup;
 
     private UserInfo currentUser;
     private Room currentRoom;
@@ -39,7 +45,7 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
         setContentView(R.layout.activity_setting);
 
         room_id = getIntent().getStringExtra(Consts.ROOM_ID);
-        mapManager = new MapManager(this,2);
+        mapManager = new MapManager(this,3);
         initMap();
     }
     private void initMap(){
@@ -67,6 +73,23 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
                 return null;
             }
         });
+
+        mapManager.longClick(mMap, new MapManager.IMakeRoom() {
+            @Override
+            public void makePopup(LatLng latLng) {
+                popUpStage.setVisibility(View.VISIBLE);
+                customMapPopup = new CustomMapPopup(SettingActivity.this,latLng.latitude,latLng.longitude, currentRoom, mMap, Consts.ROOM_UPDATE_TOTAL);
+                mapManager.moveToClickLocation(mMap,latLng);
+                popUpStage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popUpStage.setVisibility(View.GONE);
+                        customMapPopup.deletePopUpMarker();
+                    }
+                });
+                popUpStage.addView(customMapPopup);
+            }
+        });
     }
 
     private void loadCurrentUser(){
@@ -85,6 +108,8 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
                         currentRoom = room;
                         LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
                         mapManager.moveCameraLocationZoom(mMap, latLng, 12);
+                        roomMarker = mMap.addMarker(currentRoom.getMarker());
+                        roomMarker.setTag(currentRoom);
 
                         initView();
                         loadMember();
@@ -99,6 +124,7 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(null);
+        setPopUpStage();
     }
 
     private void loadMember(){
@@ -111,6 +137,27 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
                 }
             }
         });
+    }
+
+    private void updateRoom(Room room){
+        if(room == null) return;
+        roomMarker.remove();
+        roomMarker = mMap.addMarker(room.getMarker());
+        roomMarker.setTag(room);
+        roomMarker.showInfoWindow();
+    }
+
+    @Override
+    public void deletePopUp(Room room, Marker PopUpMarker) {
+        popUpStage.removeView(customMapPopup);
+        popUpStage.setVisibility(View.GONE);
+        PopUpMarker.remove();
+        updateRoom(room);
+    }
+
+    private void setPopUpStage(){
+        popUpStage = findViewById(R.id.popUpStage);
+        popUpStage.setVisibility(View.GONE);
     }
 
     /**

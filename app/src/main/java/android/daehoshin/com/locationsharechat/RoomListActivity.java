@@ -44,7 +44,7 @@ import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.PERMISSION_REQ;
 import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
 
-public class RoomListActivity extends AppCompatActivity implements OnMapReadyCallback, CustomMapPopup.DelteThis {
+public class RoomListActivity extends AppCompatActivity implements OnMapReadyCallback, CustomMapPopup.IDelteThis {
 
     public static final String[] Permission = new String[] {
               Manifest.permission.ACCESS_FINE_LOCATION

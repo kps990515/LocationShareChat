@@ -36,9 +36,9 @@ public class Consts {
     public static final int LOCATION_UPDATE_START = 700;
     public static final int LOCATION_UPDATE_STOP = 701;
 
-    // 현재 시간 및 분
-    public static final String CURRENT_HOUR = "current_hour";
-    public static final String CURRENT_MIN = "current_min";
+    // 시간 및 분
+    public static final String Custom_HOUR = "custom_hour";
+    public static final String Custom_MIN = "custom_min";
 
     // 방 생성 및 수정에 대한 값
     public static final String ROOM_CREATE = "create_room";
