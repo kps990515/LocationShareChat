@@ -43,19 +43,22 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
 
     @Override
     public ChatAdapter.Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_chat,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_chat, parent, false);
         return new Holder(view);
     }
 
     @Override
     public void onBindViewHolder(ChatAdapter.Holder holder, int position) {
         Msg msg = data.get(position);
+
         if(msg.getUid().equals(currentUserUid)){
             holder.leftLayout.setVisibility(View.GONE);
+            holder.rightLayout.setVisibility(View.VISIBLE);
             holder.txt_rmsg.setText(msg.getMessage());
             holder.txt_rtime.setText(FormatUtil.changeTimeFormatLongToString(msg.getTime()));
         }else{
             holder.rightLayout.setVisibility(View.GONE);
+            holder.leftLayout.setVisibility(View.VISIBLE);
             holder.txt_msg.setText(msg.getMessage());
             holder.txt_name.setText(msg.getName());
             holder.txt_time.setText(FormatUtil.changeTimeFormatLongToString(msg.getTime()));

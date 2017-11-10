@@ -66,7 +66,7 @@ public class Room {
 
     private List<Msg> msgs = new ArrayList<>();
     @Exclude
-    public void getMsg(final IRoomMsgCallback callback){
+    public void getRealtimeMsg(final IRoomMsgCallback callback){
         DatabaseManager.getMsgRef(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -75,7 +75,7 @@ public class Room {
                     if(idx >= msgs.size()) {
                         Msg msg = item.getValue(Msg.class);
                         msgs.add(msg);
-                        callback.getMsg(item.getValue(Msg.class));
+                        callback.getRealtimeMsg(msg);
                     }
                     idx++;
                 }
@@ -83,7 +83,7 @@ public class Room {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                callback.getMsg(null);
+                //callback.getRealtimeMsg(null);
             }
         });
     }
@@ -155,6 +155,6 @@ public class Room {
         void getMember(List<Member> members);
     }
     public interface IRoomMsgCallback{
-        void getMsg(Msg msg);
+        void getRealtimeMsg(Msg msg);
     }
 }

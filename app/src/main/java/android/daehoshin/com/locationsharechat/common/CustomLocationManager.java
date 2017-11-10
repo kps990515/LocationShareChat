@@ -7,15 +7,10 @@ import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 위치 정보에 대한 것을 관리하는 Manager (LocationManager는 이미 있어서 다시 정의)
@@ -23,6 +18,7 @@ import java.util.Map;
  */
 
 public class CustomLocationManager implements LocationListener {
+    private UserInfo currentUser = null;
 
     private LocationManager locationManager;
     private Location lastLocation;
@@ -68,6 +64,20 @@ public class CustomLocationManager implements LocationListener {
             // popup 으로 GPS 혹은 network 설정할지 요청?? 안하면 start 하지 않음
         }
         Log.e("startUpdateLocation","=======================================" + gps_enabled + " // "+ network_enabled);
+
+        if(currentUser == null){
+            AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
+                @Override
+                public void signinAnonymously(boolean isSuccessful) {
+
+                }
+
+                @Override
+                public void getCurrentUser(UserInfo userInfo) {
+                    currentUser = userInfo;
+                }
+            });
+        }
     }
     public void stopUpdateLocation(){
         locationManager.removeUpdates(this);
@@ -85,19 +95,11 @@ public class CustomLocationManager implements LocationListener {
         lastLocation = location;
         Log.e("onLocationChanged","============="+lastLat + " //" + lastLng);
 
-//        AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
-//            @Override
-//            public void signinAnonymously(boolean isSuccessful) {
-//
-//            }
-//
-//            @Override
-//            public void getCurrentUser(UserInfo userInfo) {
-//                userInfo.setLat(lastLat + "");
-//                userInfo.setLng(lastLng + "");
-//                userInfo.save();
-//            }
-//        });
+        if(currentUser != null){
+            currentUser.setLat(lastLat + "");
+            currentUser.setLng(lastLng + "");
+            currentUser.save();
+        }
     }
 
     @Override
