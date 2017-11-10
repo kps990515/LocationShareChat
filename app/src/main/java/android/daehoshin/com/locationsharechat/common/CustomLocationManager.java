@@ -96,9 +96,7 @@ public class CustomLocationManager implements LocationListener {
         Log.e("onLocationChanged","============="+lastLat + " //" + lastLng);
 
         if(currentUser != null){
-            currentUser.setLat(lastLat + "");
-            currentUser.setLng(lastLng + "");
-            currentUser.save();
+            currentUser.updateLocation(lastLat, lastLng);
         }
     }
 

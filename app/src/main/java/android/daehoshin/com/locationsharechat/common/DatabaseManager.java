@@ -1,5 +1,8 @@
 package android.daehoshin.com.locationsharechat.common;
 
+import android.daehoshin.com.locationsharechat.domain.room.Room;
+import android.daehoshin.com.locationsharechat.domain.user.Member;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -52,6 +55,15 @@ public class DatabaseManager {
     public static DatabaseReference getMsgRef(String roomid, long idx){
         return getInstance().database.getReference(TB_MSG + "/" + roomid + "/" + idx);
     }
+
+    public static void delete(Member member){
+        getMemberRef(member.getId(), member.getUid()).removeValue();
+    }
+    public static void delete(Room room){
+        getRoomRef(room.getId()).removeValue();
+        getMemberRef(room.getId()).removeValue();
+    }
+
 
 
     private FirebaseDatabase database;

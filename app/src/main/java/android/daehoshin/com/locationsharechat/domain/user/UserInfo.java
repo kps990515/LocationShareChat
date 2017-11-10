@@ -60,6 +60,16 @@ public class UserInfo extends BaseUser {
         return room.split(",");
     }
 
+    @Exclude
+    public void updateLocation(double lat, double lng){
+        this.lat = lat + "";
+        this.lng = lng + "";
+        for(String roomid : getRoomIds()){
+            Member member = new Member(this, roomid);
+            DatabaseManager.getMemberRef(roomid, uid).setValue(member);
+        }
+    }
+
     public void addRoom(String roomId){
         if(room == null) room = "";
         if(room.length() > 0) room += ",";
