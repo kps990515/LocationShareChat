@@ -29,7 +29,29 @@ public class StorageManager {
     }
 
 
+    public static void uploadProfile(Context context, String uid, Uri uploadFile){
+        StorageReference riversRef = getInstance().stRef.child(DIR_PROFILE + "/" + uid + ".jpg");
 
+        try {
+            uploadFile = FormatUtil.decodeUri(context, uploadFile, 1024);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        riversRef.putFile(uploadFile)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+
+                    }
+                });
+    }
     public static void uploadProfile(Context context, String uid, Uri uploadFile, final IUploadCallback callback){
         StorageReference riversRef = getInstance().stRef.child(DIR_PROFILE + "/" + uid + ".jpg");
 

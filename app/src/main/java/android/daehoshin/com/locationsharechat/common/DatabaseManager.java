@@ -31,7 +31,6 @@ public class DatabaseManager {
     public static DatabaseReference getUserRef(){
         return getInstance().userRef;
     }
-
     public static DatabaseReference getUserRef(String uid){
         return getInstance().database.getReference(TB_USER + "/" + uid);
     }
@@ -39,7 +38,6 @@ public class DatabaseManager {
     public static DatabaseReference getMemberRef(String roomid){
         return getInstance().database.getReference(TB_MEMBER + "/" + roomid);
     }
-
     public static DatabaseReference getMemberRef(String roomid, String uid){
         return getInstance().database.getReference(TB_MEMBER + "/" + roomid + "/" + uid);
     }
@@ -47,7 +45,6 @@ public class DatabaseManager {
     public static DatabaseReference getRoomRef(){
         return getInstance().roomRef;
     }
-
     public static DatabaseReference getRoomRef(String roomid){
         return getInstance().database.getReference(TB_ROOM + "/" + roomid);
     }
@@ -55,7 +52,6 @@ public class DatabaseManager {
     public static DatabaseReference getMsgRef(String roomid){
         return getInstance().database.getReference(TB_MSG + "/" + roomid);
     }
-
     public static DatabaseReference getMsgRef(String roomid, long idx){
         return getInstance().database.getReference(TB_MSG + "/" + roomid + "/" + idx);
     }
@@ -113,7 +109,6 @@ public class DatabaseManager {
             });
         }
     }
-
 
     private FirebaseDatabase database;
     private DatabaseReference userRef;

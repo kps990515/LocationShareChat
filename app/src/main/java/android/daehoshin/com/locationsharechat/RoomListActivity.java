@@ -3,10 +3,12 @@ package android.daehoshin.com.locationsharechat;
 import android.Manifest;
 import android.content.Intent;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
-import android.daehoshin.com.locationsharechat.common.MapManager;
+import android.daehoshin.com.locationsharechat.common.DatabaseManager;
+import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
 import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
+import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.room.RoomActivity;
 import android.daehoshin.com.locationsharechat.service.LocationService;
@@ -23,7 +25,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,6 +36,9 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
@@ -48,18 +52,23 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
     public static final String[] Permission = new String[] {
               Manifest.permission.ACCESS_FINE_LOCATION
             , Manifest.permission.ACCESS_COARSE_LOCATION };
+    private PermissionUtil pUtil;
 
     private GoogleMap mMap;
-    private PermissionUtil pUtil;
+    private GoogleMapManager mapManager;
+
 
     private FrameLayout progress;
 
     private FrameLayout popUpStage;
-    CustomMapPopup customMapPopup;
-    MapManager mapManager;
-    Intent serviceIntent;
+    private CustomMapPopup customMapPopup;
+
+    private Intent serviceIntent;
 
     private UserInfo currentUser;
+
+    private boolean useInvite = false;
+    private String inviteRoomId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +82,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         getDelegate().setSupportActionBar(toolbar);
 
         setPopUpStage();
-        mapManager = new MapManager(this,0);
+        mapManager = new GoogleMapManager(this);
         serviceIntent = new Intent(this, LocationService.class);
 
         checkPermission();
@@ -85,14 +94,19 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
                 .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
                     @Override
                     public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-                        // Get deep link from result (may be null if no link is found)
                         Uri deepLink = null;
                         if (pendingDynamicLinkData != null) {
                             deepLink = pendingDynamicLinkData.getLink();
-                            Toast.makeText(RoomListActivity.this, deepLink.getHost(), Toast.LENGTH_LONG).show();
+
+                            if(deepLink.getPathSegments().size() == 2){
+                                switch (deepLink.getPathSegments().get(0)){
+                                    case "invite":
+                                        useInvite = true;
+                                        inviteRoomId = deepLink.getPathSegments().get(1);
+                                        break;
+                                }
+                            }
                         }
-
-
                     }
                 })
                 .addOnFailureListener(this, new OnFailureListener() {
@@ -125,23 +139,14 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
      * Signin 체크
      */
     private void checkSignin(){
-        AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
-            @Override
-            public void signinAnonymously(boolean isSuccessful) {
-
+        AuthManager.getInstance().getCurrentUser(userInfo -> {
+            if(userInfo == null) {
+                Intent intent = new Intent(RoomListActivity.this, SigninActivity.class);
+                startActivityForResult(intent, LOGIN_REQ);
             }
-
-            @Override
-            public void getCurrentUser(UserInfo userInfo) {
-                if(userInfo == null) {
-                    Intent intent = new Intent(RoomListActivity.this, SigninActivity.class);
-                    startActivityForResult(intent, LOGIN_REQ);
-                }
-                else {
-                    currentUser = userInfo;
-
-                    initMap();
-                }
+            else {
+                currentUser = userInfo;
+                initMap();
             }
         });
     }
@@ -172,21 +177,19 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         serviceIntent.setAction(Consts.Thread_START);
         startService(serviceIntent);
 
-        mapManager.longClick(mMap, new MapManager.IMakeRoom() {
-            @Override
-            public void makePopup(LatLng latLng) {
-                popUpStage.setVisibility(View.VISIBLE);
-                customMapPopup = new CustomMapPopup(RoomListActivity.this,latLng.latitude,latLng.longitude, mMap, Consts.ROOM_CREATE);
-                mapManager.moveToClickLocation(mMap,latLng);
-                popUpStage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popUpStage.setVisibility(View.GONE);
-                        customMapPopup.deletePopUpMarker();
-                    }
-                });
-                popUpStage.addView(customMapPopup);
-            }
+        mapManager.zoomTo(mMap, new LatLng(Double.parseDouble(currentUser.getLat()), Double.parseDouble(currentUser.getLng())), Consts.Zoom_SIZE);
+
+        mMap.setOnMapLongClickListener(latLng -> {
+            popUpStage.setVisibility(View.VISIBLE);
+            customMapPopup = new CustomMapPopup(RoomListActivity.this,latLng.latitude,latLng.longitude, mMap, Consts.ROOM_CREATE);
+            mapManager.moveTo(mMap, latLng);
+
+            popUpStage.setOnClickListener(v -> {
+                popUpStage.setVisibility(View.GONE);
+                customMapPopup.deletePopUpMarker();
+            });
+
+            popUpStage.addView(customMapPopup);
         });
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -209,20 +212,36 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
             }
         });
 
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
+        mMap.setOnInfoWindowClickListener(marker -> {
                 if(marker.getTag() instanceof Room) {
                     Room room = (Room) marker.getTag();
-                    Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
-                    intent.putExtra(ROOM_ID, room.id);
-                    startActivity(intent);
-                }
+                    showRoom(room.getId());
             }
         });
 
         addUser(currentUser);
-        loadData();
+
+        if(useInvite) {
+            DatabaseManager.getRoomRef(inviteRoomId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Room inviteRoom = dataSnapshot.getValue(Room.class);
+                    Member member = new Member(currentUser, inviteRoomId);
+                    member.save();
+
+                    currentUser.addRoom(inviteRoom);
+                    loadData();
+
+                    showRoom(inviteRoomId);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+        else loadData();
 
         mapManager.setMyLocation(mMap);
         progress.setVisibility(View.GONE);
@@ -230,41 +249,31 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         findViewById(R.id.appBarLayout).setVisibility(View.VISIBLE);
     }
 
+    private void showRoom(String roomId){
+        Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
+        intent.putExtra(ROOM_ID, roomId);
+        startActivity(intent);
+    }
+
     LatLngBounds.Builder builder = new LatLngBounds.Builder();
     private void loadData(){
-        AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
-            @Override
-            public void signinAnonymously(boolean isSuccessful) {
+        AuthManager.getInstance().getCurrentUser(userInfo -> {
+            currentUser = userInfo;
+            final String roomIds[] = currentUser.getRoomIds();
+            if(roomIds.length == 0) mapManager.moveToLocation(mMap);
+            else {
+                for (int i = 0; i < roomIds.length; i++) {
+                    final int finalI = i;
+                    currentUser.getRoom(roomIds[i], room -> {
+                        addRoom(room);
 
-            }
-
-            @Override
-            public void getCurrentUser(UserInfo userInfo) {
-                currentUser = userInfo;
-                final String roomIds[] = currentUser.getRoomIds();
-                if(roomIds.length == 0) mapManager.moveToMyLocation(mMap);
-                else {
-                    for (int i = 0; i < roomIds.length; i++) {
-                        final int finalI = i;
-                        currentUser.getRoom(roomIds[i], new UserInfo.IUserInfoCallback() {
-                            @Override
-                            public void getRoom(Room room) {
-                                Log.e("Room","===================" + room.title);
-                                addRoom(room);
-                                if (finalI == roomIds.length - 1) {
-                                    LatLngBounds bounds = builder.build();
-                                    mMap.setMaxZoomPreference(18.0f);
-                                    final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 90);
-                                    mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-                                        @Override
-                                        public void onMapLoaded() {
-                                            mMap.animateCamera(cu, 600, null);
-                                        }
-                                    });
-                                }
-                            }
-                        });
-                    }
+                        if (finalI == roomIds.length - 1) {
+                            LatLngBounds bounds = builder.build();
+                            mMap.setMaxZoomPreference(18.0f);
+                            final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 90);
+                            mMap.setOnMapLoadedCallback(() -> mMap.animateCamera(cu, 600, null));
+                        }
+                    });
                 }
             }
         });
@@ -280,6 +289,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         if(userInfo == null) return;
         Marker marker = userInfo.addMarker(mMap);
         marker.showInfoWindow();
+        builder.include(marker.getPosition());
     }
 
     @Override
@@ -319,36 +329,15 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         return super.onOptionsItemSelected(item);
     }
 
-
-
-
-
-
-
-    //======== 임시용 버튼(삭제 할 것) 생성=================================
-
-
-    boolean checkService = false;
-    public void onService(View view){
-        if(checkService){
-            serviceIntent.setAction(Consts.Thread_START);
-            startService(serviceIntent);
-            checkService = false;
-        } else{
-            stopService(serviceIntent);
-            checkService = true;
-        }
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        mapManager.conControlGoogleApiClient(this,true);
+        mapManager.connect();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mapManager.conControlGoogleApiClient(this,false);
+        mapManager.disconnect();
     }
 }

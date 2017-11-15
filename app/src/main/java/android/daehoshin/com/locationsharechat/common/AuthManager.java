@@ -44,14 +44,14 @@ public class AuthManager {
      * 현재 사용자 받아오기
      * @param callback 현재 UserInfo 반환(로그인 안된경우 null)
      */
-    public void getCurrentUser(final IAuthCallback callback){
+    public void getCurrentUser(final IGetCurrentUser callback){
         if(fUser == null) {
-            callback.getCurrentUser(null);
+            callback.result(null);
             return;
         }
 
         if(currentUser != null){
-            callback.getCurrentUser(currentUser);
+            callback.result(currentUser);
             return;
         }
 
@@ -59,12 +59,12 @@ public class AuthManager {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 currentUser = dataSnapshot.getValue(UserInfo.class);
-                callback.getCurrentUser(currentUser);
+                callback.result(currentUser);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                callback.getCurrentUser(null);
+                callback.result(null);
             }
         });
     }
@@ -73,7 +73,7 @@ public class AuthManager {
      * 익명 로그인 처리
      * @param callback 성공여부 반환
      */
-    public void signInAnonymously(final Context context, final String nickname, final Uri profileUri, final IAuthCallback callback){
+    public void signInAnonymously(final Context context, final String nickname, final Uri profileUri, final ISigninAnonymously callback){
         auth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -88,41 +88,34 @@ public class AuthManager {
                     ui.save();
 
                     if(profileUri != null) {
-                        StorageManager.uploadProfile(context, ui.getUid(), profileUri, new StorageManager.IUploadCallback() {
-                            @Override
-                            public void uploaded(boolean isSuccess, Uri uri) {
-
-                            }
-                        });
+                        StorageManager.uploadProfile(context, ui.getUid(), profileUri);
                     }
                 }
 
-                callback.signinAnonymously(task.isSuccessful());
+                callback.result(task.isSuccessful());
             }
         });
     }
 
     public void signout(final Activity activity){
-        getCurrentUser(new IAuthCallback() {
-            @Override
-            public void signinAnonymously(boolean isSuccessful) {
-
-            }
-
-            @Override
-            public void getCurrentUser(UserInfo userInfo) {
-                auth.signOut();
-                DatabaseManager.delete(activity, userInfo);
-            }
+        getCurrentUser(userInfo -> {
+            auth.signOut();
+            DatabaseManager.delete(activity, userInfo);
         });
+    }
 
+
+    /**
+     * 로그인 성공여부 callback interface
+     */
+    public interface ISigninAnonymously{
+        void result(boolean isSuccessful);
     }
 
     /**
-     * 로그인 관련 Callback interface
+     * 로그인 사용자정보 callback interface
      */
-    public interface IAuthCallback{
-        void signinAnonymously(boolean isSuccessful);
-        void getCurrentUser(UserInfo userInfo);
+    public interface IGetCurrentUser{
+        void result(UserInfo userInfo);
     }
 }

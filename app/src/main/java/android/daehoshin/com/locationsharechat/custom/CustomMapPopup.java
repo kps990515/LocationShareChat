@@ -6,7 +6,6 @@ import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
-import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.util.FormatUtil;
 import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 import android.support.annotation.NonNull;
@@ -282,25 +281,16 @@ public class CustomMapPopup extends FrameLayout {
         if(Consts.ROOM_CREATE.equals(type)) {
             room.save();
             // 자신 밑에 room_id를 추가
-            AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
-                @Override
-                public void signinAnonymously(boolean isSuccessful) {
+            AuthManager.getInstance().getCurrentUser(userInfo -> {
+                userInfo.addRoom(room);
+                userInfo.save();
 
-                }
-
-                @Override
-                public void getCurrentUser(UserInfo userInfo) {
-                    userInfo.addRoom(room);
-                    userInfo.save();
-
-                    // 맴버에 자신을 추가
-                    Member member = new Member(userInfo, room.id);
-                    member.save();
-                }
+                // 맴버에 자신을 추가
+                Member member = new Member(userInfo, room.id);
+                member.save();
             });
-        } else {
-            room.save();
         }
+        else room.save();
     }
 
     // 마커 삭제

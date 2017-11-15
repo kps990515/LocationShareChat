@@ -1,9 +1,8 @@
 package android.daehoshin.com.locationsharechat.room;
 
 import android.daehoshin.com.locationsharechat.R;
-import android.daehoshin.com.locationsharechat.RoomListActivity;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
-import android.daehoshin.com.locationsharechat.common.MapManager;
+import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
 import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
@@ -25,13 +24,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private MapManager mapManager;
+    private GoogleMapManager mapManager;
     private Marker roomMarker;
     private Toolbar toolbar;
 
@@ -46,7 +44,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         initView();
 
         room_id = getIntent().getStringExtra(Consts.ROOM_ID);
-        mapManager = new MapManager(this,2);
+        mapManager = new GoogleMapManager(this);
         initMap();
 
     }
@@ -84,30 +82,20 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
     LatLngBounds.Builder builder = new LatLngBounds.Builder();
     private void loadCurrentUser(){
-        AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
-            @Override
-            public void signinAnonymously(boolean isSuccessful) {
+        AuthManager.getInstance().getCurrentUser(userInfo -> {
+            currentUser = userInfo;
 
-            }
+            currentUser.getRoom(room_id, room -> {
+                    currentRoom = room;
+                    LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
+                    mapManager.zoomTo(mMap, latLng, 12);
+                    roomMarker = currentRoom.addMarker(mMap);
+                    roomMarker.showInfoWindow();
 
-            @Override
-            public void getCurrentUser(UserInfo userInfo) {
-                currentUser = userInfo;
-                currentUser.getRoom(room_id, new UserInfo.IUserInfoCallback() {
-                    @Override
-                    public void getRoom(Room room) {
-                        currentRoom = room;
-                        LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
-                        mapManager.moveCameraLocationZoom(mMap, latLng, 12);
-                        roomMarker = currentRoom.addMarker(mMap);
-                        roomMarker.showInfoWindow();
-
-                        builder.include(roomMarker.getPosition());
-                        initView();
-                        loadMember();
-                    }
-                });
-            }
+                    builder.include(roomMarker.getPosition());
+                    initView();
+                    loadMember();
+            });
         });
     }
 

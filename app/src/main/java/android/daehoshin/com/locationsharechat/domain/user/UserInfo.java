@@ -97,6 +97,7 @@ public class UserInfo extends BaseUser {
     public void addRoom(Room newRoom){
         if(room == null) room = "";
         if(room.length() > 0) room += ",";
+        if(room.indexOf(newRoom.getId()) >= 0) return;
         room += newRoom.getId();
 
         rooms.add(newRoom);

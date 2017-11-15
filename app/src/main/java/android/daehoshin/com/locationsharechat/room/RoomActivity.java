@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.DatabaseManager;
-import android.daehoshin.com.locationsharechat.common.MapManager;
+import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
 import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.daehoshin.com.locationsharechat.domain.room.Msg;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
@@ -22,19 +22,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
 import java.util.List;
@@ -45,7 +41,7 @@ import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
 public class RoomActivity extends AppCompatActivity implements OnMapReadyCallback {
     private SupportMapFragment mapFragment;
     private GoogleMap mMap;
-    private MapManager mapManager;
+    private GoogleMapManager mapManager;
     private RecyclerView chatList;
     private EditText edit_msg;
     private ChatAdapter adapter;
@@ -57,39 +53,8 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FrameLayout popUpLayout;
     private CustomMemberPopup customMemberPopup;
 
-    private void checkDynamicLink(){
-        FirebaseDynamicLinks.getInstance()
-                .getDynamicLink(getIntent())
-                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
-                    @Override
-                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-                        // Get deep link from result (may be null if no link is found)
-                        Uri deepLink = null;
-                        if (pendingDynamicLinkData != null) {
-                            deepLink = pendingDynamicLinkData.getLink();
-                            Toast.makeText(RoomActivity.this, deepLink.getHost(), Toast.LENGTH_LONG).show();
-                        }
-
-                        // Handle the deep link. For example, open the linked
-                        // content, or apply promotional credit to the user's
-                        // account.
-                        // ...
-
-                        // ...
-                    }
-                })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //checkDynamicLink();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
@@ -98,7 +63,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar toolbar = findViewById(R.id.toolbar);
         getDelegate().setSupportActionBar(toolbar);
 
-        mapManager = new MapManager(this, 1);
+        mapManager = new GoogleMapManager(this);
 
         initMap();
     }
@@ -125,35 +90,20 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void loadCurrentUser(){
-        AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
-            @Override
-            public void signinAnonymously(boolean isSuccessful) {
+        AuthManager.getInstance().getCurrentUser(userInfo -> {
+            currentUser = userInfo;
+            currentUser.getRoom(roomid, room -> {
+                    currentRoom = room;
+                    getSupportActionBar().setTitle(currentRoom.getTitle());
+                    LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
 
-            }
+                    mMap.setOnMapLoadedCallback(() -> mapManager.zoomTo(mMap, latLng, 12));
+                    currentRoom.addMarker(mMap);
 
-            @Override
-            public void getCurrentUser(UserInfo userInfo) {
-                currentUser = userInfo;
-                currentUser.getRoom(roomid, new UserInfo.IUserInfoCallback() {
-                    @Override
-                    public void getRoom(Room room) {
-                        currentRoom = room;
-                        getSupportActionBar().setTitle(currentRoom.getTitle());
-                        final LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
-                        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-                            @Override
-                            public void onMapLoaded() {
-                                mapManager.moveCameraLocationZoom(mMap, latLng, 12);
-                            }
-                        });
-                        currentRoom.addMarker(mMap);
-
-                        initView();
-                        loadMember();
-                        setRealtimeMsgLitener();
-                    }
-                });
-            }
+                    initView();
+                    loadMember();
+                    setRealtimeMsgLitener();
+            });
         });
     }
 
@@ -276,12 +226,9 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void invite(){
         DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
-                .setLink(Uri.parse("https://example.com/"))
+                .setLink(Uri.parse("https://test.com/invite/" + currentRoom.getId() + "/"))
                 .setDynamicLinkDomain(DYNAMICLINK_BASE_URL)
-                .setAndroidParameters(
-                        new DynamicLink.AndroidParameters.Builder("android.daehoshin.com.locationsharechat")
-                                .setMinimumVersion(16)
-                                .build())
+                .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build())
                 .buildDynamicLink();
 
         Task<ShortDynamicLink> shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()

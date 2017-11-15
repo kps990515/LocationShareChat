@@ -33,12 +33,7 @@ abstract class BaseUser implements Serializable {
 
     @Exclude
     public void uploadProfile(Context context, Uri profileUri){
-        StorageManager.uploadProfile(context, uid, profileUri, new StorageManager.IUploadCallback() {
-            @Override
-            public void uploaded(boolean isSuccess, Uri uri) {
-
-            }
-        });
+        StorageManager.uploadProfile(context, uid, profileUri);
     }
 
     @Exclude

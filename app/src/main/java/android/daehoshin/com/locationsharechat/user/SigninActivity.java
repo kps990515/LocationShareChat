@@ -65,29 +65,21 @@ public class SigninActivity extends AppCompatActivity {
 
         init();
 
-        if(!isSignin){
+        if(!isSignin) {
             progress.setVisibility(View.VISIBLE);
 
-            AuthManager.getInstance().getCurrentUser(new AuthManager.IAuthCallback() {
-                @Override
-                public void signinAnonymously(boolean isSuccessful) {
+            AuthManager.getInstance().getCurrentUser(userInfo -> {
+                currentUser = userInfo;
+                etNickname.setText(currentUser.getName());
+                currentUser.getProfile(new StorageManager.IDownloadCallback() {
+                    @Override
+                    public void downloaded(String id, Uri uri) {
+                        profileUri = uri;
+                        Glide.with(SigninActivity.this).load(profileUri).apply(RequestOptions.circleCropTransform()).into(ivProfile);
 
-                }
-
-                @Override
-                public void getCurrentUser(UserInfo userInfo) {
-                    currentUser = userInfo;
-                    etNickname.setText(currentUser.getName());
-                    currentUser.getProfile(new StorageManager.IDownloadCallback() {
-                        @Override
-                        public void downloaded(String id, Uri uri) {
-                            profileUri = uri;
-                            Glide.with(SigninActivity.this).load(profileUri).apply(RequestOptions.circleCropTransform()).into(ivProfile);
-
-                            progress.setVisibility(View.GONE);
-                        }
-                    });
-                }
+                        progress.setVisibility(View.GONE);
+                    }
+                });
             });
         }
     }
@@ -139,25 +131,18 @@ public class SigninActivity extends AppCompatActivity {
 
             progress.setVisibility(View.VISIBLE);
 
-            AuthManager.getInstance().signInAnonymously(this, etNickname.getText().toString(), profileUri, new AuthManager.IAuthCallback() {
-                @Override
-                public void signinAnonymously(boolean isSuccessful) {
-                    if (isSuccessful) {
-                        setResult(RESULT_OK);
-                        progress.setVisibility(View.GONE);
-                        Toast.makeText(SigninActivity.this, ResourceUtil.getString(SigninActivity.this, R.string.success_signin), Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        progress.setVisibility(View.GONE);
-                        Toast.makeText(SigninActivity.this, "Signin failed", Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void getCurrentUser(UserInfo userInfo) {
-
-                }
-            });
+            AuthManager.getInstance().signInAnonymously(this, etNickname.getText().toString(), profileUri,
+                    isSuccessful -> {
+                        if (isSuccessful) {
+                            setResult(RESULT_OK);
+                            progress.setVisibility(View.GONE);
+                            Toast.makeText(SigninActivity.this, ResourceUtil.getString(SigninActivity.this, R.string.success_signin), Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            progress.setVisibility(View.GONE);
+                            Toast.makeText(SigninActivity.this, "Signin failed", Toast.LENGTH_LONG).show();
+                        }
+                    });
         }
         else{
             if ("".equals(etNickname.getText().toString())) {
@@ -171,12 +156,7 @@ public class SigninActivity extends AppCompatActivity {
             currentUser.save();
 
             if(profileUri != null) {
-                StorageManager.uploadProfile(this, currentUser.getUid(), profileUri, new StorageManager.IUploadCallback() {
-                    @Override
-                    public void uploaded(boolean isSuccess, Uri uri) {
-
-                    }
-                });
+                StorageManager.uploadProfile(this, currentUser.getUid(), profileUri);
             }
             progress.setVisibility(View.GONE);
             Toast.makeText(this, ResourceUtil.getString(this, R.string.success_apply), Toast.LENGTH_SHORT).show();
