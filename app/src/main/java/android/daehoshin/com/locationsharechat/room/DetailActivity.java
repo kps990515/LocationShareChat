@@ -3,7 +3,7 @@ package android.daehoshin.com.locationsharechat.room;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
-import android.daehoshin.com.locationsharechat.constant.Consts;
+import android.daehoshin.com.locationsharechat.common.Constants;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
@@ -43,7 +43,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         setContentView(R.layout.activity_detail);
         initView();
 
-        room_id = getIntent().getStringExtra(Consts.ROOM_ID);
+        room_id = getIntent().getStringExtra(Constants.ROOM_ID);
         mapManager = new GoogleMapManager(this);
         initMap();
 

@@ -2,7 +2,6 @@ package android.daehoshin.com.locationsharechat.common;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
-import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -114,8 +113,8 @@ public class GoogleMapManager {
      */
     private void setLocationRequest(){
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(Consts.LOCATION_INTERVAL_TIME);
-        locationRequest.setFastestInterval(Consts.LOCATION_INTERVAL_TIME);
+        locationRequest.setInterval(Constants.LOCATION_INTERVAL_TIME);
+        locationRequest.setFastestInterval(Constants.LOCATION_INTERVAL_TIME);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 

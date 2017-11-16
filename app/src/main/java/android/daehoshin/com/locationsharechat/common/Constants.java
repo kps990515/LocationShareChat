@@ -1,10 +1,10 @@
-package android.daehoshin.com.locationsharechat.constant;
+package android.daehoshin.com.locationsharechat.common;
 
 /**
- * Created by user on 2017-11-09.
+ * Created by daeho on 2017. 11. 16..
  */
 
-public class Consts {
+public class Constants {
     public static final String DYNAMICLINK_BASE_URL = "szyx6.app.goo.gl";
 
     public static final String ROOM_ID = "room_id";
@@ -41,7 +41,7 @@ public class Consts {
     public static final String Custom_MIN = "custom_min";
 
     // 방 생성 및 수정에 대한 값
-    public static final String ROOM_CREATE = "create_room";
-    public static final String ROOM_UPDATE_NOTLOC = "update_room_partial";
-    public static final String ROOM_UPDATE_TOTAL = "update_room_total";
+//    public static final String ROOM_CREATE = "create_room";
+//    public static final String ROOM_UPDATE_NOTLOC = "update_room_partial";
+//    public static final String ROOM_UPDATE_TOTAL = "update_room_total";
 }

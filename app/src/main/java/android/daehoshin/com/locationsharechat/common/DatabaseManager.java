@@ -10,10 +10,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import static android.daehoshin.com.locationsharechat.constant.Consts.TB_MEMBER;
-import static android.daehoshin.com.locationsharechat.constant.Consts.TB_MSG;
-import static android.daehoshin.com.locationsharechat.constant.Consts.TB_ROOM;
-import static android.daehoshin.com.locationsharechat.constant.Consts.TB_USER;
 
 /**
  * Created by daeho on 2017. 11. 7..
@@ -32,28 +28,28 @@ public class DatabaseManager {
         return getInstance().userRef;
     }
     public static DatabaseReference getUserRef(String uid){
-        return getInstance().database.getReference(TB_USER + "/" + uid);
+        return getInstance().database.getReference(Constants.TB_USER + "/" + uid);
     }
 
     public static DatabaseReference getMemberRef(String roomid){
-        return getInstance().database.getReference(TB_MEMBER + "/" + roomid);
+        return getInstance().database.getReference(Constants.TB_MEMBER + "/" + roomid);
     }
     public static DatabaseReference getMemberRef(String roomid, String uid){
-        return getInstance().database.getReference(TB_MEMBER + "/" + roomid + "/" + uid);
+        return getInstance().database.getReference(Constants.TB_MEMBER + "/" + roomid + "/" + uid);
     }
 
     public static DatabaseReference getRoomRef(){
         return getInstance().roomRef;
     }
     public static DatabaseReference getRoomRef(String roomid){
-        return getInstance().database.getReference(TB_ROOM + "/" + roomid);
+        return getInstance().database.getReference(Constants.TB_ROOM + "/" + roomid);
     }
 
     public static DatabaseReference getMsgRef(String roomid){
-        return getInstance().database.getReference(TB_MSG + "/" + roomid);
+        return getInstance().database.getReference(Constants.TB_MSG + "/" + roomid);
     }
     public static DatabaseReference getMsgRef(String roomid, long idx){
-        return getInstance().database.getReference(TB_MSG + "/" + roomid + "/" + idx);
+        return getInstance().database.getReference(Constants.TB_MSG + "/" + roomid + "/" + idx);
     }
 
     public static void leaveRoom(final UserInfo userInfo, final String roomid){
@@ -116,7 +112,7 @@ public class DatabaseManager {
 
     private DatabaseManager(){
         database = FirebaseDatabase.getInstance();
-        userRef = database.getReference(TB_USER);
-        roomRef = database.getReference(TB_ROOM);
+        userRef = database.getReference(Constants.TB_USER);
+        roomRef = database.getReference(Constants.TB_ROOM);
     }
 }

@@ -3,17 +3,11 @@ package android.daehoshin.com.locationsharechat.common;
 import android.content.Context;
 import android.daehoshin.com.locationsharechat.util.FormatUtil;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
-
-import static android.daehoshin.com.locationsharechat.constant.Consts.DIR_PROFILE;
 
 /**
  * Created by daeho on 2017. 11. 8..
@@ -28,9 +22,8 @@ public class StorageManager {
         return sm;
     }
 
-
     public static void uploadProfile(Context context, String uid, Uri uploadFile){
-        StorageReference riversRef = getInstance().stRef.child(DIR_PROFILE + "/" + uid + ".jpg");
+        StorageReference riversRef = getInstance().stRef.child(Constants.DIR_PROFILE + "/" + uid + ".jpg");
 
         try {
             uploadFile = FormatUtil.decodeUri(context, uploadFile, 1024);
@@ -39,21 +32,11 @@ public class StorageManager {
         }
 
         riversRef.putFile(uploadFile)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-
-                    }
-                });
+                .addOnSuccessListener(taskSnapshot -> {})
+                .addOnFailureListener(exception -> {});
     }
     public static void uploadProfile(Context context, String uid, Uri uploadFile, final IUploadCallback callback){
-        StorageReference riversRef = getInstance().stRef.child(DIR_PROFILE + "/" + uid + ".jpg");
+        StorageReference riversRef = getInstance().stRef.child(Constants.DIR_PROFILE + "/" + uid + ".jpg");
 
         try {
             uploadFile = FormatUtil.decodeUri(context, uploadFile, 1024);
@@ -62,33 +45,15 @@ public class StorageManager {
         }
 
         riversRef.putFile(uploadFile)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        callback.uploaded(true, taskSnapshot.getDownloadUrl());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        callback.uploaded(false, null);
-                    }
-                });
+                .addOnSuccessListener(taskSnapshot -> callback.uploaded(true, taskSnapshot.getDownloadUrl()))
+                .addOnFailureListener(exception -> callback.uploaded(false, null));
     }
 
-    public static void downloadProfile(final String uid, final IDownloadCallback callback){
-        StorageReference riversRef = getInstance().stRef.child(DIR_PROFILE + "/" + uid + ".jpg");
-        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                callback.downloaded(uid, uri);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                callback.downloaded(uid, null);
-            }
-        });
+    public static void downloadProfile(final String uid, IDownloadCallback callback){
+        StorageReference riversRef = getInstance().stRef.child(Constants.DIR_PROFILE + "/" + uid + ".jpg");
+        riversRef.getDownloadUrl()
+                .addOnSuccessListener(uri -> callback.downloaded(uid, uri))
+                .addOnFailureListener(e -> callback.downloaded(uid, null));
     }
 
     private StorageReference stRef;

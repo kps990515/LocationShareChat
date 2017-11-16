@@ -5,7 +5,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.CurrentLocationManager;
-import android.daehoshin.com.locationsharechat.constant.Consts;
+import android.daehoshin.com.locationsharechat.common.Constants;
 import android.os.IBinder;
 
 /**
@@ -31,10 +31,10 @@ public class LocationService extends Service {
         if(intent != null){
             String action = intent.getAction();
             switch (action){
-                case Consts.Thread_START:
+                case Constants.Thread_START:
                     CurrentLocationManager.updateLocationStart(this);
                     break;
-                case Consts.Thread_STOP:
+                case Constants.Thread_STOP:
                     CurrentLocationManager.updateLocationStop();
                     break;
             }

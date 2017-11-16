@@ -3,7 +3,7 @@ package android.daehoshin.com.locationsharechat.room;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
-import android.daehoshin.com.locationsharechat.constant.Consts;
+import android.daehoshin.com.locationsharechat.common.Constants;
 import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
@@ -25,15 +25,14 @@ import com.google.android.gms.maps.model.Marker;
 
 import java.util.List;
 
-public class SettingActivity extends AppCompatActivity implements OnMapReadyCallback, CustomMapPopup.IDelteThis {
-
+public class SettingActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private GoogleMapManager mapManager;
     private Marker roomMarker;
     private Toolbar toolbar;
 
     private FrameLayout popUpStage;
-    private CustomMapPopup customMapPopup;
+    private CustomMapPopup popUpCustomMap;
 
     private UserInfo currentUser;
     private Room currentRoom;
@@ -44,7 +43,7 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        room_id = getIntent().getStringExtra(Consts.ROOM_ID);
+        room_id = getIntent().getStringExtra(Constants.ROOM_ID);
         mapManager = new GoogleMapManager(this);
         initMap();
     }
@@ -81,17 +80,9 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
 
         mMap.setOnMapLongClickListener(latLng -> {
                 popUpStage.setVisibility(View.VISIBLE);
-
-                customMapPopup = new CustomMapPopup(SettingActivity.this
-                        , latLng.latitude
-                        , latLng.longitude
-                        , currentRoom
-                        , mMap
-                        , Consts.ROOM_UPDATE_TOTAL);
-
                 mapManager.moveTo(mMap, latLng);
 
-                popUpStage.addView(customMapPopup);
+                popUpStage.addView(createCustomMapPopup(latLng, CustomMapPopup.PopupType.UPDATE_TOTAL));
             });
     }
 
@@ -107,11 +98,29 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
                     currentRoom.addMarker(mMap);
 
                     popUpStage.setVisibility(View.VISIBLE);
-                    customMapPopup = new CustomMapPopup(SettingActivity.this,latLng.latitude,latLng.longitude, currentRoom, mMap, Consts.ROOM_UPDATE_NOTLOC);
-                    popUpStage.addView(customMapPopup);
+
+                    popUpStage.addView(createCustomMapPopup(latLng, CustomMapPopup.PopupType.UPDATE_PARTIAL));
                     loadMember();
                 });
         });
+    }
+
+    private CustomMapPopup createCustomMapPopup(LatLng latLng, CustomMapPopup.PopupType type){
+        if(popUpCustomMap != null) popUpCustomMap.recycle();
+
+        popUpCustomMap = new CustomMapPopup(this
+                , room -> {
+                            popUpStage.removeAllViews();
+                            popUpStage.setVisibility(View.GONE);
+                            updateRoom(room);
+                  }
+                , latLng.latitude
+                , latLng.longitude
+                , currentRoom
+                , mMap
+                , type);
+
+        return popUpCustomMap;
     }
 
     private void initView(){
@@ -140,24 +149,13 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
         roomMarker.showInfoWindow();
     }
 
-    @Override
-    public void deletePopUp(Room room, Marker PopUpMarker) {
-        popUpStage.removeView(customMapPopup);
-        popUpStage.setVisibility(View.GONE);
-        PopUpMarker.remove();
-        updateRoom(room);
-    }
-
-    private void setPopUpStage(){
+    private void setPopUpStage() {
         popUpStage = findViewById(R.id.popUpStage);
         popUpStage.setVisibility(View.GONE);
 
-        popUpStage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popUpStage.setVisibility(View.GONE);
-                customMapPopup.deletePopUpMarker();
-            }
+        popUpStage.setOnClickListener(v -> {
+            popUpStage.setVisibility(View.GONE);
+            popUpStage.removeAllViews();
         });
     }
 

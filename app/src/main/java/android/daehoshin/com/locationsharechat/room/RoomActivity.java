@@ -3,6 +3,7 @@ package android.daehoshin.com.locationsharechat.room;
 import android.content.Intent;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
+import android.daehoshin.com.locationsharechat.common.Constants;
 import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
 import android.daehoshin.com.locationsharechat.common.StorageManager;
@@ -35,9 +36,6 @@ import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
 import java.util.List;
 
-import static android.daehoshin.com.locationsharechat.constant.Consts.DYNAMICLINK_BASE_URL;
-import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
-
 public class RoomActivity extends AppCompatActivity implements OnMapReadyCallback {
     private SupportMapFragment mapFragment;
     private GoogleMap mMap;
@@ -58,7 +56,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
-        roomid = getIntent().getStringExtra(ROOM_ID);
+        roomid = getIntent().getStringExtra(Constants.ROOM_ID);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         getDelegate().setSupportActionBar(toolbar);
@@ -82,7 +80,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onMapClick(LatLng latLng) {
                 Intent intent = new Intent(RoomActivity.this, DetailActivity.class);
-                intent.putExtra(ROOM_ID, roomid);
+                intent.putExtra(Constants.ROOM_ID, roomid);
                 startActivity(intent);
                 overridePendingTransition(R.anim.anim_slide_in_top,R.anim.anim_slide_out_bottom);
             }
@@ -216,7 +214,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             case R.id.menu_setting:
                 Intent intent = new Intent(RoomActivity.this, SettingActivity.class);
-                intent.putExtra(ROOM_ID, roomid);
+                intent.putExtra(Constants.ROOM_ID, roomid);
                 startActivity(intent);
                 break;
         }
@@ -227,7 +225,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void invite(){
         DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
                 .setLink(Uri.parse("https://test.com/invite/" + currentRoom.getId() + "/"))
-                .setDynamicLinkDomain(DYNAMICLINK_BASE_URL)
+                .setDynamicLinkDomain(Constants.DYNAMICLINK_BASE_URL)
                 .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build())
                 .buildDynamicLink();
 

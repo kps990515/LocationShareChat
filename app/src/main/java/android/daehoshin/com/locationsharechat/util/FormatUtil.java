@@ -2,7 +2,7 @@ package android.daehoshin.com.locationsharechat.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.daehoshin.com.locationsharechat.constant.Consts;
+import android.daehoshin.com.locationsharechat.common.Constants;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -116,8 +116,8 @@ public class FormatUtil {
         SimpleDateFormat sdfM =new SimpleDateFormat("mm");
         int hour = Integer.parseInt(sdfH.format(time));
         int min = Integer.parseInt(sdfM.format(time));
-        result.put(Consts.Custom_HOUR, hour);
-        result.put(Consts.Custom_MIN, min);
+        result.put(Constants.Custom_HOUR, hour);
+        result.put(Constants.Custom_MIN, min);
         return result;
     }
 

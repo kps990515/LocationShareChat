@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.daehoshin.com.locationsharechat.BuildConfig;
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
+import android.daehoshin.com.locationsharechat.common.Constants;
 import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
@@ -34,11 +35,6 @@ import com.bumptech.glide.request.RequestOptions;
 import java.io.File;
 import java.io.IOException;
 
-import static android.daehoshin.com.locationsharechat.constant.Consts.CAMERA_PERMISSION_REQ;
-import static android.daehoshin.com.locationsharechat.constant.Consts.CAMERA_REQ;
-import static android.daehoshin.com.locationsharechat.constant.Consts.GALLERY_REQ;
-import static android.daehoshin.com.locationsharechat.constant.Consts.IS_SIGNIN;
-
 public class SigninActivity extends AppCompatActivity {
     private boolean isSignin = true;
 
@@ -61,7 +57,7 @@ public class SigninActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        isSignin = getIntent().getBooleanExtra(IS_SIGNIN, true);
+        isSignin = getIntent().getBooleanExtra(Constants.IS_SIGNIN, true);
 
         init();
 
@@ -167,7 +163,7 @@ public class SigninActivity extends AppCompatActivity {
     public void onCamera(View v){
         String[] Permission = new String[] { android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE };
 
-        PermissionUtil pUtil = new PermissionUtil(CAMERA_PERMISSION_REQ, Permission);
+        PermissionUtil pUtil = new PermissionUtil(Constants.CAMERA_PERMISSION_REQ, Permission);
         pUtil.check(this, new PermissionUtil.IPermissionGrant() {
             @Override
             public void run() {
@@ -206,9 +202,9 @@ public class SigninActivity extends AppCompatActivity {
             fileUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", photoFile);
 
             intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-            startActivityForResult(intent, CAMERA_REQ);
+            startActivityForResult(intent, Constants.CAMERA_REQ);
         }
-        else startActivityForResult(intent, CAMERA_REQ);
+        else startActivityForResult(intent, Constants.CAMERA_REQ);
     }
 
     /**
@@ -247,7 +243,7 @@ public class SigninActivity extends AppCompatActivity {
     public void onGallery(View v){
         String[] Permission = new String[] { Manifest.permission.READ_EXTERNAL_STORAGE };
 
-        PermissionUtil pUtil = new PermissionUtil(CAMERA_PERMISSION_REQ, Permission);
+        PermissionUtil pUtil = new PermissionUtil(Constants.CAMERA_PERMISSION_REQ, Permission);
         pUtil.check(this, new PermissionUtil.IPermissionGrant() {
             @Override
             public void run() {
@@ -265,7 +261,7 @@ public class SigninActivity extends AppCompatActivity {
 
     private void gallery(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, GALLERY_REQ);
+        startActivityForResult(intent, Constants.GALLERY_REQ);
     }
 
     @Override
@@ -275,14 +271,14 @@ public class SigninActivity extends AppCompatActivity {
         profileUri = null;
 
         switch (requestCode){
-            case CAMERA_REQ:
+            case Constants.CAMERA_REQ:
                 if(resultCode == RESULT_OK){
                     // 버전체크
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) profileUri = fileUri;
                     else profileUri = data.getData();
                 }
                 break;
-            case GALLERY_REQ:
+            case Constants.GALLERY_REQ:
                 // 갤러리 액티비티 종료시 호출 - 정상종료 된 경우만 이미지설정
                 if(resultCode == RESULT_OK) profileUri = data.getData();
                 break;

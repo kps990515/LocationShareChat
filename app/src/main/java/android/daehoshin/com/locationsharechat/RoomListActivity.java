@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
-import android.daehoshin.com.locationsharechat.constant.Consts;
+import android.daehoshin.com.locationsharechat.common.Constants;
 import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
@@ -42,12 +42,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
-import static android.daehoshin.com.locationsharechat.constant.Consts.IS_SIGNIN;
-import static android.daehoshin.com.locationsharechat.constant.Consts.LOGIN_REQ;
-import static android.daehoshin.com.locationsharechat.constant.Consts.PERMISSION_REQ;
-import static android.daehoshin.com.locationsharechat.constant.Consts.ROOM_ID;
 
-public class RoomListActivity extends AppCompatActivity implements OnMapReadyCallback, CustomMapPopup.IDelteThis {
+public class RoomListActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     public static final String[] Permission = new String[] {
               Manifest.permission.ACCESS_FINE_LOCATION
@@ -61,7 +57,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
     private FrameLayout progress;
 
     private FrameLayout popUpStage;
-    private CustomMapPopup customMapPopup;
+    private CustomMapPopup popUpCustomMap;
 
     private Intent serviceIntent;
 
@@ -121,7 +117,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
      * 권한 체크
      */
     private void checkPermission(){
-        pUtil = new PermissionUtil(PERMISSION_REQ, Permission);
+        pUtil = new PermissionUtil(Constants.PERMISSION_REQ, Permission);
         pUtil.check(this, new PermissionUtil.IPermissionGrant() {
             @Override
             public void run() {
@@ -142,7 +138,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         AuthManager.getInstance().getCurrentUser(userInfo -> {
             if(userInfo == null) {
                 Intent intent = new Intent(RoomListActivity.this, SigninActivity.class);
-                startActivityForResult(intent, LOGIN_REQ);
+                startActivityForResult(intent, Constants.LOGIN_REQ);
             }
             else {
                 currentUser = userInfo;
@@ -156,7 +152,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode){
-            case LOGIN_REQ:
+            case Constants.LOGIN_REQ:
                 switch (resultCode){
                     case RESULT_OK: checkSignin(); break;
                     case RESULT_CANCELED: finish(); break;
@@ -174,22 +170,19 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        serviceIntent.setAction(Consts.Thread_START);
+        serviceIntent.setAction(Constants.Thread_START);
         startService(serviceIntent);
 
-        mapManager.zoomTo(mMap, new LatLng(Double.parseDouble(currentUser.getLat()), Double.parseDouble(currentUser.getLng())), Consts.Zoom_SIZE);
+        mapManager.zoomTo(mMap, new LatLng(Double.parseDouble(currentUser.getLat()), Double.parseDouble(currentUser.getLng())), Constants.Zoom_SIZE);
 
         mMap.setOnMapLongClickListener(latLng -> {
             popUpStage.setVisibility(View.VISIBLE);
-            customMapPopup = new CustomMapPopup(RoomListActivity.this,latLng.latitude,latLng.longitude, mMap, Consts.ROOM_CREATE);
+
             mapManager.moveTo(mMap, latLng);
 
-            popUpStage.setOnClickListener(v -> {
-                popUpStage.setVisibility(View.GONE);
-                customMapPopup.deletePopUpMarker();
-            });
+            popUpStage.setOnClickListener(v -> popUpStage.setVisibility(View.GONE));
 
-            popUpStage.addView(customMapPopup);
+            popUpStage.addView(createCustomMapPopup(latLng, CustomMapPopup.PopupType.CREATE));
         });
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -249,9 +242,25 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         findViewById(R.id.appBarLayout).setVisibility(View.VISIBLE);
     }
 
+    private CustomMapPopup createCustomMapPopup(LatLng latLng, CustomMapPopup.PopupType type){
+        if(popUpCustomMap != null) popUpCustomMap.recycle();
+
+        popUpCustomMap = new CustomMapPopup(this
+                , room -> {
+                    popUpStage.setVisibility(View.GONE);
+                    addRoom(room);
+                }
+                ,latLng.latitude
+                ,latLng.longitude
+                , mMap
+                , CustomMapPopup.PopupType.CREATE);
+
+        return popUpCustomMap;
+    }
+
     private void showRoom(String roomId){
         Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
-        intent.putExtra(ROOM_ID, roomId);
+        intent.putExtra(Constants.ROOM_ID, roomId);
         startActivity(intent);
     }
 
@@ -292,13 +301,6 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         builder.include(marker.getPosition());
     }
 
-    @Override
-    public void deletePopUp(Room room, Marker PopUpMarker) {
-        popUpStage.removeView(customMapPopup);
-        popUpStage.setVisibility(View.GONE);
-        PopUpMarker.remove();
-        addRoom(room);
-    }
 
     private void setPopUpStage(){
         popUpStage = findViewById(R.id.popUpStage);
@@ -317,7 +319,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         switch(menu){
             case R.id.menu_profile:
                 Intent intent = new Intent(this, SigninActivity.class);
-                intent.putExtra(IS_SIGNIN, false);
+                intent.putExtra(Constants.IS_SIGNIN, false);
                 startActivity(intent);
                 break;
             case R.id.menu_signout:

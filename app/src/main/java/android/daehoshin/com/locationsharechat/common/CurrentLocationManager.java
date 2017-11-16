@@ -2,7 +2,6 @@ package android.daehoshin.com.locationsharechat.common;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.daehoshin.com.locationsharechat.constant.Consts;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.location.Location;
 import android.location.LocationListener;
@@ -54,8 +53,8 @@ public class CurrentLocationManager implements LocationListener {
             while (isRunningThread){
                 Message msg = new Message();
 
-                if(isRunning) msg.what = Consts.LOCATION_UPDATE_STOP;
-                else msg.what = Consts.LOCATION_UPDATE_START;
+                if(isRunning) msg.what = Constants.LOCATION_UPDATE_STOP;
+                else msg.what = Constants.LOCATION_UPDATE_START;
 
                 handler.sendMessage(msg);
 
@@ -106,10 +105,10 @@ public class CurrentLocationManager implements LocationListener {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
-                case Consts.LOCATION_UPDATE_START:
+                case Constants.LOCATION_UPDATE_START:
                     startService();
                     break;
-                case Consts.LOCATION_UPDATE_STOP:
+                case Constants.LOCATION_UPDATE_STOP:
                     stopService();
                     break;
             }
@@ -123,8 +122,8 @@ public class CurrentLocationManager implements LocationListener {
      */
     @SuppressLint("MissingPermission")
     private void startService(){
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Consts.LOCATION_INTERVAL_TIME, Consts.LOCATION_INTERVAL_METER, this);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,Consts.LOCATION_INTERVAL_TIME, Consts.LOCATION_INTERVAL_METER, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constants.LOCATION_INTERVAL_TIME, Constants.LOCATION_INTERVAL_METER, this);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,Constants.LOCATION_INTERVAL_TIME, Constants.LOCATION_INTERVAL_METER, this);
         isRunning = true;
     }
     private void stopService(){
