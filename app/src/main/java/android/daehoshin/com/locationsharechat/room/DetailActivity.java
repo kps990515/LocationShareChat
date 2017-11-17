@@ -2,8 +2,8 @@ package android.daehoshin.com.locationsharechat.room;
 
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
-import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
 import android.daehoshin.com.locationsharechat.common.Constants;
+import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
@@ -24,10 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
-import java.util.List;
-
 public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
-
     private GoogleMap mMap;
     private GoogleMapManager mapManager;
     private Marker roomMarker;
@@ -45,8 +42,8 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
         room_id = getIntent().getStringExtra(Constants.ROOM_ID);
         mapManager = new GoogleMapManager(this);
-        initMap();
 
+        initMap();
     }
 
     private void initMap(){
@@ -101,37 +98,33 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
     private void initView(){
         toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(null);
     }
 
     private void loadMember(){
-        currentRoom.getMember(new Room.IRoomMemberCallback() {
-            @Override
-            public void getMember(List<Member> members) {
-                for(int i=0 ; i<members.size() ; i++){
-                    Marker marker;
-                    if(currentUser.getUid().equals(members.get(i).getUid())) {
-                        marker = currentUser.addMarker(mMap);
-                    } else {
-                        marker = members.get(i).addMarker(mMap);
-                    }
-                    builder.include(marker.getPosition());
-                    if(i == members.size()-1) {
-                        LatLngBounds bounds = builder.build();
-                        mMap.setMaxZoomPreference(18.0f);
-                        final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 140);
-                        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-                            @Override
-                            public void onMapLoaded() {
-                                mMap.moveCamera(cu);
-                            }
-                        });
-                    }
-                }
+        currentRoom.getMember(members -> {
+            for(int i = 0 ; i < members.size(); i++){
+                Member member = members.get(i);
+                Marker marker;
+
+                if(currentUser.getUid().equals(member.getUid())) marker = currentUser.addMarker(mMap);
+                else marker = member.addMarker(mMap);
+
+                builder.include(marker.getPosition());
             }
+
+            zoomToMembers();
         });
+    }
+
+    private void zoomToMembers(){
+        LatLngBounds bounds = builder.build();
+        mMap.setMaxZoomPreference(18.0f);
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 140);
+        mMap.setOnMapLoadedCallback(() -> mMap.moveCamera(cu));
     }
 
     /**
@@ -140,7 +133,6 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
      * @return
      */
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.detail_menu, menu);
         return true;
     }
@@ -151,14 +143,14 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         switch (id) {
             case android.R.id.home:
-                finish();
-                break;
             case R.id.action_close:
                 finish();
                 break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

@@ -38,12 +38,11 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        Member member = new Member();
-        member.name = mem_names.get(position);
-        member.uid = profiles_uid.get(position);
-        member.uri = profiles_uri.get(position);
-        holder.txt_membername.setText(member.name);
+        String name = mem_names.get(position);
+        String uid = profiles_uid.get(position);
         Uri uri = profiles_uri.get(position);
+
+        holder.txt_membername.setText(name);
 
         if(uri != null) Glide.with(holder.itemView.getContext()).load(uri).apply(RequestOptions.circleCropTransform()).into(holder.image_memberProfile);
         else holder.image_memberProfile.setImageResource(R.drawable.ic_action_name);
@@ -57,15 +56,12 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.Holder> {
     public class Holder extends RecyclerView.ViewHolder {
         TextView txt_membername;
         ImageView image_memberProfile;
+
         public Holder(View itemView) {
             super(itemView);
+
             txt_membername = itemView.findViewById(R.id.txt_membername);
             image_memberProfile = itemView.findViewById(R.id.image_memerProfile);
         }
-    }
-    class Member{
-        String uid;
-        Uri uri;
-        String name;
     }
 }

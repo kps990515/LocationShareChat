@@ -78,20 +78,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder>{
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-        ConstraintLayout leftLayout;
-        ConstraintLayout rightLayout;
-        CardView cardView;
-        CardView cardViewL;
-        TextView txt_msg;
-        TextView txt_name;
-        TextView txt_count;
-        TextView txt_time;
+        ConstraintLayout leftLayout, rightLayout;
+        CardView cardView, cardViewL;
+        TextView txt_msg, txt_name, txt_count, txt_time;
         ImageView image_profile;
-        TextView txt_rmsg;
-        TextView txt_rcount;
-        TextView txt_rtime;
+        TextView txt_rmsg, txt_rcount, txt_rtime;
+
         public Holder(View itemView) {
             super(itemView);
+
             leftLayout = itemView.findViewById(R.id.leftLayout);
             rightLayout = itemView.findViewById(R.id.rightLayout);
             cardView = itemView.findViewById(R.id.cardView);

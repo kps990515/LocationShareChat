@@ -112,10 +112,10 @@ public class UserInfo extends BaseUser {
     @Exclude
     private List<Room> rooms = new ArrayList<>();
 
-    public void getRoom(String roomId, final IUserInfoCallback callback){
+    public void getRoom(String roomId, IGetRooms callback){
         for(Room room : rooms){
             if(room.getId().equals(roomId)) {
-                callback.getRoom(room);
+                callback.callback(room);
                 return;
             }
         }
@@ -125,17 +125,17 @@ public class UserInfo extends BaseUser {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Room room = dataSnapshot.getValue(Room.class);
                 rooms.add(room);
-                callback.getRoom(room);
+                callback.callback(room);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                callback.getRoom(null);
+                callback.callback(null);
             }
         });
     }
 
-    public interface IUserInfoCallback{
-        void getRoom(Room room);
+    public interface IGetRooms{
+        void callback(Room room);
     }
 }

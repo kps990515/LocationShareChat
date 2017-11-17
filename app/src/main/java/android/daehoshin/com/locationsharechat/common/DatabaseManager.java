@@ -52,28 +52,23 @@ public class DatabaseManager {
         return getInstance().database.getReference(Constants.TB_MSG + "/" + roomid + "/" + idx);
     }
 
-    public static void leaveRoom(final UserInfo userInfo, final String roomid){
-        userInfo.getRoom(roomid, new UserInfo.IUserInfoCallback() {
-            @Override
-            public void getRoom(final Room room) {
-                userInfo.removeRoom(roomid);
-                userInfo.save();
-                getMemberRef(roomid, userInfo.getUid()).removeValue();
+    public static void leaveRoom(UserInfo userInfo, String roomid){
+        userInfo.getRoom(roomid, room -> {
+            userInfo.removeRoom(roomid);
+            userInfo.save();
+            getMemberRef(roomid, userInfo.getUid()).removeValue();
 
-                getMemberRef(roomid).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.getChildrenCount() == 0) {
-                            delete(room);
-                        }
-                    }
+            getMemberRef(roomid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.getChildrenCount() == 0) delete(room);
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
-            }
+                }
+            });
         });
 
     }

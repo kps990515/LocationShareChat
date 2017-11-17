@@ -19,12 +19,10 @@ import android.provider.MediaStore;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +37,6 @@ public class SigninActivity extends AppCompatActivity {
     private boolean isSignin = true;
 
     private ImageView ivProfile;
-    private ImageButton btnAddProfile;
     private EditText etNickname;
     private TextView tvNicknameMsg;
     private Uri profileUri = null;
@@ -67,14 +64,14 @@ public class SigninActivity extends AppCompatActivity {
             AuthManager.getInstance().getCurrentUser(userInfo -> {
                 currentUser = userInfo;
                 etNickname.setText(currentUser.getName());
-                currentUser.getProfile(new StorageManager.IDownloadCallback() {
-                    @Override
-                    public void downloaded(String id, Uri uri) {
-                        profileUri = uri;
-                        Glide.with(SigninActivity.this).load(profileUri).apply(RequestOptions.circleCropTransform()).into(ivProfile);
+                currentUser.getProfile((id, uri) -> {
+                    profileUri = uri;
+                    Glide.with(SigninActivity.this)
+                            .load(profileUri)
+                            .apply(RequestOptions.circleCropTransform())
+                            .into(ivProfile);
 
-                        progress.setVisibility(View.GONE);
-                    }
+                    progress.setVisibility(View.GONE);
                 });
             });
         }
@@ -85,24 +82,18 @@ public class SigninActivity extends AppCompatActivity {
 
         if(!isSignin) ((Button)findViewById(R.id.btnSignin)).setText(ResourceUtil.getString(this, R.string.btn_apply));
 
-        btnAddProfile = findViewById(R.id.btnAddProfile);
         etNickname = findViewById(R.id.etNickname);
-        etNickname.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                tvNicknameMsg.setVisibility(View.GONE);
-                return false;
-            }
+        etNickname.setOnTouchListener((view, motionEvent) -> {
+            tvNicknameMsg.setVisibility(View.GONE);
+            return false;
         });
+
         tvNicknameMsg = findViewById(R.id.tvNicknameMsg);
 
         popupChoice = findViewById(R.id.popupChoice);
-        popupChoice.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                popupChoice.setVisibility(View.GONE);
-                return false;
-            }
+        popupChoice.setOnTouchListener((view, motionEvent) -> {
+            popupChoice.setVisibility(View.GONE);
+            return false;
         });
 
         progress = findViewById(R.id.progress);
@@ -154,8 +145,10 @@ public class SigninActivity extends AppCompatActivity {
             if(profileUri != null) {
                 StorageManager.uploadProfile(this, currentUser.getUid(), profileUri);
             }
+
             progress.setVisibility(View.GONE);
             Toast.makeText(this, ResourceUtil.getString(this, R.string.success_apply), Toast.LENGTH_SHORT).show();
+
             finish();
         }
     }
@@ -212,12 +205,7 @@ public class SigninActivity extends AppCompatActivity {
      * @param file
      */
     private void refreshMedia(File file){
-        MediaScannerConnection.scanFile(this, new String[]{file.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
-            @Override
-            public void onScanCompleted(String path, Uri uri) {
-
-            }
-        });
+        MediaScannerConnection.scanFile(this, new String[]{file.getAbsolutePath()}, null, (path, uri) -> {});
     }
 
     /**
@@ -247,12 +235,10 @@ public class SigninActivity extends AppCompatActivity {
         pUtil.check(this, new PermissionUtil.IPermissionGrant() {
             @Override
             public void run() {
-//                btnAddProfile.setVisibility(View.GONE);
             }
 
             @Override
             public void fail() {
-//                btnAddProfile.setVisibility(View.GONE);
             }
         });
 

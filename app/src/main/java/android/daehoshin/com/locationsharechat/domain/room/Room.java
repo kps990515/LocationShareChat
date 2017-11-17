@@ -54,7 +54,7 @@ public class Room implements Serializable{
     private List<Member> members = new ArrayList<>();
 
     @Exclude
-    public void getMember(final IRoomMemberCallback callback){
+    public void getMember(IGetMembers callback){
         DatabaseManager.getMemberRef(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -70,12 +70,12 @@ public class Room implements Serializable{
                     if(!isContain) members.add(member);
                 }
 
-                callback.getMember(members);
+                callback.callback(members);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                callback.getMember(new ArrayList<Member>());
+                callback.callback(new ArrayList<Member>());
             }
         });
     }
@@ -87,6 +87,7 @@ public class Room implements Serializable{
     @Exclude
     void realtimeRefresh() {
         if(realtimeRunning) return;
+
         if(realtimeRef == null) realtimeRef = DatabaseManager.getRoomRef(id);
         realtimeRef.addValueEventListener(realtimeListener);
         realtimeRunning = true;
@@ -121,7 +122,7 @@ public class Room implements Serializable{
         msgs = new HashMap<>();
     }
     @Exclude
-    public void getRealtimeMsg(final IRoomMsgCallback callback){
+    public void getRealtimeMsg(IGetMessages callback){
         DatabaseManager.getMsgRef(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -131,7 +132,7 @@ public class Room implements Serializable{
                     if(msgs.containsKey(msg.getIdx())) continue;
                     else{
                         msgs.put(msg.getIdx(), msg);
-                        callback.getRealtimeMsg(msg);
+                        callback.callback(msg);
                     }
                 }
             }
@@ -230,10 +231,10 @@ public class Room implements Serializable{
         this.msg_count = msg_count;
     }
 
-    public interface IRoomMemberCallback{
-        void getMember(List<Member> members);
+    public interface IGetMembers{
+        void callback(List<Member> members);
     }
-    public interface IRoomMsgCallback{
-        void getRealtimeMsg(Msg msg);
+    public interface IGetMessages{
+        void callback(Msg msg);
     }
 }

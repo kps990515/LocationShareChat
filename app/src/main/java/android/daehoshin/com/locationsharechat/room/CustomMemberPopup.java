@@ -15,14 +15,11 @@ import android.widget.FrameLayout;
  */
 
 public class CustomMemberPopup extends FrameLayout{
-
-    RecyclerView memberList;
-    private View view;
-    MemberAdapter adapter;
-
+    private MemberAdapter adapter;
 
     public CustomMemberPopup(@NonNull Context context) {
         super(context);
+
         initView();
     }
 
@@ -30,17 +27,14 @@ public class CustomMemberPopup extends FrameLayout{
         adapter.addMember(uid, uri, name);
     }
 
-
     private void initView(){
-        view = LayoutInflater.from(getContext()).inflate(R.layout.item_list_members,null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_list_members, null);
 
-        memberList = view.findViewById(R.id.membersList);
+        RecyclerView memberList = view.findViewById(R.id.membersList);
         adapter = new MemberAdapter();
         memberList.setAdapter(adapter);
         memberList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         addView(view);
     }
-
-
 }

@@ -127,7 +127,7 @@ public class CurrentLocationManager implements LocationListener {
         isRunning = true;
     }
     private void stopService(){
-        locationManager.removeUpdates(this);
         isRunning = false;
+        //locationManager.removeUpdates(this);
     }
 }

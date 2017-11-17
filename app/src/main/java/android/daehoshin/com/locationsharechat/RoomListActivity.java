@@ -3,9 +3,9 @@ package android.daehoshin.com.locationsharechat;
 import android.Manifest;
 import android.content.Intent;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
+import android.daehoshin.com.locationsharechat.common.Constants;
 import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
-import android.daehoshin.com.locationsharechat.common.Constants;
 import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
@@ -17,7 +17,6 @@ import android.daehoshin.com.locationsharechat.util.MarkerUtil;
 import android.daehoshin.com.locationsharechat.util.PermissionUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -34,13 +33,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
 
 public class RoomListActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -52,7 +48,6 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
 
     private GoogleMap mMap;
     private GoogleMapManager mapManager;
-
 
     private FrameLayout progress;
 
@@ -68,8 +63,6 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        checkDynamicLink();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
 
@@ -82,35 +75,36 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         serviceIntent = new Intent(this, LocationService.class);
 
         checkPermission();
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopService(serviceIntent);
+
+        super.onDestroy();
     }
 
     private void checkDynamicLink(){
         FirebaseDynamicLinks.getInstance()
                 .getDynamicLink(getIntent())
-                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
-                    @Override
-                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-                        Uri deepLink = null;
-                        if (pendingDynamicLinkData != null) {
-                            deepLink = pendingDynamicLinkData.getLink();
+                .addOnSuccessListener(this, pendingDynamicLinkData -> {
+                    Uri deepLink = null;
+                    if (pendingDynamicLinkData != null) {
+                        deepLink = pendingDynamicLinkData.getLink();
 
-                            if(deepLink.getPathSegments().size() == 2){
-                                switch (deepLink.getPathSegments().get(0)){
-                                    case "invite":
-                                        useInvite = true;
-                                        inviteRoomId = deepLink.getPathSegments().get(1);
-                                        break;
-                                }
+                        if(deepLink.getPathSegments().size() == 2){
+                            switch (deepLink.getPathSegments().get(0)){
+                                case "invite":
+                                    useInvite = true;
+                                    inviteRoomId = deepLink.getPathSegments().get(1);
+                                    break;
                             }
                         }
                     }
                 })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("RoomListActivity", "getDynamicLink:onFailure", e);
-                    }
-                });
+                .addOnFailureListener(this, e -> Log.d("RoomListActivity", "getDynamicLink:onFailure", e));
     }
 
     /**
@@ -172,6 +166,8 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         mMap = googleMap;
         serviceIntent.setAction(Constants.Thread_START);
         startService(serviceIntent);
+
+        checkDynamicLink();
 
         mapManager.zoomTo(mMap, new LatLng(Double.parseDouble(currentUser.getLat()), Double.parseDouble(currentUser.getLng())), Constants.Zoom_SIZE);
 
@@ -316,6 +312,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int menu = item.getItemId();
+
         switch(menu){
             case R.id.menu_profile:
                 Intent intent = new Intent(this, SigninActivity.class);

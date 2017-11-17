@@ -48,6 +48,7 @@ public class Member extends BaseUser {
     @Override
     void realtimeRefresh() {
         if(realtimeRunning) return;
+
         if(realtimeRef == null) realtimeRef = DatabaseManager.getUserRef(uid);
         realtimeRef.addValueEventListener(realtimeListener);
 

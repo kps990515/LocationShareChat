@@ -6,14 +6,12 @@ import android.daehoshin.com.locationsharechat.common.AuthManager;
 import android.daehoshin.com.locationsharechat.common.Constants;
 import android.daehoshin.com.locationsharechat.common.DatabaseManager;
 import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
-import android.daehoshin.com.locationsharechat.common.StorageManager;
 import android.daehoshin.com.locationsharechat.domain.room.Msg;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
 import android.daehoshin.com.locationsharechat.domain.user.UserInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,13 +26,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
-
-import java.util.List;
 
 public class RoomActivity extends AppCompatActivity implements OnMapReadyCallback {
     private SupportMapFragment mapFragment;
@@ -75,15 +70,15 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
         loadCurrentUser();
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                Intent intent = new Intent(RoomActivity.this, DetailActivity.class);
-                intent.putExtra(Constants.ROOM_ID, roomid);
-                startActivity(intent);
-                overridePendingTransition(R.anim.anim_slide_in_top,R.anim.anim_slide_out_bottom);
-            }
+
+        mMap.setOnMapClickListener(latLng -> {
+            Intent intent = new Intent(RoomActivity.this, DetailActivity.class);
+            intent.putExtra(Constants.ROOM_ID, roomid);
+            startActivity(intent);
+
+            overridePendingTransition(R.anim.anim_slide_in_top,R.anim.anim_slide_out_bottom);
         });
     }
 
@@ -91,21 +86,20 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         AuthManager.getInstance().getCurrentUser(userInfo -> {
             currentUser = userInfo;
             currentUser.getRoom(roomid, room -> {
-                    currentRoom = room;
-                    getSupportActionBar().setTitle(currentRoom.getTitle());
-                    LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
+                currentRoom = room;
 
-                    mMap.setOnMapLoadedCallback(() -> mapManager.zoomTo(mMap, latLng, 12));
-                    currentRoom.addMarker(mMap);
+                getSupportActionBar().setTitle(currentRoom.getTitle());
+                LatLng latLng = new LatLng(Double.parseDouble(currentRoom.getLat()), Double.parseDouble(currentRoom.getLng()));
 
-                    initView();
-                    loadMember();
-                    setRealtimeMsgLitener();
+                mMap.setOnMapLoadedCallback(() -> mapManager.zoomTo(mMap, latLng, 12));
+                currentRoom.addMarker(mMap);
+
+                initView();
+                loadMember();
+                setRealtimeMsgLitener();
             });
         });
     }
-
-
 
     private void initView(){
         chatList = findViewById(R.id.chatList);
@@ -119,32 +113,23 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void loadMember(){
-        currentRoom.getMember(new Room.IRoomMemberCallback() {
-            @Override
-            public void getMember(List<Member> members) {
-                for(final Member member : members){
-                    if(currentUser.getUid().equals(member.getUid())) currentUser.addMarker(mMap);
-                    else member.addMarker(mMap);
+        currentRoom.getMember(members -> {
+            for(Member member : members){
+                if(currentUser.getUid().equals(member.getUid())) currentUser.addMarker(mMap);
+                else member.addMarker(mMap);
 
-                    member.getProfile(new StorageManager.IDownloadCallback() {
-                        @Override
-                        public void downloaded(String id, Uri uri) {
-                            adapter.addProfile(id, uri);
-                            customMemberPopup.addMember(id,uri,member.getName());
-                        }
-                    });
-                }
+                member.getProfile((id, uri) -> {
+                    adapter.addProfile(id, uri);
+                    customMemberPopup.addMember(id,uri,member.getName());
+                });
             }
         });
     }
 
     private void setRealtimeMsgLitener(){
-        currentRoom.getRealtimeMsg(new Room.IRoomMsgCallback() {
-            @Override
-            public void getRealtimeMsg(Msg msg) {
-                adapter.addMsg(msg);
-                chatList.scrollToPosition(adapter.getItemCount() - 1);
-            }
+        currentRoom.getRealtimeMsg(msg -> {
+            adapter.addMsg(msg);
+            chatList.scrollToPosition(adapter.getItemCount() - 1);
         });
     }
 
@@ -154,6 +139,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void send(View view){
         String text = edit_msg.getText().toString();
+
         if(text != null && !"".equals(text)) {
             Msg msg = new Msg();
             msg.setId(roomid);
@@ -172,6 +158,7 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onDestroy() {
         if(currentRoom != null) currentRoom.msgsClear();
+
         super.onDestroy();
     }
 
@@ -190,15 +177,14 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int menu = item.getItemId();
+
         switch(menu){
             case R.id.menu_getout:
                 DatabaseManager.leaveRoom(currentUser, roomid);
                 currentRoom.removeMarker();
                 finish();
                 break;
-            case R.id.menu_invite:
-                invite();
-                break;
+            case R.id.menu_invite: invite(); break;
             case R.id.menu_member:
                 popUpLayout.setVisibility(View.VISIBLE);
                 popUpLayout.addView(customMemberPopup);
@@ -232,24 +218,20 @@ public class RoomActivity extends AppCompatActivity implements OnMapReadyCallbac
         Task<ShortDynamicLink> shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
                 .setLongLink(dynamicLink.getUri())
                 .buildShortDynamicLink()
-                .addOnCompleteListener(this, new OnCompleteListener<ShortDynamicLink>() {
-                    @Override
-                    public void onComplete(@NonNull Task<ShortDynamicLink> task) {
-                        if (task.isSuccessful()) {
-                            // Short link created
-                            Uri shortLink = task.getResult().getShortLink();
-                            Uri flowchartLink = task.getResult().getPreviewLink();
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Uri shortLink = task.getResult().getShortLink();
+                        Uri flowchartLink = task.getResult().getPreviewLink();
 
-                            Intent sendIntent = new Intent();
-                            String msg = shortLink.toString();
-                            sendIntent.setAction(Intent.ACTION_SEND);
-                            sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
-                            sendIntent.setType("text/plain");
-                            startActivity(sendIntent);
-                        } else {
-                            // Error
-                            // ...
-                        }
+                        Intent sendIntent = new Intent();
+                        String msg = shortLink.toString();
+                        sendIntent.setAction(Intent.ACTION_SENDTO);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
+                        sendIntent.setType("text/plain");
+                        startActivity(sendIntent);
+                    } else {
+                        // Error
+                        // ...
                     }
                 });
     }

@@ -2,8 +2,8 @@ package android.daehoshin.com.locationsharechat.room;
 
 import android.daehoshin.com.locationsharechat.R;
 import android.daehoshin.com.locationsharechat.common.AuthManager;
-import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
 import android.daehoshin.com.locationsharechat.common.Constants;
+import android.daehoshin.com.locationsharechat.common.GoogleMapManager;
 import android.daehoshin.com.locationsharechat.custom.CustomMapPopup;
 import android.daehoshin.com.locationsharechat.domain.room.Room;
 import android.daehoshin.com.locationsharechat.domain.user.Member;
@@ -22,8 +22,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-
-import java.util.List;
 
 public class SettingActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
@@ -45,6 +43,7 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
 
         room_id = getIntent().getStringExtra(Constants.ROOM_ID);
         mapManager = new GoogleMapManager(this);
+
         initMap();
     }
     private void initMap(){
@@ -132,13 +131,10 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     private void loadMember(){
-        currentRoom.getMember(new Room.IRoomMemberCallback() {
-            @Override
-            public void getMember(List<Member> members) {
-                for(Member member : members){
-                    if(currentUser.getUid().equals(member.getUid())) currentUser.addMarker(mMap);
-                    else member.addMarker(mMap);
-                }
+        currentRoom.getMember(members -> {
+            for(Member member : members){
+                if(currentUser.getUid().equals(member.getUid())) currentUser.addMarker(mMap);
+                else member.addMarker(mMap);
             }
         });
     }
@@ -165,7 +161,6 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
      * @return
      */
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.detail_menu, menu);
         return true;
     }
@@ -176,14 +171,14 @@ public class SettingActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         switch (id) {
             case android.R.id.home:
-                finish();
-                break;
             case R.id.action_close:
                 finish();
                 break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }
