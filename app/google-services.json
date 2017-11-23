@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:533107464950:android:2177ccc01baaefc8",
         "android_client_info": {
-          "package_name": "android.daehoshin.com.locationsharechat"
+          "package_name": "a.daehoshin.com.locationsharechat"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "533107464950-9mr9411pb2cpuuldc5brkn7g6tuc3dj1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "android.daehoshin.com.locationsharechat",
+            "package_name": "a.daehoshin.com.locationsharechat",
             "certificate_hash": "c3bde2f8f6c5d30bb4312b7cb60bc013e6d01490"
           }
         },

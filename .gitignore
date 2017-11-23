@@ -18,6 +18,7 @@ gen/
 
 # Ignore gradle files
 .gradle/
+gradle.properties
 build/
 
 # Local configuration file (sdk path, etc)
@@ -42,3 +43,6 @@ Thumbs.db
 .idea/dataSources.ids
 .idea/libraries/android_android_26.xml
 .idea/libraries/com_google_android_gms_play_services_location_11_0_4.xml
+
+keystore/
+app/libs/

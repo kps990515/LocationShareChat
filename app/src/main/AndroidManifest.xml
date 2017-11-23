@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="android.daehoshin.com.locationsharechat">
+    package="a.daehoshin.com.locationsharechat">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -38,7 +38,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".RoomListActivity"
+            android:name="a.daehoshin.com.locationsharechat.RoomListActivity"
             android:label="@string/title_activity_room_list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,7 +55,7 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity android:name=".user.SigninActivity" />
+        <activity android:name="a.daehoshin.com.locationsharechat.user.SigninActivity" />
 
         <!-- 사진을 저장하기 위해 파일에 대한 권한 획득 설정 -->
         <provider
@@ -71,7 +71,7 @@
         </provider>
 
         <activity
-            android:name=".room.RoomActivity"
+            android:name="a.daehoshin.com.locationsharechat.room.RoomActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -80,12 +80,12 @@
         </activity>
 
         <service
-            android:name=".service.LocationService"
+            android:name="a.daehoshin.com.locationsharechat.service.LocationService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".room.DetailActivity" />
-        <activity android:name=".room.SettingActivity"></activity>
+        <activity android:name="a.daehoshin.com.locationsharechat.room.DetailActivity" />
+        <activity android:name="a.daehoshin.com.locationsharechat.room.SettingActivity"></activity>
     </application>
 
 </manifest>
