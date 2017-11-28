@@ -3,7 +3,7 @@
     Google Play Store link : https://play.google.com/store/apps/details?id=a.daehoshin.com.locationsharechat
     
 1. 주요기능
-    - 익명 로그인 : Firebase authority
+    - 익명 로그인 : Firebase authentication
     - 친구초대(url) 기능 : Firebase dynamic link
     - 실시간 채팅 : Firebase realtime database
     - 실시간 위치 조회 : Google map / Location service
