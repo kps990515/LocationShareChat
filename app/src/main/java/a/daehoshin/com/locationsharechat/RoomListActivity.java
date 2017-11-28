@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -76,8 +77,6 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         serviceIntent = new Intent(this, LocationService.class);
 
         checkPermission();
-
-
     }
 
     @Override
@@ -111,22 +110,29 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
                 .addOnFailureListener(this, e -> Log.d("RoomListActivity", "getDynamicLink:onFailure", e));
     }
 
+    private PermissionUtil.IPermissionGrant pGrant = new PermissionUtil.IPermissionGrant() {
+        @Override
+        public void run() {
+            checkSignin();
+        }
+
+        @Override
+        public void fail() {
+            finish();
+        }
+    };
+
     /**
      * 권한 체크
      */
     private void checkPermission(){
         pUtil = new PermissionUtil(Constants.PERMISSION_REQ, Permission);
-        pUtil.check(this, new PermissionUtil.IPermissionGrant() {
-            @Override
-            public void run() {
-                checkSignin();
-            }
+        pUtil.check(this, pGrant);
+    }
 
-            @Override
-            public void fail() {
-                finish();
-            }
-        });
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        pUtil.afterPermissionResult(requestCode, grantResults, pGrant);
     }
 
     /**
@@ -135,6 +141,8 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
     private void checkSignin(){
         AuthManager.getInstance().getCurrentUser(userInfo -> {
             if(userInfo == null) {
+                progress.setVisibility(View.GONE);
+
                 Intent intent = new Intent(RoomListActivity.this, SigninActivity.class);
                 startActivityForResult(intent, Constants.LOGIN_REQ);
             }
@@ -152,7 +160,10 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
         switch (requestCode){
             case Constants.LOGIN_REQ:
                 switch (resultCode){
-                    case RESULT_OK: checkSignin(); break;
+                    case RESULT_OK:
+                        progress.setVisibility(View.VISIBLE);
+                        checkSignin();
+                        break;
                     case RESULT_CANCELED: finish(); break;
                 }
                 break;
