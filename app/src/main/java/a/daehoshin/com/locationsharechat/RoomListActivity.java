@@ -155,8 +155,7 @@ public class RoomListActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
+//        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case Constants.LOGIN_REQ:
                 switch (resultCode){
