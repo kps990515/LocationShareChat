@@ -1,7 +1,7 @@
 # 어디야
     비회원 기반의 채팅 / 위치조회 서비스
-    Google Play Store link : https://play.google.com/store/apps/details?id=a.daehoshin.com.locationsharechat
-    
+    Google Play Store link : 예정
+   
 1. 주요기능
     - 익명 로그인 : Firebase authentication
     - 친구초대(url) 기능 : Firebase dynamic link
